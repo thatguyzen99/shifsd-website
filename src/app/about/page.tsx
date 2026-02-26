@@ -42,7 +42,7 @@ const leadership = [
 ];
 
 const partnersList = [
-  { name: "USAID / EDC", description: "Leaders In Teaching (LIT) Project partner — youth education and workforce development across Montserrado and Bong Counties." },
+  { name: "EDC", description: "Leaders In Teaching (LIT) Project partner — youth education and workforce development across Montserrado and Bong Counties." },
   { name: "All We Can (UK)", description: "Supporting adult literacy (REFLECT methodology), VSLA programming, and entrepreneurship training in Lofa and Nimba Counties." },
   { name: "Mission Alliance", description: "Collaborative partner in community development and capacity building initiatives." },
   { name: "YOCEL", description: "Youth-focused partnership supporting education and livelihood programming." },
