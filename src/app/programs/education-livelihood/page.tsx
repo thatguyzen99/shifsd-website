@@ -15,20 +15,23 @@ const subPrograms = [
     stats: "381 students • 141 boys, 240 girls • 16 staff",
     description: "Accredited academic school running from Nursery through Senior High (Grade 10), located at the SHIFSD Multipurpose Youth Training Center in Johnsonville, Montserrado County.",
     color: "bg-blue-50 border-blue-200",
+    image: "/images/hac-students-outdoor.jpg",
   },
   {
     icon: Wrench,
     title: "Holy Hands Institute (HHI) — TVET",
     stats: "1,000+ graduates • New 14-classroom building",
-    description: "Accredited technical and vocational education institution established in 2016. Graduates work at LEC, LWSC, and other national entities. New facility funded by the Brown Marital Trust.",
+    description: "Accredited technical and vocational education institution established in 2016. Graduates work at LEC, LWSC, and other national entities. New facility funded by the Brown Marital Trust. Programs include Electricity, Plumbing, and more.",
     color: "bg-indigo-50 border-indigo-200",
+    image: "/images/hhi-tvet-trainees.jpg",
   },
   {
     icon: GraduationCap,
-    title: "USAID Youth Advance / EDC Partnership",
-    stats: "722 youth trained • 18+ communities • Cohorts 2 & 3",
-    description: "Partnership with USAID/EDC delivering Basic Education and Work Ready Now (soft skills) training across Montserrado County. SHIFSD serves as a regional implementing partner for the Leaders In Teaching (LIT) Project.",
+    title: "EDC Leaders In Teaching (LIT) Partnership",
+    stats: "722 youth trained • 18+ communities • National TOTs",
+    description: "Partnership with EDC delivering Basic Education and Work Ready Now (soft skills) training across Montserrado County. SHIFSD serves as a regional implementing partner for the Leaders In Teaching (LIT) Project, with national Training of Trainers and Master Teacher onboarding.",
     color: "bg-sky-50 border-sky-200",
+    image: "/images/lit-tot-goodridge.jpg",
   },
   {
     icon: BookOpen,
@@ -36,6 +39,7 @@ const subPrograms = [
     stats: "30 communities • Lofa County • REFLECT methodology",
     description: "Supported by All We Can (AWC UK), this program uses the REFLECT methodology to deliver adult literacy education across 30 communities in Lofa County, empowering adults to participate more fully in their communities.",
     color: "bg-teal-50 border-teal-200",
+    image: "/images/alp-lofa-grads-2025.jpg",
   },
   {
     icon: DollarSign,
@@ -43,6 +47,7 @@ const subPrograms = [
     stats: "150 women • $6,092 saved • 5 communities",
     description: "In Nimba County, 150 rural women were trained in VSLA methodology, saving $6,092 USD in just 8 months. 125 women established petty trading businesses, transforming household economics.",
     color: "bg-emerald-50 border-emerald-200",
+    image: "/images/vsla-green.jpg",
   },
   {
     icon: Award,
@@ -50,6 +55,7 @@ const subPrograms = [
     stats: "145 women • 6-day program • June 2024",
     description: "Funded by All We Can and Otto 8 Per Miles, this intensive training equipped 145 women with business skills, financial literacy, and entrepreneurial confidence.",
     color: "bg-amber-50 border-amber-200",
+    image: "/images/training-graduates.jpg",
   },
 ];
 
@@ -71,19 +77,23 @@ export default function EducationPage() {
         </div>
       </section>
 
-      <section className="bg-blue-800 py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
-          {[
-            { value: "381", label: "Students at HAC" },
-            { value: "722", label: "Youth Trained (EDC)" },
-            { value: "150", label: "Women in VSLAs" },
-            { value: "$6,092", label: "Saved in 8 Months" },
-          ].map((s) => (
-            <div key={s.label}>
-              <div className="font-[var(--font-heading)] text-3xl font-bold text-amber">{s.value}</div>
-              <div className="text-sm text-white/70 mt-1">{s.label}</div>
-            </div>
-          ))}
+      {/* Stats */}
+      <section className="relative -mt-8 z-10 pb-4">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { value: "381", label: "Students at HAC", icon: "🎓" },
+              { value: "722", label: "Youth Trained (EDC)", icon: "👨‍💼" },
+              { value: "150", label: "Women in VSLAs", icon: "👩‍🤝‍👩" },
+              { value: "$6,092", label: "Saved in 8 Months", icon: "💰" },
+            ].map((s) => (
+              <div key={s.label} className="bg-white rounded-2xl shadow-lg border border-gray-border p-5 text-center hover:shadow-xl transition-shadow">
+                <div className="text-2xl mb-2">{s.icon}</div>
+                <div className="font-[var(--font-heading)] text-3xl font-bold text-forest">{s.value}</div>
+                <div className="text-xs font-semibold text-charcoal-light mt-1 uppercase tracking-wide">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -94,17 +104,24 @@ export default function EducationPage() {
             {subPrograms.map((program) => {
               const Icon = program.icon;
               return (
-                <div key={program.title} className={`rounded-2xl border ${program.color} p-6 md:p-8`}>
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shrink-0">
-                      <Icon className="w-6 h-6 text-blue-700" />
+                <div key={program.title} className={`rounded-2xl border ${program.color} overflow-hidden`}>
+                  {program.image && (
+                    <div className="h-48 overflow-hidden">
+                      <img src={program.image} alt={program.title} className="w-full h-full object-cover" />
                     </div>
-                    <div>
-                      <h3 className="font-[var(--font-heading)] font-bold text-charcoal text-lg">{program.title}</h3>
-                      <p className="text-xs font-semibold text-forest mt-1">{program.stats}</p>
+                  )}
+                  <div className="p-6 md:p-8">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shrink-0 shadow-sm">
+                        <Icon className="w-6 h-6 text-blue-700" />
+                      </div>
+                      <div>
+                        <h3 className="font-[var(--font-heading)] font-bold text-charcoal text-lg">{program.title}</h3>
+                        <p className="text-xs font-semibold text-forest mt-1">{program.stats}</p>
+                      </div>
                     </div>
+                    <p className="mt-4 text-sm text-charcoal-light leading-relaxed">{program.description}</p>
                   </div>
-                  <p className="mt-4 text-sm text-charcoal-light leading-relaxed">{program.description}</p>
                 </div>
               );
             })}

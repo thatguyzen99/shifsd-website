@@ -10,11 +10,51 @@ export const metadata: Metadata = {
 
 const blogPosts = [
   {
-    title: "722 Youth Complete EDC Work Ready Now Training",
-    excerpt: "In partnership with USAID/EDC, SHIFSD trained 722 youth in Basic Education and Work Ready Now soft skills across 18+ communities in Montserrado County, preparing them for the workforce.",
-    date: "December 2024",
+    title: "EDC Leaders In Teaching (LIT) National TOTs Launch at Goodridge School",
+    excerpt: "SHIFSD partnered with EDC to launch the Leaders In Teaching (LIT) national Training of Trainers at E.J. Goodridge School in Barnersville, strengthening education leadership across Montserrado County.",
+    date: "February 2025",
     tag: "Education",
     featured: true,
+    image: "/images/lit-tot-goodridge.jpg",
+  },
+  {
+    title: "SHIFSD Reaches 1,187+ Beneficiaries Across Liberia",
+    excerpt: "From 2024 to present, SHIFSD has impacted over 1,187 beneficiaries across the country through education, livelihood skills, TVET training, and community development programs.",
+    date: "February 2025",
+    tag: "Impact",
+    featured: true,
+    image: "/images/shifsd-lit-onboarding.jpg",
+  },
+  {
+    title: "EDC LIT Master Trainers Onboarded at SHIFSD Center",
+    excerpt: "Master Trainers for the EDC Leaders In Teaching project were onboarded at the SHIFSD Multipurpose Youth Training Center in Johnsonville, preparing them to lead education transformation.",
+    date: "January 2025",
+    tag: "Education",
+    featured: false,
+    image: "/images/lit-master-teachers-center.jpg",
+  },
+  {
+    title: "SHIFSD Orientation Meeting at Main Office",
+    excerpt: "A well-attended orientation meeting was held at the main office of SHIFSD in Lee Hill Community, Johnsonville Avenue. Bravo to all who made this a success — we are indeed grateful.",
+    date: "January 2025",
+    tag: "Organization",
+    featured: false,
+    image: "/images/shifsd-office-johnsonville.jpg",
+  },
+  {
+    title: "Adult Literacy Level 1 Graduates in Lofa County",
+    excerpt: "SHIFSD celebrated its 2025 Adult Literacy Level 1 graduates in Lofa County, empowering adults to read, write, and participate more fully in their communities through the REFLECT methodology.",
+    date: "January 2025",
+    tag: "Literacy",
+    featured: false,
+    image: "/images/alp-lofa-grads-2025.jpg",
+  },
+  {
+    title: "722 Youth Complete EDC Work Ready Now Training",
+    excerpt: "In partnership with EDC, SHIFSD trained 722 youth in Basic Education and Work Ready Now soft skills across 18+ communities in Montserrado County, preparing them for the workforce.",
+    date: "December 2024",
+    tag: "Education",
+    featured: false,
     image: "/images/hero-community.jpg",
   },
   {
@@ -22,7 +62,7 @@ const blogPosts = [
     excerpt: "Women in five Nimba County communities saved $6,092 in just 8 months through SHIFSD's VSLA program, with 125 women establishing their own petty trading businesses.",
     date: "November 2024",
     tag: "Livelihoods",
-    featured: true,
+    featured: false,
     image: "/images/vsla-green.jpg",
   },
   {
@@ -33,36 +73,33 @@ const blogPosts = [
     featured: false,
   },
   {
-    title: "SHIFSD Launches CSA Awareness Campaign in 25 Communities",
-    excerpt: "Over 500 community members in Nimba County are now aware of climate smart agriculture practices following SHIFSD's intensive awareness campaign.",
-    date: "September 2024",
-    tag: "Agriculture",
-    featured: false,
-  },
-  {
     title: "145 Women Graduate Entrepreneurship Training",
     excerpt: "Funded by All We Can and Otto 8 Per Miles, the six-day intensive training equipped women with business planning, financial literacy, and market access skills.",
     date: "June 2024",
     tag: "Training",
     featured: false,
   },
-  {
-    title: "Adult Literacy Expanding Across Lofa County",
-    excerpt: "Using the REFLECT methodology, SHIFSD's adult literacy program now reaches 30 communities in Lofa County, supported by All We Can (AWC UK).",
-    date: "May 2024",
-    tag: "Literacy",
-    featured: false,
-  },
 ];
 
 const galleryCategories = [
+  { name: "LIT Training of Trainers", count: "Goodridge School", color: "bg-blue-100 text-blue-800", image: "/images/lit-tot-goodridge.jpg" },
+  { name: "LIT Master Trainers", count: "SHIFSD Center", color: "bg-indigo-100 text-indigo-800", image: "/images/lit-master-teachers-center.jpg" },
+  { name: "LIT School Leaders", count: "Montserrado County", color: "bg-sky-100 text-sky-800", image: "/images/lit-school-leaders-training.jpg" },
+  { name: "SHIFSD Director at LIT", count: "Onboarding Meeting", color: "bg-violet-100 text-violet-800", image: "/images/shifsd-director-lit-onboarding.jpg" },
+  { name: "EDC & DMI Visit", count: "School Leaders Training", color: "bg-cyan-100 text-cyan-800", image: "/images/edc-school-leaders-visit.jpg" },
+  { name: "LIT Inception Meeting", count: "Voka Mission", color: "bg-slate-100 text-slate-800", image: "/images/lit-inception-voka-mission.jpg" },
+  { name: "HHI Electricity Trainees", count: "TVET Programs", color: "bg-amber-100 text-amber-800", image: "/images/hhi-electricity-trainees.jpg" },
+  { name: "Female Electrician in Training", count: "Holy Hands Institute", color: "bg-pink-100 text-pink-800", image: "/images/tvet-electricity-female.jpg" },
+  { name: "HHI TVET Trainees", count: "Holy Hands Institute", color: "bg-orange-100 text-orange-800", image: "/images/hhi-tvet-trainees.jpg" },
+  { name: "Plumbing Trainees", count: "TVET Programs", color: "bg-teal-100 text-teal-800", image: "/images/tvet-plumbing-trainees.jpg" },
+  { name: "Adult Literacy Grads 2025", count: "Lofa County", color: "bg-green-100 text-green-800", image: "/images/alp-lofa-grads-2025.jpg" },
+  { name: "Literacy Graduation Day", count: "Lofa County", color: "bg-lime-100 text-lime-800", image: "/images/literacy-graduation-day.jpg" },
+  { name: "Literacy Graduate Certificate", count: "Lofa County", color: "bg-emerald-100 text-emerald-800", image: "/images/literacy-grad-certificate.jpg" },
+  { name: "ALP Level 1 Participant", count: "Lofa County", color: "bg-teal-100 text-teal-800", image: "/images/alp-participant.jpg" },
+  { name: "AWC Onboarding", count: "All We Can Partnership", color: "bg-purple-100 text-purple-800", image: "/images/awc-onboarding-presentation.jpg" },
+  { name: "SHIFSD Main Office", count: "Johnsonville", color: "bg-stone-100 text-stone-800", image: "/images/shifsd-office-johnsonville.jpg" },
+  { name: "Hummingbird Academy", count: "Students Outdoor", color: "bg-blue-100 text-blue-800", image: "/images/hac-students-outdoor.jpg" },
   { name: "VSLA Training Sessions", count: "Nimba County", color: "bg-emerald-100 text-emerald-800", image: "/images/vsla-white.jpg" },
-  { name: "EDC Youth Training", count: "Montserrado County", color: "bg-blue-100 text-blue-800", image: "/images/hero-community.jpg" },
-  { name: "Hummingbird Academy", count: "Johnsonville", color: "bg-purple-100 text-purple-800", image: "/images/hac-students-outdoor.jpg" },
-  { name: "HAC Classroom", count: "Learning in Action", color: "bg-indigo-100 text-indigo-800", image: "/images/hac-classroom.jpg" },
-  { name: "Holy Hands Institute", count: "TVET Programs", color: "bg-amber-100 text-amber-800", image: "/images/tvet-trainees.jpg" },
-  { name: "CSA Demonstration Farm", count: "Nimba County", color: "bg-green-100 text-green-800", image: "/images/vsla-nimba-outdoor.jpg" },
-  { name: "Community Events", count: "Multiple Counties", color: "bg-rose-100 text-rose-800", image: "/images/vsla-nimba-meeting.jpg" },
 ];
 
 export default function NewsPage() {
@@ -120,15 +157,22 @@ export default function NewsPage() {
           {/* Other Posts */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {blogPosts.filter(p => !p.featured).map((post) => (
-              <article key={post.title} className="rounded-xl border border-gray-border p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-xs font-semibold bg-forest/10 text-forest px-2.5 py-1 rounded-full">{post.tag}</span>
-                  <span className="flex items-center gap-1 text-xs text-charcoal-light">
-                    <Calendar className="w-3 h-3" /> {post.date}
-                  </span>
+              <article key={post.title} className="rounded-xl border border-gray-border overflow-hidden hover:shadow-md transition-shadow">
+                {post.image && (
+                  <div className="h-40 overflow-hidden">
+                    <img src={post.image} alt={post.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </div>
+                )}
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-xs font-semibold bg-forest/10 text-forest px-2.5 py-1 rounded-full">{post.tag}</span>
+                    <span className="flex items-center gap-1 text-xs text-charcoal-light">
+                      <Calendar className="w-3 h-3" /> {post.date}
+                    </span>
+                  </div>
+                  <h3 className="font-[var(--font-heading)] font-bold text-charcoal mb-2">{post.title}</h3>
+                  <p className="text-sm text-charcoal-light leading-relaxed">{post.excerpt}</p>
                 </div>
-                <h3 className="font-[var(--font-heading)] font-bold text-charcoal mb-2">{post.title}</h3>
-                <p className="text-sm text-charcoal-light leading-relaxed">{post.excerpt}</p>
               </article>
             ))}
           </div>

@@ -6,11 +6,11 @@ import { Download, Quote, BarChart3, MapPin, Users, ArrowRight } from "lucide-re
 
 export const metadata: Metadata = {
   title: "Impact",
-  description: "See SHIFSD's measurable impact: 700+ beneficiaries, 722 youth trained, $6,092 saved by women's groups, and more across 7 Liberian counties.",
+  description: "See SHIFSD's measurable impact: 1,187+ beneficiaries, 722 youth trained, $6,092 saved by women's groups, and more across 7 Liberian counties.",
 };
 
 const impactMetrics = [
-  { metric: "700+", label: "Direct Beneficiaries (2024)", description: "Individuals directly served across all program areas" },
+  { metric: "1,187+", label: "Beneficiaries Since 2024", description: "Individuals directly impacted across all program areas nationwide" },
   { metric: "722", label: "Youth Trained (EDC)", description: "Young people trained in Basic Education and Work Ready Now skills" },
   { metric: "150", label: "Women in VSLAs", description: "Rural women trained in Village Savings & Loan methodology" },
   { metric: "$6,092", label: "Savings Mobilized", description: "Saved by women's groups in just 8 months across 5 communities" },

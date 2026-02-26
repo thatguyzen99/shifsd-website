@@ -70,7 +70,7 @@ const ctas = [
 ];
 
 const partners = [
-  "USAID / EDC",
+  "EDC",
   "All We Can (UK)",
   "Mission Alliance",
   "YOCEL",
@@ -208,31 +208,31 @@ export default function HomePage() {
           <div className="mt-12 grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "722 Youth Complete EDC Work Ready Now Training",
+                title: "EDC Leaders In Teaching (LIT) TOTs Launch",
                 excerpt:
-                  "In partnership with USAID/EDC, SHIFSD trained 722 youth in Basic Education and soft skills across 18+ communities in Montserrado County.",
-                date: "December 2024",
+                  "SHIFSD partnered with EDC to launch the national Training of Trainers at E.J. Goodridge School, strengthening education leadership.",
+                date: "February 2025",
                 tag: "Education",
-                image: "/images/training-graduates.jpg",
-                alt: "SHIFSD business training graduates holding certificates at the Multipurpose Youth Training Center",
+                image: "/images/lit-tot-goodridge.jpg",
+                alt: "EDC Leaders In Teaching Training of Trainers at Goodridge School",
               },
               {
-                title: "150 Women Transform Lives Through VSLA Savings",
+                title: "1,187+ Beneficiaries Impacted Nationwide",
                 excerpt:
-                  "Women in five Nimba County communities saved $6,092 in just 8 months, with 125 establishing petty trading businesses.",
-                date: "November 2024",
-                tag: "Livelihoods",
-                image: "/images/vsla-green.jpg",
-                alt: "VSLA women's savings group in green SHIFSD shirts with savings box in Nimba County",
+                  "From 2024 to present, SHIFSD has reached over 1,187 beneficiaries across the country through education, TVET, and community programs.",
+                date: "February 2025",
+                tag: "Impact",
+                image: "/images/shifsd-lit-onboarding.jpg",
+                alt: "SHIFSD LIT onboarding meeting with staff and partners",
               },
               {
-                title: "New 14-Classroom School Building Under Construction",
+                title: "Adult Literacy Level 1 Graduates in Lofa",
                 excerpt:
-                  "Funded by the Brown Marital Trust, the new Holy Hands Institute facility will expand TVET capacity for hundreds of students.",
-                date: "October 2024",
-                tag: "Infrastructure",
-                image: "/images/tvet-trainees.jpg",
-                alt: "TVET trainees and Executive Director at Holy Hands Institute",
+                  "SHIFSD celebrated its 2025 Adult Literacy graduates in Lofa County, empowering adults through the REFLECT methodology.",
+                date: "January 2025",
+                tag: "Literacy",
+                image: "/images/alp-lofa-grads-2025.jpg",
+                alt: "SHIFSD Adult Literacy Level 1 graduates in Lofa County 2025",
               },
             ].map((post) => (
               <article

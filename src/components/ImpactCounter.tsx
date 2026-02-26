@@ -57,7 +57,7 @@ function Counter({ end, suffix = "", label, duration = 2000 }: CounterProps) {
 
 const stats = [
   { end: 24, suffix: "+", label: "Years of Service" },
-  { end: 700, suffix: "+", label: "Beneficiaries in 2024" },
+  { end: 1187, suffix: "+", label: "Beneficiaries Since 2024" },
   { end: 7, suffix: "", label: "Counties Reached" },
   { end: 28, suffix: ".1", label: "Acres of Farmland" },
 ];
