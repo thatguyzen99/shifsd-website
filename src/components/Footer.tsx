@@ -17,11 +17,12 @@ const programLinks = [
 ];
 
 const partners = [
-  "USAID/EDC",
-  "All We Can (UK)",
-  "Mission Alliance",
-  "YOCEL",
-  "Brown Marital Trust",
+  { name: "EDC", logo: "/images/partner-edc.webp" },
+  { name: "All We Can (UK)", logo: "/images/partner-allwecan.webp" },
+  { name: "Mission Alliance", logo: "/images/partner-mission-alliance.webp" },
+  { name: "YOCEL", logo: "/images/partner-yocel.webp" },
+  { name: "Brown Marital Trust", logo: null },
+  { name: "Stichting INITIAT", logo: "/images/partner-initiat.webp" },
 ];
 
 export function Footer() {
@@ -129,11 +130,17 @@ export function Footer() {
             <h4 className="font-[var(--font-heading)] font-bold text-sm uppercase tracking-wider mt-6 mb-3">
               Partners
             </h4>
-            <ul className="space-y-1">
+            <div className="flex flex-wrap gap-3 mt-1">
               {partners.map((p) => (
-                <li key={p} className="text-xs text-white/50">{p}</li>
+                <div key={p.name} className="flex items-center justify-center w-14 h-14 rounded-lg bg-white/10 p-1.5" title={p.name}>
+                  {p.logo ? (
+                    <img loading="lazy" src={p.logo} alt={p.name} className="max-h-10 max-w-full object-contain brightness-0 invert opacity-70" />
+                  ) : (
+                    <span className="text-[8px] text-white/50 text-center leading-tight">{p.name}</span>
+                  )}
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Contact */}

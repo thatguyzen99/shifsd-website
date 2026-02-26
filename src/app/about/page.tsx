@@ -10,6 +10,7 @@ import {
   MapPin,
   Award,
   ExternalLink,
+  Handshake,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -42,12 +43,12 @@ const leadership = [
 ];
 
 const partnersList = [
-  { name: "EDC", description: "Leaders In Teaching (LIT) Project partner — youth education and workforce development across Montserrado and Bong Counties." },
-  { name: "All We Can (UK)", description: "Supporting adult literacy (REFLECT methodology), VSLA programming, and entrepreneurship training in Lofa and Nimba Counties." },
-  { name: "Mission Alliance", description: "Collaborative partner in community development and capacity building initiatives." },
-  { name: "YOCEL", description: "Youth-focused partnership supporting education and livelihood programming." },
-  { name: "Brown Marital Trust", description: "Funding the new 14-classroom Holy Hands Institute building for expanded TVET education." },
-  { name: "Stichting INITIAT", description: "International partnership supporting SHIFSD's institutional development goals." },
+  { name: "EDC", description: "Leaders In Teaching (LIT) Project partner — youth education and workforce development across Montserrado and Bong Counties.", logo: "/images/partner-edc.webp" },
+  { name: "All We Can (UK)", description: "Supporting adult literacy (REFLECT methodology), VSLA programming, and entrepreneurship training in Lofa and Nimba Counties.", logo: "/images/partner-allwecan.webp" },
+  { name: "Mission Alliance", description: "Collaborative partner in community development and capacity building initiatives.", logo: "/images/partner-mission-alliance.webp" },
+  { name: "YOCEL", description: "Youth-focused partnership supporting education and livelihood programming.", logo: "/images/partner-yocel.webp" },
+  { name: "Brown Marital Trust", description: "Funding the new 14-classroom Holy Hands Institute building for expanded TVET education.", logo: null },
+  { name: "Stichting INITIAT", description: "International partnership supporting SHIFSD's institutional development goals.", logo: "/images/partner-initiat.webp" },
 ];
 
 export default function AboutPage() {
@@ -232,13 +233,17 @@ export default function AboutPage() {
           <SectionHeading title="Our Partners" subtitle="We are proud to collaborate with organizations that share our vision for a better Liberia." />
           <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {partnersList.map((partner) => (
-              <div key={partner.name} className="rounded-xl border border-gray-border p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-deep-blue/10 flex items-center justify-center">
-                    <ExternalLink className="w-4 h-4 text-deep-blue" />
-                  </div>
-                  <h3 className="font-[var(--font-heading)] font-bold text-charcoal">{partner.name}</h3>
+              <div key={partner.name} className="rounded-xl border border-gray-border p-6 hover:shadow-md transition-shadow flex flex-col items-center text-center">
+                <div className="w-24 h-24 rounded-xl bg-white flex items-center justify-center mb-4 overflow-hidden">
+                  {partner.logo ? (
+                    <img loading="lazy" src={partner.logo} alt={partner.name} className="w-20 h-20 object-contain" />
+                  ) : (
+                    <div className="w-20 h-20 rounded-lg bg-deep-blue/10 flex items-center justify-center">
+                      <Handshake className="w-8 h-8 text-deep-blue" />
+                    </div>
+                  )}
                 </div>
+                <h3 className="font-[var(--font-heading)] font-bold text-charcoal mb-2">{partner.name}</h3>
                 <p className="text-sm text-charcoal-light leading-relaxed">{partner.description}</p>
               </div>
             ))}

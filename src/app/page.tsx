@@ -70,12 +70,12 @@ const ctas = [
 ];
 
 const partners = [
-  "EDC",
-  "All We Can (UK)",
-  "Mission Alliance",
-  "YOCEL",
-  "Brown Marital Trust",
-  "Stichting INITIAT",
+  { name: "EDC", logo: "/images/partner-edc.webp" },
+  { name: "All We Can (UK)", logo: "/images/partner-allwecan.webp" },
+  { name: "Mission Alliance", logo: "/images/partner-mission-alliance.webp" },
+  { name: "YOCEL", logo: "/images/partner-yocel.webp" },
+  { name: "Brown Marital Trust", logo: null },
+  { name: "Stichting INITIAT", logo: "/images/partner-initiat.webp" },
 ];
 
 export default function HomePage() {
@@ -188,10 +188,14 @@ export default function HomePage() {
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             {partners.map((partner) => (
               <div
-                key={partner}
-                className="flex items-center justify-center h-16 px-6 rounded-xl bg-gray-bg text-charcoal-light font-[var(--font-heading)] font-semibold text-sm"
+                key={partner.name}
+                className="flex items-center justify-center h-20 w-32 rounded-xl bg-gray-bg p-3"
               >
-                {partner}
+                {partner.logo ? (
+                  <img loading="lazy" src={partner.logo} alt={partner.name} className="max-h-14 max-w-full object-contain" />
+                ) : (
+                  <span className="text-charcoal-light font-[var(--font-heading)] font-semibold text-xs text-center">{partner.name}</span>
+                )}
               </div>
             ))}
           </div>
