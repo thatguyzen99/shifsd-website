@@ -84,7 +84,7 @@ export default function HomePage() {
       {/* ============ HERO ============ */}
       <section className="relative min-h-[90vh] flex items-center pt-24">
         {/* Background image placeholder + overlay */}
-        <div className="absolute inset-0 bg-[url('/images/hero-community.jpg')] bg-cover bg-center bg-[center_20%]">
+        <div className="absolute inset-0 bg-[url('/images/hero-community.webp')] bg-cover bg-center bg-[center_20%]">
           <div className="hero-overlay absolute inset-0" />
         </div>
 
@@ -213,7 +213,7 @@ export default function HomePage() {
                   "SHIFSD partnered with EDC to launch the national Training of Trainers at E.J. Goodridge School, strengthening education leadership.",
                 date: "February 2025",
                 tag: "Education",
-                image: "/images/lit-tot-goodridge.jpg",
+                image: "/images/lit-tot-goodridge.webp",
                 alt: "EDC Leaders In Teaching Training of Trainers at Goodridge School",
               },
               {
@@ -222,7 +222,7 @@ export default function HomePage() {
                   "From 2024 to present, SHIFSD has reached over 1,187 beneficiaries across the country through education, TVET, and community programs.",
                 date: "February 2025",
                 tag: "Impact",
-                image: "/images/shifsd-lit-onboarding.jpg",
+                image: "/images/shifsd-lit-onboarding.webp",
                 alt: "SHIFSD LIT onboarding meeting with staff and partners",
               },
               {
@@ -231,7 +231,7 @@ export default function HomePage() {
                   "SHIFSD celebrated its 2025 Adult Literacy graduates in Lofa County, empowering adults through the REFLECT methodology.",
                 date: "January 2025",
                 tag: "Literacy",
-                image: "/images/alp-lofa-grads-2025.jpg",
+                image: "/images/alp-lofa-grads-2025.webp",
                 alt: "SHIFSD Adult Literacy Level 1 graduates in Lofa County 2025",
               },
             ].map((post) => (

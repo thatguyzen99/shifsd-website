@@ -72,7 +72,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/images/logo.png"
+                src="/images/logo.webp"
                 alt="SHIFSD Logo"
                 className="w-10 h-10 rounded-full object-cover"
               />

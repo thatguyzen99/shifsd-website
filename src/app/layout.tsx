@@ -53,8 +53,8 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/images/logo.png",
-    apple: "/images/logo.png",
+    icon: "/images/logo.webp",
+    apple: "/images/logo.webp",
   },
 };
 

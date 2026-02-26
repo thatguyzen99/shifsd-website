@@ -15,7 +15,7 @@ const subPrograms = [
     stats: "381 students • 141 boys, 240 girls • 16 staff",
     description: "Accredited academic school running from Nursery through Senior High (Grade 10), located at the SHIFSD Multipurpose Youth Training Center in Johnsonville, Montserrado County.",
     color: "bg-blue-50 border-blue-200",
-    image: "/images/hac-students-outdoor.jpg",
+    image: "/images/hac-students-outdoor.webp",
   },
   {
     icon: Wrench,
@@ -23,7 +23,7 @@ const subPrograms = [
     stats: "1,000+ graduates • New 14-classroom building",
     description: "Accredited technical and vocational education institution established in 2016. Graduates work at LEC, LWSC, and other national entities. New facility funded by the Brown Marital Trust. Programs include Electricity, Plumbing, and more.",
     color: "bg-indigo-50 border-indigo-200",
-    image: "/images/hhi-tvet-trainees.jpg",
+    image: "/images/hhi-tvet-trainees.webp",
   },
   {
     icon: GraduationCap,
@@ -31,7 +31,7 @@ const subPrograms = [
     stats: "722 youth trained • 18+ communities • National TOTs",
     description: "Partnership with EDC delivering Basic Education and Work Ready Now (soft skills) training across Montserrado County. SHIFSD serves as a regional implementing partner for the Leaders In Teaching (LIT) Project, with national Training of Trainers and Master Teacher onboarding.",
     color: "bg-sky-50 border-sky-200",
-    image: "/images/lit-tot-goodridge.jpg",
+    image: "/images/lit-tot-goodridge.webp",
   },
   {
     icon: BookOpen,
@@ -39,7 +39,7 @@ const subPrograms = [
     stats: "30 communities • Lofa County • REFLECT methodology",
     description: "Supported by All We Can (AWC UK), this program uses the REFLECT methodology to deliver adult literacy education across 30 communities in Lofa County, empowering adults to participate more fully in their communities.",
     color: "bg-teal-50 border-teal-200",
-    image: "/images/alp-lofa-grads-2025.jpg",
+    image: "/images/alp-lofa-grads-2025.webp",
   },
   {
     icon: DollarSign,
@@ -47,7 +47,7 @@ const subPrograms = [
     stats: "150 women • $6,092 saved • 5 communities",
     description: "In Nimba County, 150 rural women were trained in VSLA methodology, saving $6,092 USD in just 8 months. 125 women established petty trading businesses, transforming household economics.",
     color: "bg-emerald-50 border-emerald-200",
-    image: "/images/vsla-green.jpg",
+    image: "/images/vsla-green.webp",
   },
   {
     icon: Award,
@@ -55,7 +55,7 @@ const subPrograms = [
     stats: "145 women • 6-day program • June 2024",
     description: "Funded by All We Can and Otto 8 Per Miles, this intensive training equipped 145 women with business skills, financial literacy, and entrepreneurial confidence.",
     color: "bg-amber-50 border-amber-200",
-    image: "/images/training-graduates.jpg",
+    image: "/images/training-graduates.webp",
   },
 ];
 
@@ -107,7 +107,7 @@ export default function EducationPage() {
                 <div key={program.title} className={`rounded-2xl border ${program.color} overflow-hidden`}>
                   {program.image && (
                     <div className="h-48 overflow-hidden">
-                      <img src={program.image} alt={program.title} className="w-full h-full object-cover" />
+                      <img loading="lazy" src={program.image} alt={program.title} className="w-full h-full object-cover" />
                     </div>
                   )}
                   <div className="p-6 md:p-8">

@@ -26,21 +26,21 @@ const stories = [
     name: "VSLA Member",
     location: "Nimba County",
     program: "VSLA Program",
-    image: "/images/vsla-white.jpg",
+    image: "/images/vsla-white.webp",
   },
   {
     quote: "The Work Ready Now training gave me the soft skills and confidence I needed. I never thought I could present myself professionally in an interview.",
     name: "Youth Trainee",
     location: "Montserrado County",
     program: "EDC Youth Advance",
-    image: "/images/training-graduates.jpg",
+    image: "/images/training-graduates.webp",
   },
   {
     quote: "Learning to read and write has changed everything for me. Now I can read letters from my children and help with community decisions.",
     name: "Adult Literacy Participant",
     location: "Lofa County",
     program: "Adult Literacy Program",
-    image: "/images/vsla-nimba-outdoor.jpg",
+    image: "/images/vsla-nimba-outdoor.webp",
   },
 ];
 
@@ -113,7 +113,7 @@ export default function ImpactPage() {
             {stories.map((story) => (
               <div key={story.name} className="bg-gray-bg rounded-2xl overflow-hidden">
                 <div className="h-48 overflow-hidden">
-                  <img src={story.image} alt={`${story.program} - ${story.location}`} className="w-full h-full object-cover" />
+                  <img loading="lazy" src={story.image} alt={`${story.program} - ${story.location}`} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-8">
                 <Quote className="w-8 h-8 text-amber/40 mb-4" />

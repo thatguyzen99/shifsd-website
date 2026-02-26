@@ -208,7 +208,7 @@ export default function AboutPage() {
               <div key={person.name} className="bg-white rounded-2xl overflow-hidden">
                 <div className="h-48 overflow-hidden">
                   <img
-                    src={["/images/hero-community.jpg", "/images/tvet-trainees.jpg", "/images/vsla-nimba-meeting.jpg"][i]}
+                    src={["/images/hero-community.webp", "/images/tvet-trainees.webp", "/images/vsla-nimba-meeting.webp"][i]}
                     alt={person.name}
                     className="w-full h-full object-cover"
                   />
@@ -252,13 +252,13 @@ export default function AboutPage() {
           <SectionHeading title="SHIFSD Institutions" subtitle="Three entities working together toward a common mission." light />
           <div className="mt-12 grid md:grid-cols-3 gap-8">
             {[
-              { name: "Hummingbird Academy (HAC)", logo: "/images/logo-hac.png", motto: "Applied Knowledge is Power", est: "Est. 2016", description: "Accredited academic school running from Nursery to Senior Secondary (Grade 10), serving 381 students with 16 dedicated teaching staff at the SMYTC campus." },
-              { name: "Holy Hands Institute (HHI)", logo: "/images/logo-hhi.png", motto: "Meeting Needs and Healing Hearts", est: "Est. 2016", description: "Accredited TVET institution graduating over 1,000 trainees in welding, auto mechanics, cosmetology, and electrical — many now employed at LEC, LWSC, and other national entities." },
-              { name: "LightUp The Bible Ministries (LBM)", logo: "/images/logo-lbm.png", motto: "Discover What The Bible Really Says", est: "", description: "Registered Christian ministry serving as the spiritual arm of SHIFSD, providing faith-based support and community upliftment." },
+              { name: "Hummingbird Academy (HAC)", logo: "/images/logo-hac.webp", motto: "Applied Knowledge is Power", est: "Est. 2016", description: "Accredited academic school running from Nursery to Senior Secondary (Grade 10), serving 381 students with 16 dedicated teaching staff at the SMYTC campus." },
+              { name: "Holy Hands Institute (HHI)", logo: "/images/logo-hhi.webp", motto: "Meeting Needs and Healing Hearts", est: "Est. 2016", description: "Accredited TVET institution graduating over 1,000 trainees in welding, auto mechanics, cosmetology, and electrical — many now employed at LEC, LWSC, and other national entities." },
+              { name: "LightUp The Bible Ministries (LBM)", logo: "/images/logo-lbm.webp", motto: "Discover What The Bible Really Says", est: "", description: "Registered Christian ministry serving as the spiritual arm of SHIFSD, providing faith-based support and community upliftment." },
             ].map((inst) => (
               <div key={inst.name} className="bg-white/5 rounded-2xl p-8 border border-white/10 text-center">
                 <div className="w-24 h-24 mx-auto mb-5 bg-white rounded-2xl p-2 flex items-center justify-center">
-                  <img src={inst.logo} alt={inst.name} className="w-full h-full object-contain" />
+                  <img loading="lazy" src={inst.logo} alt={inst.name} className="w-full h-full object-contain" />
                 </div>
                 <h3 className="font-[var(--font-heading)] font-bold text-amber text-lg mb-1">
                   {inst.name}

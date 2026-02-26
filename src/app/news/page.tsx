@@ -15,7 +15,7 @@ const blogPosts = [
     date: "February 2025",
     tag: "Education",
     featured: true,
-    image: "/images/lit-tot-goodridge.jpg",
+    image: "/images/lit-tot-goodridge.webp",
   },
   {
     title: "SHIFSD Reaches 1,187+ Beneficiaries Across Liberia",
@@ -23,7 +23,7 @@ const blogPosts = [
     date: "February 2025",
     tag: "Impact",
     featured: true,
-    image: "/images/shifsd-lit-onboarding.jpg",
+    image: "/images/shifsd-lit-onboarding.webp",
   },
   {
     title: "EDC LIT Master Trainers Onboarded at SHIFSD Center",
@@ -31,7 +31,7 @@ const blogPosts = [
     date: "January 2025",
     tag: "Education",
     featured: false,
-    image: "/images/lit-master-teachers-center.jpg",
+    image: "/images/lit-master-teachers-center.webp",
   },
   {
     title: "SHIFSD Orientation Meeting at Main Office",
@@ -39,7 +39,7 @@ const blogPosts = [
     date: "January 2025",
     tag: "Organization",
     featured: false,
-    image: "/images/shifsd-office-johnsonville.jpg",
+    image: "/images/shifsd-office-johnsonville.webp",
   },
   {
     title: "Adult Literacy Level 1 Graduates in Lofa County",
@@ -47,7 +47,7 @@ const blogPosts = [
     date: "January 2025",
     tag: "Literacy",
     featured: false,
-    image: "/images/alp-lofa-grads-2025.jpg",
+    image: "/images/alp-lofa-grads-2025.webp",
   },
   {
     title: "722 Youth Complete EDC Work Ready Now Training",
@@ -55,7 +55,7 @@ const blogPosts = [
     date: "December 2024",
     tag: "Education",
     featured: false,
-    image: "/images/hero-community.jpg",
+    image: "/images/hero-community.webp",
   },
   {
     title: "150 Women Transform Lives Through VSLA Savings",
@@ -63,7 +63,7 @@ const blogPosts = [
     date: "November 2024",
     tag: "Livelihoods",
     featured: false,
-    image: "/images/vsla-green.jpg",
+    image: "/images/vsla-green.webp",
   },
   {
     title: "New 14-Classroom School Building Under Construction",
@@ -82,24 +82,24 @@ const blogPosts = [
 ];
 
 const galleryCategories = [
-  { name: "LIT Training of Trainers", count: "Goodridge School", color: "bg-blue-100 text-blue-800", image: "/images/lit-tot-goodridge.jpg" },
-  { name: "LIT Master Trainers", count: "SHIFSD Center", color: "bg-indigo-100 text-indigo-800", image: "/images/lit-master-teachers-center.jpg" },
-  { name: "LIT School Leaders", count: "Montserrado County", color: "bg-sky-100 text-sky-800", image: "/images/lit-school-leaders-training.jpg" },
-  { name: "SHIFSD Director at LIT", count: "Onboarding Meeting", color: "bg-violet-100 text-violet-800", image: "/images/shifsd-director-lit-onboarding.jpg" },
-  { name: "EDC & DMI Visit", count: "School Leaders Training", color: "bg-cyan-100 text-cyan-800", image: "/images/edc-school-leaders-visit.jpg" },
-  { name: "LIT Inception Meeting", count: "Voka Mission", color: "bg-slate-100 text-slate-800", image: "/images/lit-inception-voka-mission.jpg" },
-  { name: "HHI Electricity Trainees", count: "TVET Programs", color: "bg-amber-100 text-amber-800", image: "/images/hhi-electricity-trainees.jpg" },
-  { name: "Female Electrician in Training", count: "Holy Hands Institute", color: "bg-pink-100 text-pink-800", image: "/images/tvet-electricity-female.jpg" },
-  { name: "HHI TVET Trainees", count: "Holy Hands Institute", color: "bg-orange-100 text-orange-800", image: "/images/hhi-tvet-trainees.jpg" },
-  { name: "Plumbing Trainees", count: "TVET Programs", color: "bg-teal-100 text-teal-800", image: "/images/tvet-plumbing-trainees.jpg" },
-  { name: "Adult Literacy Grads 2025", count: "Lofa County", color: "bg-green-100 text-green-800", image: "/images/alp-lofa-grads-2025.jpg" },
-  { name: "Literacy Graduation Day", count: "Lofa County", color: "bg-lime-100 text-lime-800", image: "/images/literacy-graduation-day.jpg" },
-  { name: "Literacy Graduate Certificate", count: "Lofa County", color: "bg-emerald-100 text-emerald-800", image: "/images/literacy-grad-certificate.jpg" },
-  { name: "ALP Level 1 Participant", count: "Lofa County", color: "bg-teal-100 text-teal-800", image: "/images/alp-participant.jpg" },
-  { name: "AWC Onboarding", count: "All We Can Partnership", color: "bg-purple-100 text-purple-800", image: "/images/awc-onboarding-presentation.jpg" },
-  { name: "SHIFSD Main Office", count: "Johnsonville", color: "bg-stone-100 text-stone-800", image: "/images/shifsd-office-johnsonville.jpg" },
-  { name: "Hummingbird Academy", count: "Students Outdoor", color: "bg-blue-100 text-blue-800", image: "/images/hac-students-outdoor.jpg" },
-  { name: "VSLA Training Sessions", count: "Nimba County", color: "bg-emerald-100 text-emerald-800", image: "/images/vsla-white.jpg" },
+  { name: "LIT Training of Trainers", count: "Goodridge School", color: "bg-blue-100 text-blue-800", image: "/images/lit-tot-goodridge.webp" },
+  { name: "LIT Master Trainers", count: "SHIFSD Center", color: "bg-indigo-100 text-indigo-800", image: "/images/lit-master-teachers-center.webp" },
+  { name: "LIT School Leaders", count: "Montserrado County", color: "bg-sky-100 text-sky-800", image: "/images/lit-school-leaders-training.webp" },
+  { name: "SHIFSD Director at LIT", count: "Onboarding Meeting", color: "bg-violet-100 text-violet-800", image: "/images/shifsd-director-lit-onboarding.webp" },
+  { name: "EDC & DMI Visit", count: "School Leaders Training", color: "bg-cyan-100 text-cyan-800", image: "/images/edc-school-leaders-visit.webp" },
+  { name: "LIT Inception Meeting", count: "Voka Mission", color: "bg-slate-100 text-slate-800", image: "/images/lit-inception-voka-mission.webp" },
+  { name: "HHI Electricity Trainees", count: "TVET Programs", color: "bg-amber-100 text-amber-800", image: "/images/hhi-electricity-trainees.webp" },
+  { name: "Female Electrician in Training", count: "Holy Hands Institute", color: "bg-pink-100 text-pink-800", image: "/images/tvet-electricity-female.webp" },
+  { name: "HHI TVET Trainees", count: "Holy Hands Institute", color: "bg-orange-100 text-orange-800", image: "/images/hhi-tvet-trainees.webp" },
+  { name: "Plumbing Trainees", count: "TVET Programs", color: "bg-teal-100 text-teal-800", image: "/images/tvet-plumbing-trainees.webp" },
+  { name: "Adult Literacy Grads 2025", count: "Lofa County", color: "bg-green-100 text-green-800", image: "/images/alp-lofa-grads-2025.webp" },
+  { name: "Literacy Graduation Day", count: "Lofa County", color: "bg-lime-100 text-lime-800", image: "/images/literacy-graduation-day.webp" },
+  { name: "Literacy Graduate Certificate", count: "Lofa County", color: "bg-emerald-100 text-emerald-800", image: "/images/literacy-grad-certificate.webp" },
+  { name: "ALP Level 1 Participant", count: "Lofa County", color: "bg-teal-100 text-teal-800", image: "/images/alp-participant.webp" },
+  { name: "AWC Onboarding", count: "All We Can Partnership", color: "bg-purple-100 text-purple-800", image: "/images/awc-onboarding-presentation.webp" },
+  { name: "SHIFSD Main Office", count: "Johnsonville", color: "bg-stone-100 text-stone-800", image: "/images/shifsd-office-johnsonville.webp" },
+  { name: "Hummingbird Academy", count: "Students Outdoor", color: "bg-blue-100 text-blue-800", image: "/images/hac-students-outdoor.webp" },
+  { name: "VSLA Training Sessions", count: "Nimba County", color: "bg-emerald-100 text-emerald-800", image: "/images/vsla-white.webp" },
 ];
 
 export default function NewsPage() {
@@ -130,7 +130,7 @@ export default function NewsPage() {
               <article key={post.title} className="rounded-2xl overflow-hidden border border-gray-border hover:shadow-lg transition-shadow">
                 <div className="h-56 overflow-hidden">
                   {post.image ? (
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                    <img loading="lazy" src={post.image} alt={post.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                   ) : (
                     <div className="w-full h-full bg-forest/10 flex items-center justify-center">
                       <span className="text-forest/30 text-sm font-[var(--font-heading)]">Photo Coming Soon</span>
@@ -160,7 +160,7 @@ export default function NewsPage() {
               <article key={post.title} className="rounded-xl border border-gray-border overflow-hidden hover:shadow-md transition-shadow">
                 {post.image && (
                   <div className="h-40 overflow-hidden">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                    <img loading="lazy" src={post.image} alt={post.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                   </div>
                 )}
                 <div className="p-6">
@@ -187,7 +187,7 @@ export default function NewsPage() {
             {galleryCategories.map((cat) => (
               <div key={cat.name} className="bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-shadow group">
                 <div className="h-48 overflow-hidden">
-                  <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img loading="lazy" src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-5">
                   <h3 className="font-[var(--font-heading)] font-bold text-charcoal">{cat.name}</h3>

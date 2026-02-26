@@ -14,7 +14,7 @@ export default function GetInvolvedPage() {
   return (
     <>
       <section className="relative pt-32 pb-20">
-        <div className="absolute inset-0 bg-[url('/images/vsla-green.jpg')] bg-cover bg-center">
+        <div className="absolute inset-0 bg-[url('/images/vsla-green.webp')] bg-cover bg-center">
           <div className="absolute inset-0 bg-gradient-to-r from-forest-dark/90 to-forest-dark/70" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
