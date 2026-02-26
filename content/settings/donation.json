@@ -1,0 +1,13 @@
+{
+  "bankName": "LBDI (Liberian Bank for Development & Investment)",
+  "accountName": "Self Help Initiative for Sustainable Development",
+  "accountNumber": "XXXX-XXXX-XXXX",
+  "swiftCode": "LBDILRMO",
+  "currency": "USD / LRD",
+  "mobileMoney": [
+    { "provider": "Orange Money", "number": "+231 770 024 082", "name": "SHIFSD Liberia" },
+    { "provider": "MTN Mobile Money", "number": "+231 886 874 950", "name": "SHIFSD Liberia" }
+  ],
+  "globalgivingUrl": "",
+  "gofundmeUrl": ""
+}

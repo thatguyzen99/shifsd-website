@@ -52,6 +52,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  icons: {
+    icon: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -64,7 +68,52 @@ export default function RootLayout({
       lang="en"
       className={`${montserrat.variable} ${openSans.variable} ${lora.variable}`}
     >
+      <head>
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer />
+      </head>
       <body className="antialiased">
+        {/* Netlify Identity redirect handler for CMS login */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", function(user) {
+              if (!user) {
+                window.netlifyIdentity.on("login", function() {
+                  document.location.href = "/admin/";
+                });
+              }
+            });
+          }
+        `}} />
+        {/* Hidden forms for Netlify Forms detection at build time */}
+        <form name="contact" data-netlify="true" hidden>
+          <input type="hidden" name="form-name" value="contact" />
+          <input name="first-name" />
+          <input name="last-name" />
+          <input name="email" />
+          <select name="subject"><option /></select>
+          <textarea name="message" />
+        </form>
+        <form name="volunteer" data-netlify="true" hidden>
+          <input type="hidden" name="form-name" value="volunteer" />
+          <input name="first-name" />
+          <input name="last-name" />
+          <input name="email" />
+          <select name="area-of-interest"><option /></select>
+          <textarea name="message" />
+        </form>
+        <form name="partnership" data-netlify="true" hidden>
+          <input type="hidden" name="form-name" value="partnership" />
+          <input name="organization" />
+          <input name="contact-person" />
+          <input name="email" />
+          <select name="partnership-type"><option /></select>
+          <textarea name="message" />
+        </form>
+        <form name="newsletter" data-netlify="true" hidden>
+          <input type="hidden" name="form-name" value="newsletter" />
+          <input name="email" />
+        </form>
+
         <Navbar />
         <main>{children}</main>
         <Footer />

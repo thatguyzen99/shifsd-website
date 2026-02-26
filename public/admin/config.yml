@@ -1,0 +1,102 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  # ============================================
+  # NEWS & UPDATES
+  # ============================================
+  - name: "news"
+    label: "News & Updates"
+    label_singular: "News Post"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} — {{date}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "tag", widget: "select", options: ["Education", "Agriculture", "Livelihoods", "Training", "Infrastructure", "Literacy", "Community", "Events"] }
+      - { label: "Featured Post", name: "featured", widget: "boolean", default: false }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Short Summary", name: "excerpt", widget: "text", pattern: ['.{10,300}', "Must be between 10 and 300 characters"] }
+      - { label: "Full Content", name: "body", widget: "markdown" }
+
+  # ============================================
+  # IMPACT STORIES
+  # ============================================
+  - name: "stories"
+    label: "Impact Stories"
+    label_singular: "Story"
+    folder: "content/stories"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Quote / Testimonial", name: "quote", widget: "text" }
+      - { label: "Person's Name (or role)", name: "name", widget: "string" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Program", name: "program", widget: "select", options: ["VSLA Program", "EDC Youth Advance", "Adult Literacy Program", "Hummingbird Academy", "Holy Hands Institute", "CSA Program", "Business Training"] }
+      - { label: "Photo", name: "image", widget: "image", required: false }
+
+  # ============================================
+  # PHOTO GALLERY
+  # ============================================
+  - name: "gallery"
+    label: "Photo Gallery"
+    label_singular: "Photo"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Caption", name: "title", widget: "string" }
+      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Category", name: "category", widget: "select", options: ["VSLA Training", "EDC Youth", "Hummingbird Academy", "Holy Hands Institute", "CSA Farm", "Community Events", "Leadership", "Other"] }
+      - { label: "Location", name: "location", widget: "string", required: false }
+      - { label: "Date", name: "date", widget: "datetime", required: false }
+
+  # ============================================
+  # SITE SETTINGS (editable by staff)
+  # ============================================
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Contact Information"
+        name: "contact"
+        file: "content/settings/contact.json"
+        fields:
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Phone 1", name: "phone1", widget: "string" }
+          - { label: "Phone 2", name: "phone2", widget: "string" }
+          - { label: "Address", name: "address", widget: "text" }
+          - { label: "Office Hours", name: "hours", widget: "text" }
+
+      - label: "Donation Details"
+        name: "donation"
+        file: "content/settings/donation.json"
+        fields:
+          - { label: "Bank Name", name: "bankName", widget: "string" }
+          - { label: "Account Name", name: "accountName", widget: "string" }
+          - { label: "Account Number", name: "accountNumber", widget: "string" }
+          - { label: "SWIFT Code", name: "swiftCode", widget: "string" }
+          - { label: "Currency", name: "currency", widget: "string", default: "USD / LRD" }
+          - label: "Mobile Money Accounts"
+            name: "mobileMoney"
+            widget: "list"
+            fields:
+              - { label: "Provider", name: "provider", widget: "string" }
+              - { label: "Number", name: "number", widget: "string" }
+              - { label: "Account Name", name: "name", widget: "string" }
+          - { label: "GlobalGiving URL", name: "globalgivingUrl", widget: "string", required: false }
+          - { label: "GoFundMe URL", name: "gofundmeUrl", widget: "string", required: false }
+
+      - label: "Impact Numbers"
+        name: "impact"
+        file: "content/settings/impact.json"
+        fields:
+          - { label: "Years of Operation", name: "years", widget: "string", default: "24+" }
+          - { label: "Total Beneficiaries", name: "beneficiaries", widget: "string", default: "700+" }
+          - { label: "Counties Served", name: "counties", widget: "string", default: "7" }
+          - { label: "Farm Acres", name: "acres", widget: "string", default: "28.1" }

@@ -1,5 +1,8 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
+import { DonateForm } from "@/components/DonateForm";
+import { DonationSuccess } from "@/components/DonationSuccess";
 import { Heart, Users, Handshake, ArrowRight, CheckCircle, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -30,6 +33,9 @@ export default function GetInvolvedPage() {
       {/* Donate */}
       <section id="donate" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Suspense fallback={null}>
+            <DonationSuccess />
+          </Suspense>
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div>
               <div className="flex items-center gap-3 mb-4">
@@ -59,31 +65,7 @@ export default function GetInvolvedPage() {
                 ))}
               </ul>
             </div>
-            <div className="bg-gray-bg rounded-2xl p-8">
-              <h3 className="font-[var(--font-heading)] font-bold text-lg text-charcoal mb-6 text-center">
-                Make a Donation
-              </h3>
-              <div className="grid grid-cols-3 gap-3 mb-6">
-                {["$25", "$50", "$100", "$250", "$500", "Other"].map((amount) => (
-                  <button
-                    key={amount}
-                    className="border border-gray-border rounded-xl py-3 text-sm font-semibold text-charcoal hover:border-forest hover:text-forest hover:bg-forest/5 transition-colors"
-                  >
-                    {amount}
-                  </button>
-                ))}
-              </div>
-              <div className="space-y-4">
-                <input type="text" placeholder="Full Name" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
-                <input type="email" placeholder="Email Address" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
-                <button className="w-full bg-amber hover:bg-amber-dark text-white font-[var(--font-heading)] font-bold py-3.5 rounded-xl text-sm transition-colors flex items-center justify-center gap-2">
-                  <Heart className="w-4 h-4" /> Donate Now
-                </button>
-              </div>
-              <p className="text-xs text-charcoal-light text-center mt-4">
-                Secure payment processing. Tax-deductible contribution.
-              </p>
-            </div>
+            <DonateForm />
           </div>
         </div>
       </section>
@@ -96,13 +78,20 @@ export default function GetInvolvedPage() {
               <h3 className="font-[var(--font-heading)] font-bold text-lg text-charcoal mb-6">
                 Volunteer Application
               </h3>
-              <form className="space-y-4">
+              <form
+                name="volunteer"
+                method="POST"
+                data-netlify="true"
+                action="/get-involved?form=volunteer-success"
+                className="space-y-4"
+              >
+                <input type="hidden" name="form-name" value="volunteer" />
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <input type="text" placeholder="First Name" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
-                  <input type="text" placeholder="Last Name" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
+                  <input type="text" name="first-name" required placeholder="First Name" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
+                  <input type="text" name="last-name" required placeholder="Last Name" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
                 </div>
-                <input type="email" placeholder="Email Address" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
-                <select className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm text-charcoal-light focus:outline-none focus:ring-2 focus:ring-forest">
+                <input type="email" name="email" required placeholder="Email Address" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
+                <select name="area-of-interest" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm text-charcoal-light focus:outline-none focus:ring-2 focus:ring-forest">
                   <option>Area of Interest</option>
                   <option>Education & Teaching</option>
                   <option>Agriculture & Farming</option>
@@ -111,8 +100,8 @@ export default function GetInvolvedPage() {
                   <option>Fundraising & Grants</option>
                   <option>Technology & IT</option>
                 </select>
-                <textarea rows={4} placeholder="Tell us about your skills and availability..." className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest resize-none" />
-                <button className="w-full bg-forest hover:bg-forest-dark text-white font-[var(--font-heading)] font-bold py-3.5 rounded-xl text-sm transition-colors">
+                <textarea name="message" rows={4} placeholder="Tell us about your skills and availability..." className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest resize-none" />
+                <button type="submit" className="w-full bg-forest hover:bg-forest-dark text-white font-[var(--font-heading)] font-bold py-3.5 rounded-xl text-sm transition-colors">
                   Submit Application
                 </button>
               </form>
@@ -185,19 +174,26 @@ export default function GetInvolvedPage() {
             </div>
             <div className="bg-deep-blue rounded-2xl p-8 text-white">
               <h3 className="font-[var(--font-heading)] font-bold text-lg mb-6">Partnership Inquiry</h3>
-              <form className="space-y-4">
-                <input type="text" placeholder="Organization Name" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber" />
-                <input type="text" placeholder="Contact Person" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber" />
-                <input type="email" placeholder="Email Address" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber" />
-                <select className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber">
+              <form
+                name="partnership"
+                method="POST"
+                data-netlify="true"
+                action="/get-involved?form=partner-success"
+                className="space-y-4"
+              >
+                <input type="hidden" name="form-name" value="partnership" />
+                <input type="text" name="organization" required placeholder="Organization Name" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber" />
+                <input type="text" name="contact-person" required placeholder="Contact Person" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber" />
+                <input type="email" name="email" required placeholder="Email Address" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber" />
+                <select name="partnership-type" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber">
                   <option>Partnership Type</option>
                   <option>Program Implementation</option>
                   <option>Funding / Grants</option>
                   <option>Technical Assistance</option>
                   <option>Research Partnership</option>
                 </select>
-                <textarea rows={4} placeholder="Tell us about your partnership vision..." className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber resize-none" />
-                <button className="w-full bg-amber hover:bg-amber-dark text-white font-[var(--font-heading)] font-bold py-3.5 rounded-xl text-sm transition-colors flex items-center justify-center gap-2">
+                <textarea name="message" rows={4} placeholder="Tell us about your partnership vision..." className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber resize-none" />
+                <button type="submit" className="w-full bg-amber hover:bg-amber-dark text-white font-[var(--font-heading)] font-bold py-3.5 rounded-xl text-sm transition-colors flex items-center justify-center gap-2">
                   <Mail className="w-4 h-4" /> Submit Inquiry
                 </button>
               </form>

@@ -137,9 +137,9 @@ export default function ImpactPage() {
           <SectionHeading title="Annual Reports & Documents" subtitle="Download our reports for detailed program outcomes and financial transparency." light />
           <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: "Annual Report 2024", description: "Comprehensive overview of all programs, financials, and outcomes for 2024.", type: "PDF" },
-              { title: "Strategic Plan 2024–2028", description: "Our five-year strategic vision and theory of change framework.", type: "PDF" },
-              { title: "Organizational Profile", description: "Detailed organizational background, governance, and accreditation details.", type: "PDF" },
+              { title: "Annual Report 2024", description: "Comprehensive overview of all programs, financials, and outcomes for 2024.", type: "PDF", href: "/docs/SHIFSD-Annual-Report-2024.pdf" },
+              { title: "Strategic Plan 2024–2028", description: "Our five-year strategic vision and theory of change framework.", type: "PDF", href: "/docs/SHIFSD-Strategic-Plan-2024-2028.pdf" },
+              { title: "Organizational Profile", description: "Detailed organizational background, governance, and accreditation details.", type: "PDF", href: "/docs/SHIFSD-Organizational-Profile.pdf" },
             ].map((doc) => (
               <div key={doc.title} className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-colors">
                 <div className="flex items-center gap-3 mb-3">
@@ -150,9 +150,9 @@ export default function ImpactPage() {
                 </div>
                 <h3 className="font-[var(--font-heading)] font-bold mb-2">{doc.title}</h3>
                 <p className="text-sm text-white/60 mb-4">{doc.description}</p>
-                <button className="text-sm text-amber hover:text-amber-light font-semibold flex items-center gap-1">
+                <a href={doc.href} target="_blank" rel="noopener noreferrer" download className="text-sm text-amber hover:text-amber-light font-semibold flex items-center gap-1">
                   <Download className="w-3 h-3" /> Download Report
-                </button>
+                </a>
               </div>
             ))}
           </div>

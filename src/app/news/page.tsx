@@ -58,7 +58,8 @@ const blogPosts = [
 const galleryCategories = [
   { name: "VSLA Training Sessions", count: "Nimba County", color: "bg-emerald-100 text-emerald-800", image: "/images/vsla-white.jpg" },
   { name: "EDC Youth Training", count: "Montserrado County", color: "bg-blue-100 text-blue-800", image: "/images/hero-community.jpg" },
-  { name: "Hummingbird Academy", count: "Johnsonville", color: "bg-purple-100 text-purple-800", image: "/images/training-graduates.jpg" },
+  { name: "Hummingbird Academy", count: "Johnsonville", color: "bg-purple-100 text-purple-800", image: "/images/hac-students-outdoor.jpg" },
+  { name: "HAC Classroom", count: "Learning in Action", color: "bg-indigo-100 text-indigo-800", image: "/images/hac-classroom.jpg" },
   { name: "Holy Hands Institute", count: "TVET Programs", color: "bg-amber-100 text-amber-800", image: "/images/tvet-trainees.jpg" },
   { name: "CSA Demonstration Farm", count: "Nimba County", color: "bg-green-100 text-green-800", image: "/images/vsla-nimba-outdoor.jpg" },
   { name: "Community Events", count: "Multiple Counties", color: "bg-rose-100 text-rose-800", image: "/images/vsla-nimba-meeting.jpg" },
@@ -108,9 +109,9 @@ export default function NewsPage() {
                   </div>
                   <h3 className="font-[var(--font-heading)] font-bold text-charcoal text-xl mb-2">{post.title}</h3>
                   <p className="text-sm text-charcoal-light leading-relaxed">{post.excerpt}</p>
-                  <button className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-forest hover:text-forest-light transition-colors">
-                    Read Full Story <ArrowRight className="w-3 h-3" />
-                  </button>
+                  <Link href="/contact" className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-forest hover:text-forest-light transition-colors">
+                    Learn More <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
               </article>
             ))}
@@ -140,7 +141,7 @@ export default function NewsPage() {
           <SectionHeading title="Photo Gallery" subtitle="Capturing moments of transformation across our programs and communities." />
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryCategories.map((cat) => (
-              <div key={cat.name} className="bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group">
+              <div key={cat.name} className="bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-shadow group">
                 <div className="h-48 overflow-hidden">
                   <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>

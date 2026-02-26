@@ -70,9 +70,11 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-forest rounded-full flex items-center justify-center">
-              <span className="text-white font-[var(--font-heading)] font-bold text-sm lg:text-base">S</span>
-            </div>
+            <img
+              src="/images/logo.png"
+              alt="SHIFSD Logo"
+              className="w-10 h-10 lg:w-12 lg:h-12 rounded-full object-cover"
+            />
             <div className="hidden sm:block">
               <div className="font-[var(--font-heading)] font-bold text-forest text-sm lg:text-base leading-tight">
                 SHIFSD

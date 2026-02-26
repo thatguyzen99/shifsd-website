@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { SectionHeading } from "@/components/SectionHeading";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -31,24 +30,31 @@ export default function ContactPage() {
             <div className="lg:col-span-3">
               <h2 className="font-[var(--font-heading)] text-2xl font-bold text-charcoal mb-2">Send a Message</h2>
               <div className="section-divider mb-6" />
-              <form className="space-y-5">
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                action="/contact?form=success"
+                className="space-y-5"
+              >
+                <input type="hidden" name="form-name" value="contact" />
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-semibold text-charcoal mb-1.5">First Name *</label>
-                    <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
+                    <input type="text" name="first-name" required className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-charcoal mb-1.5">Last Name *</label>
-                    <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
+                    <input type="text" name="last-name" required className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-charcoal mb-1.5">Email Address *</label>
-                  <input type="email" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
+                  <input type="email" name="email" required className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-charcoal mb-1.5">Subject</label>
-                  <select className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-forest">
+                  <select name="subject" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-forest">
                     <option>General Inquiry</option>
                     <option>Partnership Opportunity</option>
                     <option>Donation Question</option>
@@ -59,9 +65,9 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-charcoal mb-1.5">Message *</label>
-                  <textarea rows={6} className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest resize-none" placeholder="How can we help you?" />
+                  <textarea name="message" required rows={6} className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest resize-none" placeholder="How can we help you?" />
                 </div>
-                <button className="bg-forest hover:bg-forest-dark text-white font-[var(--font-heading)] font-bold px-8 py-3.5 rounded-xl text-sm transition-colors flex items-center gap-2">
+                <button type="submit" className="bg-forest hover:bg-forest-dark text-white font-[var(--font-heading)] font-bold px-8 py-3.5 rounded-xl text-sm transition-colors flex items-center gap-2">
                   <Send className="w-4 h-4" /> Send Message
                 </button>
               </form>
@@ -130,13 +136,18 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Map placeholder */}
-              <div className="mt-8 bg-gray-bg rounded-xl h-56 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-8 h-8 text-forest/30 mx-auto mb-2" />
-                  <p className="text-sm text-charcoal-light">Johnsonville, Monrovia</p>
-                  <p className="text-xs text-charcoal-light/60">Interactive map coming soon</p>
-                </div>
+              {/* Google Maps embed */}
+              <div className="mt-8 rounded-xl overflow-hidden h-56">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15864.2!2d-10.78!3d6.31!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf09f91a7f1c5b3%3A0x23456789!2sJohnsonville%2C+Monrovia%2C+Liberia!5e0!3m2!1sen!2s!4v1700000000000"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="SHIFSD Liberia Location - Johnsonville, Monrovia"
+                />
               </div>
             </div>
           </div>
