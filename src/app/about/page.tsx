@@ -257,7 +257,7 @@ export default function AboutPage() {
           <SectionHeading title="SHIFSD Institutions" subtitle="Three entities working together toward a common mission." light />
           <div className="mt-12 grid md:grid-cols-3 gap-8">
             {[
-              { name: "Hummingbird Academy (HAC)", logo: "/images/logo-hac.webp", motto: "Applied Knowledge is Power", est: "Est. 2016", description: "Accredited academic school running from Nursery to Senior Secondary (Grade 10), serving 381 students with 16 dedicated teaching staff at the SMYTC campus." },
+              { name: "Hummingbird Academy (HAC)", logo: "/images/logo-hac.webp", motto: "Applied Knowledge is Power", est: "Est. 2016", description: "Accredited academic school running from Nursery to Senior Secondary (Grade 11), serving 381 students with 16 dedicated teaching staff at the SMYTC campus." },
               { name: "Holy Hands Institute (HHI)", logo: "/images/logo-hhi.webp", motto: "Meeting Needs and Healing Hearts", est: "Est. 2016", description: "Accredited TVET institution graduating over 1,000 trainees in welding, auto mechanics, cosmetology, and electrical — many now employed at LEC, LWSC, and other national entities." },
               { name: "LightUp The Bible Ministries (LBM)", logo: "/images/logo-lbm.webp", motto: "Discover What The Bible Really Says", est: "", description: "Registered Christian ministry serving as the spiritual arm of SHIFSD, providing faith-based support and community upliftment." },
             ].map((inst) => (
