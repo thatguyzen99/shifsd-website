@@ -11,11 +11,11 @@ const GLOBALGIVING_URL = "https://www.globalgiving.org"; // Replace with your ac
 const GOFUNDME_URL = "";  // Optional: Replace with GoFundMe campaign URL if created
 
 const BANK_DETAILS = {
-  bankName: "LBDI (Liberian Bank for Development & Investment)",
-  accountName: "Self Help Initiative for Sustainable Development",
-  accountNumber: "XXXX-XXXX-XXXX", // Replace with actual account number
+  bankName: "Ecobank Liberia Ltd",
+  accountName: "Self Help Initiative for Sustainable Development Inc.",
+  accountNumber: "6100206202",
   currency: "USD / LRD",
-  swiftCode: "LBDILRMO",           // Replace with actual SWIFT code
+  swiftCode: "ABORLRMO",
 };
 
 // ============================================================
