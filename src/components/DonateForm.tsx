@@ -15,11 +15,11 @@ const BANK_DETAILS = {
   accountName: "Self Help Initiative for Sustainable Development Inc.",
   accountNumber: "6100206202",
   currency: "USD / LRD",
-  swiftCode: "ABORLRMO",
+  swiftCode: "ECOCLRLM",
 };
 
 // ============================================================
-// IMPORTANT: Replace the mobile money numbers below with
+// IMPORTANT: I will Replace the mobile money numbers below with
 // SHIFSD's actual Orange Money and MTN registered numbers.
 // The phone numbers listed are the org's contact numbers —
 // update them if different from the mobile money accounts.
