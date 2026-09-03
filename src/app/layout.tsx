@@ -46,10 +46,26 @@ export const metadata: Metadata = {
     siteName: "SHIFSD Liberia",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SHIFSD Liberia — Practical Help for Self-Reliance",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SHIFSD Liberia | Practical Help for Self-Reliance",
+    description:
+      "From refugee camp to community catalyst — empowering Liberia since 2000.",
+    images: ["/og-image.png"],
   },
   icons: {
-    icon: "/images/logo.webp",
-    apple: "/images/logo.webp",
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.png",
   },
 };
 
