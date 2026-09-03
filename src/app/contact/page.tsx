@@ -303,15 +303,25 @@ const infoCards: InfoCard[] = [
       >
         Facebook
       </a>,
-      <a
-        key="s2"
-        href="https://www.linkedin.com/company/shifsd-liberia/"
-        target="_blank"
-        rel="noreferrer"
-        className="hover:text-warm-teal transition-colors"
-      >
-        LinkedIn
-      </a>,
+      <span key="s2">
+        <a
+          href="https://www.linkedin.com/"
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-warm-teal transition-colors"
+        >
+          LinkedIn
+        </a>
+        {" / "}
+        <a
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-warm-teal transition-colors"
+        >
+          Instagram
+        </a>
+      </span>,
     ],
   },
 ];

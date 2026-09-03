@@ -26,6 +26,8 @@ function Icon({ name, className }: { name: string; className?: string }) {
   );
 }
 
+// TODO: replace placeholder hrefs (platform homepages) with real SHIFSD
+// profile URLs when the accounts go live. Facebook is already the real one.
 const socials = [
   {
     name: "Facebook",
@@ -39,11 +41,32 @@ const socials = [
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/company/shifsd-liberia/",
+    href: "https://www.linkedin.com/",
     svg: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
         <rect x="3" y="3" width="18" height="18" rx="2" />
         <path d="M8 10v7M8 7.5v.01M12 17v-4a2 2 0 0 1 4 0v4M12 13v4" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/",
+    svg: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="3.5" />
+        <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/",
+    svg: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
+        <rect x="2.5" y="6" width="19" height="12" rx="3" />
+        <path d="m10.5 9.5 4 2.5-4 2.5v-5z" fill="currentColor" stroke="none" />
       </svg>
     ),
   },
