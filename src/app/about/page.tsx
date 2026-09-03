@@ -168,6 +168,17 @@ function OurStory() {
               education, and livelihood programs that empower families to lift
               themselves out of poverty.
             </p>
+            <a
+              href="/docs/SHIFSD-Strategic-Plan-2024-2028.pdf"
+              download="SHIFSD-Strategic-Plan-2024-2028.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 self-start text-warm-teal text-[14px] font-semibold hover:underline mt-1"
+            >
+              <Icon name="download" className="!text-[18px]" />
+              Read the Strategic Plan 2024–2028
+              <span aria-hidden>↗</span>
+            </a>
           </motion.div>
         </motion.div>
       </div>

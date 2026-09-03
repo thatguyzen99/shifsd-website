@@ -560,6 +560,136 @@ function DataAndResults() {
   );
 }
 
+// ─── 4c. Publications ───────────────────────────────────────────
+type Publication = {
+  title: string;
+  description: string;
+  file: string;
+  filename: string;
+  icon: string;
+  accent: "teal" | "flame" | "gold";
+};
+
+const publications: Publication[] = [
+  {
+    title: "Annual Impact Report 2024",
+    description:
+      "Independently verified program numbers, financials, and stories from the year in one document.",
+    file: "/docs/SHIFSD-Annual-Report-2024.pdf",
+    filename: "SHIFSD-Annual-Report-2024.pdf",
+    icon: "insert_chart",
+    accent: "gold",
+  },
+  {
+    title: "Strategic Plan 2024–2028",
+    description:
+      "Our four-year roadmap across the three pillars: agriculture, education, and financial sustainability.",
+    file: "/docs/SHIFSD-Strategic-Plan-2024-2028.pdf",
+    filename: "SHIFSD-Strategic-Plan-2024-2028.pdf",
+    icon: "map",
+    accent: "teal",
+  },
+  {
+    title: "Organizational Profile",
+    description:
+      "History, governance, program structure, and the accreditation record — everything a partner needs.",
+    file: "/docs/SHIFSD-Organizational-Profile.pdf",
+    filename: "SHIFSD-Organizational-Profile.pdf",
+    icon: "menu_book",
+    accent: "flame",
+  },
+];
+
+const pubAccents = {
+  teal: { icon: "bg-warm-teal text-white", link: "text-warm-teal" },
+  flame: { icon: "bg-liberian-flame text-white", link: "text-liberian-flame" },
+  gold: { icon: "bg-horizon-gold text-deep-canopy", link: "text-horizon-gold" },
+};
+
+function PubIcon({ name, className }: { name: string; className?: string }) {
+  return (
+    <span className={`material-symbols-outlined ${className ?? ""}`} aria-hidden>
+      {name}
+    </span>
+  );
+}
+
+function Publications() {
+  return (
+    <section id="publications" className="bg-warm-sand scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-12"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col items-center gap-3 text-center max-w-[720px]"
+          >
+            <p
+              className="text-warm-teal text-[13px] font-semibold uppercase"
+              style={{ letterSpacing: "3px" }}
+            >
+              Publications
+            </p>
+            <h2
+              className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[36px] leading-[44px]"
+              style={{ letterSpacing: "-0.5px" }}
+            >
+              Reports &amp; Downloads
+            </h2>
+            <p className="text-gray-600 text-[16px] leading-[26px]">
+              The primary sources behind everything on this page. Every figure
+              can be traced back to one of these documents.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            {publications.map((p) => {
+              const a = pubAccents[p.accent];
+              return (
+                <motion.a
+                  key={p.filename}
+                  href={p.file}
+                  download={p.filename}
+                  target="_blank"
+                  rel="noreferrer"
+                  variants={fadeUp}
+                  className="group bg-white border border-gray-200 rounded-2xl p-7 flex flex-col gap-4 transition-colors hover:border-warm-teal/50"
+                >
+                  <div
+                    className={`w-12 h-12 rounded-xl ${a.icon} flex items-center justify-center`}
+                  >
+                    <PubIcon name={p.icon} className="!text-[24px]" />
+                  </div>
+                  <h3 className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[20px] leading-[28px]">
+                    {p.title}
+                  </h3>
+                  <p className="text-gray-600 text-[14px] leading-[22px] flex-1">
+                    {p.description}
+                  </p>
+                  <span
+                    className={`${a.link} inline-flex items-center gap-1 text-[14px] font-semibold`}
+                  >
+                    <PubIcon name="download" className="!text-[18px]" />
+                    Download PDF
+                    <span className="transition-transform group-hover:translate-x-0.5">
+                      →
+                    </span>
+                  </span>
+                </motion.a>
+              );
+            })}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // ─── 5. Geographic Reach ────────────────────────────────────────
 function GeographicReach() {
   return (
@@ -635,6 +765,7 @@ export default function ImpactPage() {
       <ImpactByArea />
       <StoriesOfChange />
       <DataAndResults />
+      <Publications />
       <GeographicReach />
       <SupportCTA />
     </>

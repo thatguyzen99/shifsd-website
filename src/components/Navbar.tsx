@@ -36,6 +36,7 @@ const navigation = [
       { name: "Impact by Area", href: "/impact#by-area" },
       { name: "Stories of Change", href: "/impact#stories" },
       { name: "Data & Results", href: "/impact#data" },
+      { name: "Publications", href: "/impact#publications" },
       { name: "Geographic Reach", href: "/impact#geographic-reach" },
     ],
   },
