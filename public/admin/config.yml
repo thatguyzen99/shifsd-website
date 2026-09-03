@@ -57,46 +57,9 @@ collections:
       - { label: "Location", name: "location", widget: "string", required: false }
       - { label: "Date", name: "date", widget: "datetime", required: false }
 
-  # ============================================
-  # SITE SETTINGS (editable by staff)
-  # ============================================
-  - name: "settings"
-    label: "Site Settings"
-    files:
-      - label: "Contact Information"
-        name: "contact"
-        file: "content/settings/contact.json"
-        fields:
-          - { label: "Email", name: "email", widget: "string" }
-          - { label: "Phone 1", name: "phone1", widget: "string" }
-          - { label: "Phone 2", name: "phone2", widget: "string" }
-          - { label: "Address", name: "address", widget: "text" }
-          - { label: "Office Hours", name: "hours", widget: "text" }
-
-      - label: "Donation Details"
-        name: "donation"
-        file: "content/settings/donation.json"
-        fields:
-          - { label: "Bank Name", name: "bankName", widget: "string" }
-          - { label: "Account Name", name: "accountName", widget: "string" }
-          - { label: "Account Number", name: "accountNumber", widget: "string" }
-          - { label: "SWIFT Code", name: "swiftCode", widget: "string" }
-          - { label: "Currency", name: "currency", widget: "string", default: "USD / LRD" }
-          - label: "Mobile Money Accounts"
-            name: "mobileMoney"
-            widget: "list"
-            fields:
-              - { label: "Provider", name: "provider", widget: "string" }
-              - { label: "Number", name: "number", widget: "string" }
-              - { label: "Account Name", name: "name", widget: "string" }
-          - { label: "GlobalGiving URL", name: "globalgivingUrl", widget: "string", required: false }
-          - { label: "GoFundMe URL", name: "gofundmeUrl", widget: "string", required: false }
-
-      - label: "Impact Numbers"
-        name: "impact"
-        file: "content/settings/impact.json"
-        fields:
-          - { label: "Years of Operation", name: "years", widget: "string", default: "24+" }
-          - { label: "Total Beneficiaries", name: "beneficiaries", widget: "string", default: "700+" }
-          - { label: "Counties Served", name: "counties", widget: "string", default: "7" }
-          - { label: "Farm Acres", name: "acres", widget: "string", default: "28.1" }
+  # NOTE: The "settings" collection (contact / donation / impact numbers)
+  # was removed. The site currently reads these values from source code,
+  # not from CMS-managed JSON, so exposing the fields here caused
+  # confusion (editors would edit the JSON and see no change on the
+  # live site). Re-enable this collection only when the corresponding
+  # pages are wired to read from content/settings/*.json at build time.

@@ -62,26 +62,46 @@ await sharp({
 console.log(`Generated ${output} (${W}x${H})`);
 
 // ─── Favicon + Apple touch icon ──────────────────────────────────────
-// Square Warm Sand tile with the icon centered. Padded so the mark stays
-// legible when browsers render it at 16-32px.
-async function buildSquareIcon(size, outName, bg = WARM_SAND) {
-  const iconSize = Math.round(size * 0.78);
-  const iconBuf = await sharp(iconPath)
-    .resize({ width: iconSize, withoutEnlargement: false })
+// Trim the source icon of any surrounding whitespace so the palm mark
+// fills the browser tab and home-screen tile as much as possible. A
+// small 4% breathing margin keeps the mark from touching the edges.
+// Favicon is exported on a transparent background so it looks correct
+// on both light and dark browser chromes; Apple touch icon needs an
+// opaque background per iOS spec, so it gets the Warm Sand tile.
+const trimmedIcon = await sharp(iconPath)
+  .trim({ threshold: 10 })
+  .png()
+  .toBuffer();
+
+async function buildIcon(size, outName, { transparent = false } = {}) {
+  const margin = Math.round(size * 0.04);
+  const inner = size - margin * 2;
+  const iconBuf = await sharp(trimmedIcon)
+    .resize({
+      width: inner,
+      height: inner,
+      fit: "contain",
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
     .png()
     .toBuffer();
-  const info = await sharp(iconBuf).metadata();
-  const top = Math.round((size - (info.height ?? iconSize)) / 2);
-  const left = Math.round((size - (info.width ?? iconSize)) / 2);
   const out = resolve(publicDir, outName);
   await sharp({
-    create: { width: size, height: size, channels: 4, background: bg },
+    create: {
+      width: size,
+      height: size,
+      channels: 4,
+      background: transparent
+        ? { r: 0, g: 0, b: 0, alpha: 0 }
+        : WARM_SAND,
+    },
   })
-    .composite([{ input: iconBuf, top, left }])
+    .composite([{ input: iconBuf, top: margin, left: margin }])
     .png({ compressionLevel: 9 })
     .toFile(out);
   console.log(`Generated ${out} (${size}x${size})`);
 }
 
-await buildSquareIcon(512, "favicon.png");
-await buildSquareIcon(180, "apple-touch-icon.png");
+await buildIcon(512, "favicon.png", { transparent: true });
+await buildIcon(32, "favicon-32.png", { transparent: true });
+await buildIcon(180, "apple-touch-icon.png"); // iOS wants opaque
