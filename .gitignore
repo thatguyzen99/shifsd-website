@@ -5,3 +5,6 @@ out/
 .env
 .env.local
 *.log
+.claude/
+tsconfig.tsbuildinfo
+scripts/liberia.geojson

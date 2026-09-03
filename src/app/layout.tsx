@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Montserrat, Open_Sans, Lora } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { LenisProvider } from "@/components/LenisProvider";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  display: "swap",
-  weight: ["400", "600", "700", "800"],
-});
-
-const openSans = Open_Sans({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -27,6 +21,7 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.shifsd-liberia.org"),
   title: {
     default: "SHIFSD Liberia | Self Help Initiative for Sustainable Development",
     template: "%s | SHIFSD Liberia",
@@ -66,9 +61,27 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${openSans.variable} ${lora.variable}`}
+      className={`${inter.variable} ${lora.variable}`}
     >
       <head>
+        {/* Clash Display + Clash Grotesk (headings) — Fontshare CDN */}
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@500,600,700&display=swap"
+        />
+        {/* Material Symbols (icons) — Google Fonts CDN */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+        />
         <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer />
       </head>
       <body className="antialiased">
@@ -114,9 +127,11 @@ export default function RootLayout({
           <input name="email" />
         </form>
 
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <LenisProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   );

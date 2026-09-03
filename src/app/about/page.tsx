@@ -1,282 +1,609 @@
-import { Metadata } from "next";
-import { SectionHeading } from "@/components/SectionHeading";
-import {
-  Shield,
-  Scale,
-  Eye,
-  Users,
-  Heart,
-  Calendar,
-  MapPin,
-  Award,
-  ExternalLink,
-  Handshake,
-} from "lucide-react";
+"use client";
 
-export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "Learn about SHIFSD Liberia's 24-year journey from a refugee camp in Ghana to one of Liberia's most trusted community development organizations.",
+import Link from "next/link";
+import { animate, motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+
+// ─── Shared reveal variants ─────────────────────────────────────
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
 };
 
-const timeline = [
-  { year: "2000", title: "Founded in Ghana", description: "Established by Liberian refugees in the Central Region of Ghana on November 11, 2000 — born out of a spirit of self-help." },
-  { year: "2005", title: "Registered in Liberia", description: "Officially registered with the Government of Liberia on May 30, 2005 as a non-profit, non-governmental organization." },
-  { year: "2008", title: "Repatriated to Liberia", description: "Founders repatriated and eventually settled at the SHIFSD Multipurpose Youth Training Center in Johnsonville, Monrovia." },
-  { year: "2016", title: "Holy Hands Institute Launched", description: "Established the TVET institution, now training youth in vocational skills with graduates working at LEC, LWSC, and more." },
-  { year: "2023", title: "28.1 Acres Acquired", description: "Acquired farmland in Kpytuo Town, Nimba County for climate smart agriculture demonstration and agri-business." },
-  { year: "2024", title: "700+ Beneficiaries Served", description: "Expanded reach across 7 counties with 722 youth trained, 150 women in VSLAs, and $6,092 saved in community groups." },
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+function Icon({ name, className }: { name: string; className?: string }) {
+  return (
+    <span className={`material-symbols-outlined ${className ?? ""}`} aria-hidden>
+      {name}
+    </span>
+  );
+}
+
+// ─── CountUp helper ─────────────────────────────────────────────
+function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const [n, setN] = useState(0);
+  const isFractional = to % 1 !== 0;
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(0, to, {
+      duration: 2,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      onUpdate: (v) => setN(v),
+    });
+    return () => controls.stop();
+  }, [inView, to]);
+
+  const display = isFractional ? n.toFixed(1) : Math.floor(n).toLocaleString();
+  return (
+    <span ref={ref} className="tabular-nums">
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
+// ─── 1. About Hero ──────────────────────────────────────────────
+function AboutHero() {
+  return (
+    <section
+      data-node-id="39:19"
+      className="bg-deep-canopy"
+    >
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          className="flex flex-col items-center gap-5 text-center"
+        >
+          <motion.p
+            variants={fadeUp}
+            data-node-id="39:20"
+            className="text-[13px] text-white/50"
+          >
+            <Link href="/" className="hover:text-white/80 transition-colors">
+              Home
+            </Link>
+            <span className="px-2">/</span>
+            <span>About Us</span>
+          </motion.p>
+          <motion.p
+            variants={fadeUp}
+            data-node-id="39:21"
+            className="text-horizon-gold text-[13px] font-semibold uppercase"
+            style={{ letterSpacing: "3px" }}
+          >
+            Our Story
+          </motion.p>
+          <motion.h1
+            variants={fadeUp}
+            data-node-id="39:22"
+            className="font-[family-name:var(--font-display)] font-semibold text-white text-[34px] leading-[42px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px]"
+            style={{ letterSpacing: "-1px" }}
+          >
+            About SHIFSD
+          </motion.h1>
+          <motion.p
+            variants={fadeUp}
+            data-node-id="39:23"
+            className="text-[18px] leading-[28px] text-white/80 max-w-[900px]"
+          >
+            From a group of Liberian refugees in Ghana to a nationally recognized
+            NGO transforming communities across seven counties — this is our
+            journey of resilience, purpose, and sustainable impact.
+          </motion.p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 2. Our Story ───────────────────────────────────────────────
+function OurStory() {
+  return (
+    <section id="our-story" data-node-id="41:2" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col lg:flex-row gap-14 items-center"
+        >
+          <motion.div
+            variants={fadeUp}
+            data-node-id="41:3"
+            className="w-full lg:w-[520px] shrink-0"
+          >
+            <div className="h-[400px] rounded-2xl overflow-hidden">
+              <img
+                src="/images/about/our-story.jpg"
+                alt="SHIFSD community meeting"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="flex-1 flex flex-col gap-5">
+            <p
+              data-node-id="41:5"
+              className="text-liberian-flame text-[13px] font-semibold uppercase"
+              style={{ letterSpacing: "3px" }}
+            >
+              How It Began
+            </p>
+            <h2
+              data-node-id="41:6"
+              className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[32px] leading-[40px]"
+            >
+              Born in a Refugee Camp, Built for Impact
+            </h2>
+            <p
+              data-node-id="41:7"
+              className="text-gray-600 text-[16px] leading-[26px]"
+            >
+              SHIFSD was founded in 2000 by Jeremiah Burgess and a group of
+              Liberian refugees in the Buduburam Refugee Camp in Ghana. Driven
+              by a shared vision to rebuild their war-torn homeland, they began
+              planning for the sustainable development of Liberia.
+            </p>
+            <p
+              data-node-id="41:8"
+              className="text-gray-600 text-[16px] leading-[26px]"
+            >
+              After returning to Liberia, SHIFSD established its headquarters in
+              Monrovia and expanded its programs to seven counties, working
+              alongside communities to implement sustainable agriculture,
+              education, and livelihood programs that empower families to lift
+              themselves out of poverty.
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 3. At a Glance ─────────────────────────────────────────────
+const glanceStats = [
+  { value: 2000, suffix: "", label: "Year Founded", format: "int" },
+  { value: 7, suffix: "", label: "Counties Reached", format: "int" },
+  { value: 1187, suffix: "+", label: "Direct Beneficiaries", format: "int" },
+  { value: 28.1, suffix: "", label: "Acres of Farmland", format: "float" },
+  { value: 6, suffix: "+", label: "Strategic Partners", format: "int" },
 ];
 
+function AtAGlance() {
+  return (
+    <section id="glance" data-node-id="41:9" className="bg-warm-teal scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4">
+          {glanceStats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="flex flex-col items-center text-center gap-1.5"
+            >
+              <span
+                className="font-[family-name:var(--font-heading)] font-medium text-horizon-gold text-[36px] leading-[44px]"
+                style={{ letterSpacing: "-0.5px" }}
+              >
+                <CountUp to={s.value} suffix={s.suffix} />
+              </span>
+              <span className="text-white/85 text-[14px] leading-[20px]">
+                {s.label}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 4. Vision & Mission ────────────────────────────────────────
+function VisionMission() {
+  return (
+    <section id="vision-mission" data-node-id="42:2" className="bg-warm-sand scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-12"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col items-center gap-3 text-center"
+          >
+            <p
+              className="text-warm-teal text-[13px] font-semibold uppercase"
+              style={{ letterSpacing: "3px" }}
+            >
+              Our Purpose
+            </p>
+            <h2
+              className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[36px] leading-[44px]"
+              style={{ letterSpacing: "-0.5px" }}
+            >
+              Vision &amp; Mission
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+            <motion.div
+              variants={fadeUp}
+              data-node-id="42:7"
+              className="bg-white rounded-2xl px-8 py-9 flex flex-col gap-5"
+            >
+              <div className="h-1 w-15 bg-warm-teal rounded-sm" />
+              <h3
+                className="font-[family-name:var(--font-accent)] font-semibold text-deep-canopy text-[48px] leading-[28px]"
+                style={{ letterSpacing: "-2.4px" }}
+              >
+                Our Vision
+              </h3>
+              <p className="text-gray-600 text-[16px] leading-[26px]">
+                A resilient, self-sustaining Liberia where communities thrive
+                through sustainable agriculture, quality education, and economic
+                empowerment.
+              </p>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              data-node-id="42:12"
+              className="bg-white rounded-2xl px-8 py-9 flex flex-col gap-5"
+            >
+              <div className="h-1 w-15 bg-liberian-flame rounded-sm" />
+              <h3
+                className="font-[family-name:var(--font-accent)] font-semibold text-deep-canopy text-[48px] leading-[28px]"
+                style={{ letterSpacing: "-2.4px" }}
+              >
+                Our Mission
+              </h3>
+              <p className="text-gray-600 text-[16px] leading-[26px]">
+                To empower Liberian communities with the knowledge, skills, and
+                resources needed to achieve food security, educational
+                excellence, and financial independence through participatory,
+                sustainable development.
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 5. Core Values ─────────────────────────────────────────────
 const coreValues = [
-  { icon: Shield, name: "Integrity", description: "We communicate challenges to communities and donors in a timely manner." },
-  { icon: Scale, name: "Justice", description: "We treat all staff members and stakeholders in a respectful, fair and honest manner." },
-  { icon: Eye, name: "Transparency", description: "We remain open in the management of programs, answerable to communities, donors and partners." },
-  { icon: Users, name: "Participation", description: "We value consensus building and shared leadership." },
-  { icon: Heart, name: "Diversity", description: "We strive to accommodate and respect people of diverse backgrounds and affiliations." },
+  {
+    icon: "eco",
+    name: "Sustainability",
+    description:
+      "Building programs that endure beyond external funding through community ownership and self-reliance.",
+  },
+  {
+    icon: "handshake",
+    name: "Community Participation",
+    description:
+      "Every initiative is co-designed with the communities we serve, ensuring relevance and lasting adoption.",
+  },
+  {
+    icon: "account_balance",
+    name: "Accountability",
+    description:
+      "Transparent governance, rigorous reporting, and ethical stewardship of every resource entrusted to us.",
+  },
+  {
+    icon: "lightbulb",
+    name: "Innovation",
+    description:
+      "Embracing climate-smart techniques, digital tools, and creative approaches to development challenges.",
+  },
+  {
+    icon: "balance",
+    name: "Equity & Inclusion",
+    description:
+      "Prioritizing women, youth, and marginalized groups to ensure no community is left behind.",
+  },
+  {
+    icon: "volunteer_activism",
+    name: "Partnership",
+    description:
+      "Collaborating with local and international organizations to multiply impact and share knowledge.",
+  },
 ];
 
-const leadership = [
-  { name: "Jeremiah T. Burgess", role: "Executive Director", bio: "Founding member and visionary leader who established SHIFSD in a Ghanaian refugee camp. Over 24 years of community development leadership." },
-  { name: "Board of Directors", role: "Governance", bio: "Providing strategic oversight, constitutional governance, and accountability in alignment with SHIFSD's mission and core values." },
-  { name: "Program Directors", role: "Implementation", bio: "Leading program delivery across education, agriculture, and financial sustainability pillars across all operational counties." },
+function CoreValues() {
+  return (
+    <section id="core-values" data-node-id="42:17" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-12"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col items-center gap-3 text-center"
+          >
+            <p
+              className="text-liberian-flame text-[13px] font-semibold uppercase"
+              style={{ letterSpacing: "3px" }}
+            >
+              What Drives Us
+            </p>
+            <h2
+              className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[36px] leading-[44px]"
+              style={{ letterSpacing: "-0.5px" }}
+            >
+              Our Core Values
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            {coreValues.map((v) => (
+              <motion.div
+                key={v.name}
+                variants={fadeUp}
+                className="bg-gray-50 border border-gray-200 rounded-xl px-6 py-7 flex flex-col gap-3"
+              >
+                <Icon
+                  name={v.icon}
+                  className="!text-[40px] text-liberian-flame"
+                />
+                <h3 className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[20px] leading-[28px]">
+                  {v.name}
+                </h3>
+                <p className="text-gray-500 text-[14px] leading-[22px]">
+                  {v.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 6. Our Journey Timeline ────────────────────────────────────
+const milestones = [
+  { year: "2000", label: "Founded in Buduburam Refugee Camp, Ghana" },
+  { year: "2005", label: "Registered as NGO in Liberia; began field operations" },
+  { year: "2010", label: "Launched Climate-Smart Agriculture program" },
+  { year: "2016", label: "Expanded to 7 counties with EDC partnership" },
+  { year: "2020", label: "Established 28.1-acre demonstration farm" },
+  { year: "2024", label: "Reached 1,187+ direct beneficiaries" },
 ];
 
-const partnersList = [
-  { name: "EDC", description: "Leaders In Teaching (LIT) Project partner — youth education and workforce development across Montserrado and Bong Counties.", logo: "/images/partner-edc.webp" },
-  { name: "All We Can (UK)", description: "Supporting adult literacy (REFLECT methodology), VSLA programming, and entrepreneurship training in Lofa and Nimba Counties.", logo: "/images/partner-allwecan.webp" },
-  { name: "Mission Alliance", description: "Collaborative partner in community development and capacity building initiatives.", logo: "/images/partner-mission-alliance.webp" },
-  { name: "YOCEL", description: "Youth-focused partnership supporting education and livelihood programming.", logo: "/images/partner-yocel.webp" },
-  { name: "Brown Marital Trust", description: "Funding the new 14-classroom Holy Hands Institute building for expanded TVET education.", logo: null },
-  { name: "Stichting INITIAT", description: "International partnership supporting SHIFSD's institutional development goals.", logo: "/images/partner-initiat.webp" },
+function JourneyTimeline() {
+  return (
+    <section id="journey" data-node-id="43:2" className="bg-deep-canopy scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-12"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col items-center gap-3 text-center"
+          >
+            <p
+              className="text-horizon-gold text-[13px] font-semibold uppercase"
+              style={{ letterSpacing: "3px" }}
+            >
+              Key Milestones
+            </p>
+            <h2
+              className="font-[family-name:var(--font-heading)] font-medium text-white text-[36px] leading-[44px]"
+              style={{ letterSpacing: "-0.5px" }}
+            >
+              Our Journey
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 w-full">
+            {milestones.map((m) => (
+              <motion.div
+                key={m.year}
+                variants={fadeUp}
+                className="bg-white/[0.06] rounded-xl px-5 py-6 flex flex-col items-center gap-3 min-h-[176px]"
+              >
+                <div className="w-14 h-14 rounded-full bg-horizon-gold flex items-center justify-center">
+                  <span className="font-[family-name:var(--font-body)] font-medium text-deep-canopy text-[16px]">
+                    {m.year}
+                  </span>
+                </div>
+                <p className="text-white/80 text-[13px] leading-[20px] text-center">
+                  {m.label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 7. Leadership ──────────────────────────────────────────────
+const leaders = [
+  {
+    name: "Jeremiah Burgess",
+    role: "Executive Director & Founder",
+    photo: null,
+  },
+  {
+    name: "Board of Directors",
+    role: "Governance & Strategic Oversight",
+    photo: null,
+  },
+  {
+    name: "Program Managers",
+    role: "Field Operations & Community Engagement",
+    photo: null,
+  },
 ];
 
+function Leadership() {
+  return (
+    <section id="leadership" data-node-id="44:2" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-12"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col items-center gap-3 text-center"
+          >
+            <p
+              className="text-warm-teal text-[13px] font-semibold uppercase"
+              style={{ letterSpacing: "3px" }}
+            >
+              The Team
+            </p>
+            <h2
+              className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[36px] leading-[44px]"
+              style={{ letterSpacing: "-0.5px" }}
+            >
+              Our Leadership
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            {leaders.map((leader) => (
+              <motion.div
+                key={leader.name}
+                variants={fadeUp}
+                className="bg-white border border-gray-200 rounded-xl overflow-hidden flex flex-col"
+              >
+                <div className="h-[280px] bg-gray-300 flex items-center justify-center">
+                  {leader.photo ? (
+                    <img
+                      src={leader.photo}
+                      alt={leader.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Icon
+                      name="person"
+                      className="!text-[80px] text-gray-400"
+                    />
+                  )}
+                </div>
+                <div className="p-5 flex flex-col items-center gap-1.5 text-center">
+                  <h3 className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[20px] leading-[28px]">
+                    {leader.name}
+                  </h3>
+                  <p className="text-warm-teal text-[14px] font-medium">
+                    {leader.role}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 8. Partners & Institutions ─────────────────────────────────
+const partners = [
+  { name: "EDC", logo: "/images/partner-edc.webp" },
+  { name: "All We Can", logo: "/images/partner-allwecan.webp" },
+  { name: "Mission Alliance", logo: "/images/partner-mission-alliance.webp" },
+  { name: "YOCEL", logo: "/images/partner-yocel.webp" },
+  { name: "Brown Marital Trust", logo: null },
+  { name: "Stichting INITIAT", logo: "/images/partner-initiat.webp" },
+];
+
+function PartnersInstitutions() {
+  return (
+    <section id="partners" data-node-id="44:22" className="bg-warm-sand scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-8"
+        >
+          <motion.p
+            variants={fadeUp}
+            className="text-gray-500 text-[13px] font-medium uppercase text-center"
+            style={{ letterSpacing: "3px" }}
+          >
+            Partners &amp; Supporting Institutions
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-wrap items-center justify-center gap-8 md:gap-12"
+          >
+            {partners.map((p) => (
+              <div
+                key={p.name}
+                className="bg-white border border-gray-200 rounded-lg w-[140px] h-[60px] flex items-center justify-center overflow-hidden px-3"
+              >
+                {p.logo ? (
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    className="max-w-[100px] max-h-[44px] object-contain"
+                  />
+                ) : (
+                  <span className="text-[#b37503] text-[13px] font-semibold text-center leading-tight">
+                    {p.name}
+                  </span>
+                )}
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Page ───────────────────────────────────────────────────────
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 bg-forest-dark">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-amber font-[var(--font-heading)] font-semibold text-sm uppercase tracking-wider mb-3">
-              About SHIFSD Liberia
-            </p>
-            <h1 className="font-[var(--font-heading)] text-4xl sm:text-5xl font-bold text-white leading-tight">
-              24 Years of Practical Help for Self-Reliance
-            </h1>
-            <p className="mt-6 text-lg text-white/80 leading-relaxed">
-              From a group of determined refugees in Ghana to one of Liberia&apos;s most trusted community
-              development organizations — this is the story of SHIFSD.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Story */}
-      <section id="our-story" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <SectionHeading title="Our Story" centered={false} />
-              <div className="mt-8 space-y-4 text-charcoal-light leading-relaxed">
-                <p>
-                  The Self-Help Initiative for Sustainable Development (SHIFSD) is a
-                  refugee-inspired, nonprofit organization based on Christian values. Originally
-                  established in the Central Region of Ghana by a group of Liberian refugees on
-                  November 11, 2000, SHIFSD was born from a simple but powerful belief: instead of
-                  waiting for help, we would create our own path forward.
-                </p>
-                <p>
-                  Registered with the Government of Liberia on May 30, 2005, SHIFSD repatriated in
-                  August 2008 and eventually settled at its own premises — the SHIFSD Multipurpose
-                  Youth Training Center in Johnsonville, Monrovia. The organization is duly accredited
-                  as a national NGO (MFDP/NGO/Acc# 531871651).
-                </p>
-                <p>
-                  Today, SHIFSD operates across seven counties — Montserrado, Nimba, River Gee,
-                  Maryland, Lofa, Bomi, and Cape Mount — serving over 700 direct beneficiaries
-                  annually through three strategic pillars: Climate Smart Agriculture, Education &
-                  Livelihood Skills, and Financial Sustainability.
-                </p>
-              </div>
-            </div>
-            <div className="bg-gray-bg rounded-2xl p-8">
-              <h3 className="font-[var(--font-heading)] font-bold text-lg text-charcoal mb-4">
-                At a Glance
-              </h3>
-              <dl className="space-y-4">
-                {[
-                  { icon: Calendar, label: "Founded", value: "November 11, 2000" },
-                  { icon: MapPin, label: "Headquarters", value: "Johnsonville, Monrovia" },
-                  { icon: Award, label: "Accreditation", value: "MPEA/NGO/AC#0369" },
-                  { icon: Users, label: "2024 Beneficiaries", value: "700+" },
-                ].map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={item.label} className="flex items-start gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-forest/10 flex items-center justify-center shrink-0">
-                        <Icon className="w-4 h-4 text-forest" />
-                      </div>
-                      <div>
-                        <dt className="text-xs text-charcoal-light uppercase tracking-wider">{item.label}</dt>
-                        <dd className="font-semibold text-charcoal">{item.value}</dd>
-                      </div>
-                    </div>
-                  );
-                })}
-              </dl>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Vision & Mission */}
-      <section className="py-20 bg-gray-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <div className="bg-white rounded-2xl p-8 border-l-4 border-forest">
-              <h3 className="font-[var(--font-heading)] text-sm font-bold uppercase tracking-wider text-forest mb-3">
-                Our Vision
-              </h3>
-              <p className="text-xl font-[var(--font-accent)] italic text-charcoal leading-relaxed">
-                SHIFSD envisages a society free of illiteracy and poverty.
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-8 border-l-4 border-amber">
-              <h3 className="font-[var(--font-heading)] text-sm font-bold uppercase tracking-wider text-amber-dark mb-3">
-                Our Mission
-              </h3>
-              <p className="text-xl font-[var(--font-accent)] italic text-charcoal leading-relaxed">
-                SHIFSD exists to alleviate poverty through access to alternative sources of education
-                and entrepreneurship.
-              </p>
-            </div>
-          </div>
-
-          <SectionHeading title="Our Core Values" />
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {coreValues.map((value) => {
-              const Icon = value.icon;
-              return (
-                <div key={value.name} className="bg-white rounded-xl p-6 text-center">
-                  <div className="w-12 h-12 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-5 h-5 text-forest" />
-                  </div>
-                  <h4 className="font-[var(--font-heading)] font-bold text-charcoal mb-2">
-                    {value.name}
-                  </h4>
-                  <p className="text-xs text-charcoal-light leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading title="Our Journey" subtitle="From refugee camp to community catalyst — two decades of impact." />
-          <div className="mt-12 relative">
-            <div className="absolute left-[22px] top-0 bottom-0 w-0.5 bg-forest/20" />
-            <div className="space-y-10">
-              {timeline.map((item) => (
-                <div key={item.year} className="relative pl-14">
-                  <div className="absolute left-0 w-11 h-11 rounded-full bg-forest text-white flex items-center justify-center font-[var(--font-heading)] font-bold text-xs">
-                    {item.year}
-                  </div>
-                  <h3 className="font-[var(--font-heading)] font-bold text-charcoal text-lg">
-                    {item.title}
-                  </h3>
-                  <p className="mt-1 text-sm text-charcoal-light leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Leadership */}
-      <section id="leadership" className="py-20 bg-gray-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading title="Leadership" subtitle="Guided by experienced leadership committed to community transformation." />
-          <div className="mt-12 grid md:grid-cols-3 gap-8">
-            {leadership.map((person, i) => (
-              <div key={person.name} className="bg-white rounded-2xl overflow-hidden">
-                <div className="h-48 overflow-hidden">
-                  <img
-                    src={["/images/hero-community.webp", "/images/tvet-trainees.webp", "/images/vsla-nimba-meeting.webp"][i]}
-                    alt={person.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-[var(--font-heading)] font-bold text-charcoal">
-                    {person.name}
-                  </h3>
-                  <p className="text-sm text-forest font-semibold mb-3">{person.role}</p>
-                  <p className="text-sm text-charcoal-light leading-relaxed">{person.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Partners */}
-      <section id="partners" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading title="Our Partners" subtitle="We are proud to collaborate with organizations that share our vision for a better Liberia." />
-          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {partnersList.map((partner) => (
-              <div key={partner.name} className="rounded-xl border border-gray-border p-6 hover:shadow-md transition-shadow flex flex-col items-center text-center">
-                <div className="w-24 h-24 rounded-xl bg-white flex items-center justify-center mb-4 overflow-hidden">
-                  {partner.logo ? (
-                    <img loading="lazy" src={partner.logo} alt={partner.name} className="w-20 h-20 object-contain" />
-                  ) : (
-                    <div className="w-20 h-20 rounded-lg bg-deep-blue/10 flex items-center justify-center">
-                      <Handshake className="w-8 h-8 text-deep-blue" />
-                    </div>
-                  )}
-                </div>
-                <h3 className="font-[var(--font-heading)] font-bold text-charcoal mb-2">{partner.name}</h3>
-                <p className="text-sm text-charcoal-light leading-relaxed">{partner.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Institutions */}
-      <section className="py-20 bg-forest-dark text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading title="SHIFSD Institutions" subtitle="Three entities working together toward a common mission." light />
-          <div className="mt-12 grid md:grid-cols-3 gap-8">
-            {[
-              { name: "Hummingbird Academy (HAC)", logo: "/images/logo-hac.webp", motto: "Applied Knowledge is Power", est: "Est. 2016", description: "Accredited academic school running from Nursery to Senior Secondary (Grade 11), serving 381 students with 16 dedicated teaching staff at the SMYTC campus." },
-              { name: "Holy Hands Institute (HHI)", logo: "/images/logo-hhi.webp", motto: "Meeting Needs and Healing Hearts", est: "Est. 2016", description: "Accredited TVET institution graduating over 1,000 trainees in welding, auto mechanics, cosmetology, and electrical — many now employed at LEC, LWSC, and other national entities." },
-              { name: "LightUp The Bible Ministries (LBM)", logo: "/images/logo-lbm.webp", motto: "Discover What The Bible Really Says", est: "", description: "Registered Christian ministry serving as the spiritual arm of SHIFSD, providing faith-based support and community upliftment." },
-            ].map((inst) => (
-              <div key={inst.name} className="bg-white/5 rounded-2xl p-8 border border-white/10 text-center">
-                <div className="w-24 h-24 mx-auto mb-5 bg-white rounded-2xl p-2 flex items-center justify-center">
-                  <img loading="lazy" src={inst.logo} alt={inst.name} className="w-full h-full object-contain" />
-                </div>
-                <h3 className="font-[var(--font-heading)] font-bold text-amber text-lg mb-1">
-                  {inst.name}
-                </h3>
-                <p className="text-white/50 text-xs font-[var(--font-accent)] italic mb-3">
-                  {inst.motto}{inst.est ? ` • ${inst.est}` : ""}
-                </p>
-                <p className="text-white/70 text-sm leading-relaxed">{inst.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <AboutHero />
+      <OurStory />
+      <AtAGlance />
+      <VisionMission />
+      <CoreValues />
+      <JourneyTimeline />
+      <Leadership />
+      <PartnersInstitutions />
     </>
   );
 }

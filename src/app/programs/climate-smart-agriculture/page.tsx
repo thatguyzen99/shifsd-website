@@ -1,102 +1,317 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { SectionHeading } from "@/components/SectionHeading";
-import { Leaf, MapPin, Users, Sprout, ArrowRight } from "lucide-react";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Climate Smart Agriculture",
-  description: "SHIFSD's Climate Smart Agriculture program: 28.1 acres of farmland, 25 communities reached, and 200 smallholder farmers trained in Nimba County.",
+import Link from "next/link";
+import { animate, motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
 };
 
-export default function CSAPage() {
-  return (
-    <>
-      <section className="relative pt-32 pb-20 bg-emerald-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Leaf className="w-6 h-6 text-amber" />
-            <span className="text-amber font-[var(--font-heading)] font-semibold text-sm uppercase tracking-wider">Pillar 1</span>
-          </div>
-          <h1 className="font-[var(--font-heading)] text-4xl sm:text-5xl font-bold text-white leading-tight">
-            Climate Smart Agriculture
-          </h1>
-          <p className="mt-6 text-lg text-white/80 leading-relaxed max-w-2xl font-[var(--font-accent)] italic">
-            &ldquo;If communities invest in climate smart agriculture, the environment will be protected.&rdquo;
-          </p>
-        </div>
-      </section>
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
 
-      {/* Stats */}
-      <section className="bg-emerald-800 py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
-          {[
-            { value: "28.1", label: "Acres of Farmland" },
-            { value: "25", label: "Communities Reached" },
-            { value: "500+", label: "CSA Awareness" },
-            { value: "200", label: "Farmers Targeted" },
-          ].map((s) => (
-            <div key={s.label}>
-              <div className="font-[var(--font-heading)] text-3xl font-bold text-amber">{s.value}</div>
-              <div className="text-sm text-white/70 mt-1">{s.label}</div>
+// ─── CountUp helper ─────────────────────────────────────────────
+function CountUp({
+  to,
+  suffix = "",
+  format = "int",
+}: {
+  to: number;
+  suffix?: string;
+  format?: "int" | "float";
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(0, to, {
+      duration: 2,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      onUpdate: (v) => setN(v),
+    });
+    return () => controls.stop();
+  }, [inView, to]);
+
+  const display =
+    format === "float" ? n.toFixed(1) : Math.floor(n).toLocaleString();
+  return (
+    <span ref={ref} className="tabular-nums">
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
+// ─── 1. CSA Hero ────────────────────────────────────────────────
+function CSAHero() {
+  return (
+    <section data-node-id="48:19" className="bg-warm-teal">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          className="flex flex-col items-center gap-5 text-center text-white"
+        >
+          <motion.p variants={fadeUp} className="text-[13px] text-white/50">
+            <Link href="/" className="hover:text-white/80 transition-colors">
+              Home
+            </Link>
+            <span className="px-2">/</span>
+            <Link
+              href="/programs#program-cards"
+              className="hover:text-white/80 transition-colors"
+            >
+              Programs
+            </Link>
+            <span className="px-2">/</span>
+            <span>Climate-Smart Agriculture</span>
+          </motion.p>
+          <motion.h1
+            variants={fadeUp}
+            className="font-[family-name:var(--font-display)] font-semibold text-[34px] leading-[42px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px]"
+            style={{ letterSpacing: "-1px" }}
+          >
+            Climate-Smart Agriculture
+          </motion.h1>
+          <motion.p
+            variants={fadeUp}
+            className="text-[18px] leading-[28px] text-white/85 max-w-[900px]"
+          >
+            Training smallholder farmers in conservation agriculture,
+            agroforestry, and post-harvest techniques to build food security and
+            climate resilience across Liberia.
+          </motion.p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 2. Program Overview ────────────────────────────────────────
+function ProgramOverview() {
+  return (
+    <section id="overview" data-node-id="48:23" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col lg:flex-row gap-14 items-center"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="w-full lg:w-[520px] shrink-0"
+          >
+            <div className="h-[380px] rounded-2xl overflow-hidden">
+              <img
+                src="/images/programs/csa.jpg"
+                alt="Climate-Smart Agriculture demonstration farm"
+                className="w-full h-full object-cover"
+              />
             </div>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="flex-1 flex flex-col gap-5">
+            <p
+              className="text-warm-teal text-[13px] font-semibold uppercase"
+              style={{ letterSpacing: "3px" }}
+            >
+              Program Overview
+            </p>
+            <h2
+              className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[28px] leading-[36px]"
+              style={{ letterSpacing: "-0.25px" }}
+            >
+              Growing Food Security from the Ground Up
+            </h2>
+            <p className="text-gray-600 text-[16px] leading-[26px]">
+              Our CSA program trains farmers in climate-adaptive techniques
+              across seven counties. Working on our 28.1-acre demonstration
+              farm and in communities, we equip smallholder farmers with the
+              knowledge to increase yields while protecting the environment.
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 3. Key Activities ──────────────────────────────────────────
+const activities = [
+  {
+    title: "Conservation Agriculture",
+    description:
+      "Minimum tillage, crop rotation, and soil cover techniques that improve yields while reducing environmental impact.",
+  },
+  {
+    title: "Agroforestry",
+    description:
+      "Integrating trees with crops to restore soil fertility, provide shade, and create additional income from fruit and timber.",
+  },
+  {
+    title: "Post-Harvest Management",
+    description:
+      "Training in proper drying, storage, and processing to reduce crop losses and improve food safety.",
+  },
+  {
+    title: "Seed Multiplication",
+    description:
+      "Community seed banks and improved variety multiplication to ensure access to quality planting materials.",
+  },
+];
+
+function KeyActivities() {
+  return (
+    <section id="activities" data-node-id="48:29" className="bg-warm-sand scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-10"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[32px] text-center"
+            style={{ letterSpacing: "0.64px" }}
+          >
+            Key Activities
+          </motion.h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+            {activities.map((a) => (
+              <motion.div
+                key={a.title}
+                variants={fadeUp}
+                className="bg-white rounded-xl px-5 py-6 flex flex-col gap-2.5"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[18px]">
+                  {a.title}
+                </h3>
+                <p className="text-gray-500 text-[14px] leading-[22px]">
+                  {a.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 4. CSA Impact Stats ────────────────────────────────────────
+const csaStats = [
+  { value: 1187, suffix: "+", label: "Farmers Trained", format: "int" as const },
+  {
+    value: 28.1,
+    suffix: "",
+    label: "Acres Demonstration Farm",
+    format: "float" as const,
+  },
+  { value: 7, suffix: "", label: "Counties Reached", format: "int" as const },
+  { value: 85, suffix: "%", label: "Yield Improvement", format: "int" as const },
+];
+
+function CSAImpactStats() {
+  return (
+    <section id="stats" data-node-id="48:44" className="bg-warm-teal scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {csaStats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="flex flex-col items-center text-center gap-1.5"
+            >
+              <span
+                className="font-[family-name:var(--font-heading)] font-medium text-horizon-gold text-[36px] leading-[44px]"
+                style={{ letterSpacing: "-0.5px" }}
+              >
+                <CountUp to={s.value} suffix={s.suffix} format={s.format} />
+              </span>
+              <span className="text-white/85 text-[14px] font-medium">
+                {s.label}
+              </span>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* Program Details */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <SectionHeading title="Program Overview" centered={false} />
-              <div className="mt-6 space-y-4 text-charcoal-light leading-relaxed">
-                <p>
-                  SHIFSD&apos;s Climate Smart Agriculture program addresses the urgent need for sustainable
-                  farming practices across Liberia. With climate change threatening food security and
-                  livelihoods, this pillar equips communities with the knowledge and resources to
-                  protect their environment while improving agricultural productivity.
-                </p>
-                <p>
-                  In 2023–2024, SHIFSD acquired 28.1 acres of farmland in Kpytuo Town, Nimba County,
-                  establishing a demonstration site for CSA practices and agri-business ventures. This
-                  site serves as both a learning center and a revenue-generating social enterprise.
-                </p>
-              </div>
-            </div>
-            <div className="bg-emerald-50 rounded-2xl p-8">
-              <h3 className="font-[var(--font-heading)] font-bold text-lg text-charcoal mb-6">Key Activities</h3>
-              <ul className="space-y-4">
-                {[
-                  { icon: Sprout, text: "CSA awareness campaigns across 25 communities in Nimba County" },
-                  { icon: MapPin, text: "28.1-acre demonstration site for sustainable farming practices" },
-                  { icon: Users, text: "Training targeting 200 smallholder farmers in climate-resilient techniques" },
-                  { icon: Leaf, text: "Food processing and value addition development for local crops" },
-                ].map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <li key={item.text} className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                        <Icon className="w-4 h-4 text-emerald-700" />
-                      </div>
-                      <span className="text-sm text-charcoal-light">{item.text}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+// ─── 5. Support CSA CTA ─────────────────────────────────────────
+function SupportCTA() {
+  return (
+    <section id="support" data-node-id="48:57" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-6 text-center"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[32px]"
+          >
+            Support Our Agricultural Mission
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-gray-500 text-[16px]">
+            Help us train more farmers and expand climate-smart agriculture
+            across Liberia.
+          </motion.p>
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-wrap gap-4 justify-center"
+          >
+            <Link
+              href="/donate#tiers"
+              className="bg-warm-teal hover:bg-warm-teal/90 text-white text-[16px] font-semibold px-8 py-3.5 rounded-lg transition-colors"
+            >
+              Donate to CSA
+            </Link>
+            <Link
+              href="/programs#program-cards"
+              className="border-2 border-warm-teal text-warm-teal hover:bg-warm-teal hover:text-white text-[16px] font-semibold px-8 py-3.5 rounded-lg transition-colors"
+            >
+              ← Back to Programs
+            </Link>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
-      {/* Cross-learning */}
-      <section className="py-16 bg-gray-bg">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeading title="Regional Learning" subtitle="SHIFSD organized an exchange visit to Sierra Leone for cross-learning and best practice sharing, strengthening regional collaboration in sustainable agriculture." />
-          <Link href="/get-involved#partner" className="inline-flex items-center gap-2 mt-8 bg-forest hover:bg-forest-dark text-white font-[var(--font-heading)] font-semibold px-8 py-3.5 rounded-full text-sm transition-colors">
-            Support This Program <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
+// ─── Page ───────────────────────────────────────────────────────
+export default function CSAProgramPage() {
+  return (
+    <>
+      <CSAHero />
+      <ProgramOverview />
+      <KeyActivities />
+      <CSAImpactStats />
+      <SupportCTA />
     </>
   );
 }

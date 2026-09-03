@@ -1,206 +1,670 @@
-import { Metadata } from "next";
-import { Suspense } from "react";
-import { SectionHeading } from "@/components/SectionHeading";
-import { DonateForm } from "@/components/DonateForm";
-import { DonationSuccess } from "@/components/DonationSuccess";
-import { Heart, Users, Handshake, ArrowRight, CheckCircle, Mail } from "lucide-react";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Get Involved",
-  description: "Support SHIFSD Liberia — donate, volunteer, or partner with us to create lasting change in education, agriculture, and livelihoods.",
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { useState, useRef, type FormEvent } from "react";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
 };
 
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+function Icon({ name, className }: { name: string; className?: string }) {
+  return (
+    <span className={`material-symbols-outlined ${className ?? ""}`} aria-hidden>
+      {name}
+    </span>
+  );
+}
+
+// ─── 1. Hero ────────────────────────────────────────────────────
+function Hero() {
+  return (
+    <section data-node-id="52:19" className="bg-liberian-flame">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          className="flex flex-col items-center gap-5 text-center text-white"
+        >
+          <motion.p variants={fadeUp} className="text-[13px] text-white/50">
+            <Link href="/" className="hover:text-white/80 transition-colors">
+              Home
+            </Link>
+            <span className="px-2">/</span>
+            <span>Get Involved</span>
+          </motion.p>
+          <motion.h1
+            variants={fadeUp}
+            className="font-[family-name:var(--font-display)] font-semibold text-[34px] leading-[42px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px]"
+            style={{ letterSpacing: "-1px" }}
+          >
+            Get Involved
+          </motion.h1>
+          <motion.p
+            variants={fadeUp}
+            className="text-[18px] leading-[28px] text-white/85 max-w-[900px]"
+          >
+            Join the movement to build a more resilient, self-sustaining
+            Liberia. Whether through financial support, volunteering your
+            skills, or organizational partnership — every contribution creates
+            lasting impact.
+          </motion.p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 2. Ways to Help ────────────────────────────────────────────
+type Way = {
+  title: string;
+  description: string;
+  image: string;
+  cta: string;
+  href: string;
+  buttonClass: string;
+  external?: boolean;
+};
+
+const ways: Way[] = [
+  {
+    title: "Donate",
+    description:
+      "Your financial support directly funds agricultural training, scholarships, and community infrastructure. Choose one-time or monthly giving to create sustainable impact.",
+    image: "/images/get-involved/donate.jpg",
+    cta: "Give Now",
+    href: "/donate#tiers",
+    buttonClass: "bg-liberian-flame hover:bg-liberian-flame/90 text-white",
+    external: true,
+  },
+  {
+    title: "Volunteer",
+    description:
+      "Share your professional skills remotely or join us on the ground. We need expertise in agriculture, education, marketing, grant writing, and technology.",
+    image: "/images/get-involved/volunteer.jpg",
+    cta: "Apply to Volunteer",
+    href: "#volunteer-form",
+    buttonClass: "bg-warm-teal hover:bg-warm-teal/90 text-white",
+  },
+  {
+    title: "Partner",
+    description:
+      "Organizations, institutions, and corporations can partner with SHIFSD to amplify impact through collaborative programs, co-funding, and knowledge exchange.",
+    image: "/images/get-involved/partner.jpg",
+    cta: "Explore Partnership",
+    href: "#partner-form",
+    buttonClass: "bg-horizon-gold hover:bg-horizon-gold/90 text-deep-canopy",
+  },
+];
+
+function WaysToHelp() {
+  return (
+    <section id="ways" data-node-id="52:23" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-12"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[36px] leading-[44px] text-center"
+            style={{ letterSpacing: "-0.5px" }}
+          >
+            Three Ways to Make a Difference
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            {ways.map((w) => (
+              <motion.div
+                key={w.title}
+                variants={fadeUp}
+                className="bg-white border border-gray-200 rounded-2xl overflow-hidden flex flex-col"
+              >
+                <div className="h-[220px] overflow-hidden">
+                  <img
+                    src={w.image}
+                    alt={w.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-6 flex flex-col gap-4 flex-1">
+                  <h3 className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[24px] leading-[32px]">
+                    {w.title}
+                  </h3>
+                  <p className="text-gray-600 text-[15px] leading-[24px] flex-1">
+                    {w.description}
+                  </p>
+                  {w.external ? (
+                    <Link
+                      href={w.href}
+                      className={`${w.buttonClass} inline-flex items-center justify-center text-[15px] font-semibold px-7 py-3.5 rounded-lg transition-colors self-start`}
+                    >
+                      {w.cta}
+                    </Link>
+                  ) : (
+                    <a
+                      href={w.href}
+                      className={`${w.buttonClass} inline-flex items-center justify-center text-[15px] font-semibold px-7 py-3.5 rounded-lg transition-colors self-start`}
+                    >
+                      {w.cta}
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Form field primitives ──────────────────────────────────────
+function Field({
+  label,
+  children,
+  htmlFor,
+}: {
+  label: string;
+  children: React.ReactNode;
+  htmlFor?: string;
+}) {
+  return (
+    <label className="flex flex-col gap-1.5 text-[13px]" htmlFor={htmlFor}>
+      <span className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy">
+        {label}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+const inputClass =
+  "w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-[14px] text-deep-canopy placeholder:text-gray-400 focus:border-warm-teal focus:outline-none focus:ring-2 focus:ring-warm-teal/20 transition-colors";
+
+// ─── 3a. Volunteer Form ─────────────────────────────────────────
+const volunteerInterests = [
+  "Agriculture / CSA",
+  "Education & Training",
+  "Grant Writing",
+  "Marketing & Communications",
+  "Technology & Web",
+  "Translation",
+  "On-the-ground fieldwork",
+  "Other",
+];
+
+function VolunteerForm() {
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
+  const formRef = useRef<HTMLFormElement>(null);
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setState("sending");
+    try {
+      const data = new FormData(form);
+      const body = new URLSearchParams(data as unknown as Record<string, string>);
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error("Network");
+      setState("sent");
+      form.reset();
+    } catch {
+      setState("error");
+    }
+  }
+
+  return (
+    <section id="volunteer-form" className="bg-warm-sand scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="grid lg:grid-cols-[1fr_1.4fr] gap-12 items-start"
+        >
+          <motion.div variants={fadeUp} className="flex flex-col gap-4">
+            <p
+              className="text-warm-teal text-[13px] font-semibold uppercase"
+              style={{ letterSpacing: "3px" }}
+            >
+              Volunteer
+            </p>
+            <h2
+              className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[32px] leading-[40px]"
+            >
+              Apply to Volunteer
+            </h2>
+            <p className="text-gray-600 text-[15px] leading-[24px]">
+              Tell us a bit about yourself and where you&apos;d like to help.
+              We&apos;ll get back to you within a week to talk next steps.
+            </p>
+          </motion.div>
+
+          <motion.form
+            ref={formRef}
+            variants={fadeUp}
+            onSubmit={onSubmit}
+            name="volunteer"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            className="bg-white rounded-2xl border border-gray-200 p-7 flex flex-col gap-4"
+          >
+            <input type="hidden" name="form-name" value="volunteer" />
+            <p className="hidden">
+              <label>
+                Don&apos;t fill this out: <input name="bot-field" />
+              </label>
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Field label="First name" htmlFor="vol-first">
+                <input
+                  id="vol-first"
+                  name="first-name"
+                  type="text"
+                  required
+                  className={inputClass}
+                />
+              </Field>
+              <Field label="Last name" htmlFor="vol-last">
+                <input
+                  id="vol-last"
+                  name="last-name"
+                  type="text"
+                  required
+                  className={inputClass}
+                />
+              </Field>
+            </div>
+
+            <Field label="Email" htmlFor="vol-email">
+              <input
+                id="vol-email"
+                name="email"
+                type="email"
+                required
+                className={inputClass}
+              />
+            </Field>
+
+            <Field label="Area of interest" htmlFor="vol-interest">
+              <select
+                id="vol-interest"
+                name="area-of-interest"
+                required
+                className={inputClass}
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Choose one…
+                </option>
+                {volunteerInterests.map((i) => (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                ))}
+              </select>
+            </Field>
+
+            <Field label="Tell us about your skills and availability" htmlFor="vol-msg">
+              <textarea
+                id="vol-msg"
+                name="message"
+                rows={4}
+                required
+                className={`${inputClass} resize-y`}
+              />
+            </Field>
+
+            <button
+              type="submit"
+              disabled={state === "sending"}
+              className="bg-warm-teal hover:bg-warm-teal/90 disabled:bg-gray-400 text-white text-[15px] font-semibold px-7 py-3.5 rounded-lg transition-colors self-start"
+            >
+              {state === "sending" ? "Sending…" : "Submit application"}
+            </button>
+
+            {state === "sent" && (
+              <p className="text-warm-teal text-[14px] font-medium">
+                Thanks — we&apos;ve received your application and will be in
+                touch soon.
+              </p>
+            )}
+            {state === "error" && (
+              <p className="text-error text-[14px] font-medium">
+                Something went wrong. Please email us at{" "}
+                <a
+                  href="mailto:info@shifsd-liberia.org"
+                  className="underline"
+                >
+                  info@shifsd-liberia.org
+                </a>{" "}
+                and we&apos;ll help directly.
+              </p>
+            )}
+          </motion.form>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 3b. Partnership Form ───────────────────────────────────────
+const partnershipTypes = [
+  "Institutional / NGO",
+  "Corporate",
+  "Academic",
+  "Government / Multilateral",
+  "Faith-based",
+  "Individual major donor",
+  "Other",
+];
+
+function PartnershipForm() {
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
+  const formRef = useRef<HTMLFormElement>(null);
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setState("sending");
+    try {
+      const data = new FormData(form);
+      const body = new URLSearchParams(data as unknown as Record<string, string>);
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error("Network");
+      setState("sent");
+      form.reset();
+    } catch {
+      setState("error");
+    }
+  }
+
+  return (
+    <section id="partner-form" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="grid lg:grid-cols-[1fr_1.4fr] gap-12 items-start"
+        >
+          <motion.div variants={fadeUp} className="flex flex-col gap-4">
+            <p
+              className="text-horizon-gold text-[13px] font-semibold uppercase"
+              style={{ letterSpacing: "3px" }}
+            >
+              Partner
+            </p>
+            <h2
+              className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[32px] leading-[40px]"
+            >
+              Explore Partnership
+            </h2>
+            <p className="text-gray-600 text-[15px] leading-[24px]">
+              We collaborate with organizations that share our commitment to
+              community-led development. Share a few details and our
+              partnerships lead will set up a discovery call.
+            </p>
+          </motion.div>
+
+          <motion.form
+            ref={formRef}
+            variants={fadeUp}
+            onSubmit={onSubmit}
+            name="partnership"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            className="bg-gray-50 rounded-2xl border border-gray-200 p-7 flex flex-col gap-4"
+          >
+            <input type="hidden" name="form-name" value="partnership" />
+            <p className="hidden">
+              <label>
+                Don&apos;t fill this out: <input name="bot-field" />
+              </label>
+            </p>
+
+            <Field label="Organization name" htmlFor="part-org">
+              <input
+                id="part-org"
+                name="organization"
+                type="text"
+                required
+                className={inputClass}
+              />
+            </Field>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Field label="Contact person" htmlFor="part-person">
+                <input
+                  id="part-person"
+                  name="contact-person"
+                  type="text"
+                  required
+                  className={inputClass}
+                />
+              </Field>
+              <Field label="Email" htmlFor="part-email">
+                <input
+                  id="part-email"
+                  name="email"
+                  type="email"
+                  required
+                  className={inputClass}
+                />
+              </Field>
+            </div>
+
+            <Field label="Partnership type" htmlFor="part-type">
+              <select
+                id="part-type"
+                name="partnership-type"
+                required
+                className={inputClass}
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Choose one…
+                </option>
+                {partnershipTypes.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
+            </Field>
+
+            <Field
+              label="How would you like to work together?"
+              htmlFor="part-msg"
+            >
+              <textarea
+                id="part-msg"
+                name="message"
+                rows={4}
+                required
+                className={`${inputClass} resize-y`}
+              />
+            </Field>
+
+            <button
+              type="submit"
+              disabled={state === "sending"}
+              className="bg-horizon-gold hover:bg-horizon-gold/90 disabled:bg-gray-400 text-deep-canopy text-[15px] font-semibold px-7 py-3.5 rounded-lg transition-colors self-start"
+            >
+              {state === "sending" ? "Sending…" : "Send partnership request"}
+            </button>
+
+            {state === "sent" && (
+              <p className="text-warm-teal text-[14px] font-medium">
+                Thanks — we&apos;ve received your request. Our partnerships
+                lead will reach out shortly.
+              </p>
+            )}
+            {state === "error" && (
+              <p className="text-error text-[14px] font-medium">
+                Something went wrong. Please email us at{" "}
+                <a
+                  href="mailto:info@shifsd-liberia.org"
+                  className="underline"
+                >
+                  info@shifsd-liberia.org
+                </a>{" "}
+                and we&apos;ll help directly.
+              </p>
+            )}
+          </motion.form>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 4. FAQ (accordion) ─────────────────────────────────────────
+const faqs = [
+  {
+    q: "How is my donation used?",
+    a: "100% of designated donations go directly to program activities. Administrative costs are funded separately through institutional grants.",
+  },
+  {
+    q: "Can I volunteer remotely?",
+    a: "Yes! We welcome remote volunteers for grant writing, marketing, translation, and technical support.",
+  },
+  {
+    q: "Is SHIFSD a registered NGO?",
+    a: "Yes, SHIFSD is officially accredited by the Government of Liberia and operates under full legal compliance.",
+  },
+  {
+    q: "How do I become a partner organization?",
+    a: "Contact us at info@shifsd.org with your organization details and areas of interest. We'll schedule a discovery call.",
+  },
+];
+
+function FAQItem({
+  q,
+  a,
+  open,
+  onToggle,
+}: {
+  q: string;
+  a: string;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <motion.div
+      variants={fadeUp}
+      className="bg-white rounded-xl overflow-hidden"
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+      >
+        <span className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[17px] leading-[24px]">
+          {q}
+        </span>
+        <motion.span
+          animate={{ rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="shrink-0 text-warm-teal"
+        >
+          <Icon name="add" className="!text-[24px]" />
+        </motion.span>
+      </button>
+      <motion.div
+        initial={false}
+        animate={{
+          height: open ? "auto" : 0,
+          opacity: open ? 1 : 0,
+        }}
+        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+        className="overflow-hidden"
+      >
+        <p className="px-6 pb-5 text-gray-500 text-[14px] leading-[22px]">
+          {a}
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function FAQ() {
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  return (
+    <section id="faq" data-node-id="52:47" className="bg-warm-sand scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-50 py-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-6"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[32px] text-center"
+          >
+            Frequently Asked Questions
+          </motion.h2>
+          <div className="w-full max-w-[820px] flex flex-col gap-3">
+            {faqs.map((item, i) => (
+              <FAQItem
+                key={item.q}
+                q={item.q}
+                a={item.a}
+                open={openIdx === i}
+                onToggle={() => setOpenIdx(openIdx === i ? null : i)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Page ───────────────────────────────────────────────────────
 export default function GetInvolvedPage() {
   return (
     <>
-      <section className="relative pt-32 pb-20">
-        <div className="absolute inset-0 bg-[url('/images/vsla-green.webp')] bg-cover bg-center">
-          <div className="absolute inset-0 bg-gradient-to-r from-forest-dark/90 to-forest-dark/70" />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-amber font-[var(--font-heading)] font-semibold text-sm uppercase tracking-wider mb-3">Get Involved</p>
-            <h1 className="font-[var(--font-heading)] text-4xl sm:text-5xl font-bold text-white leading-tight">
-              Be Part of the Change
-            </h1>
-            <p className="mt-6 text-lg text-white/80 leading-relaxed">
-              There are many ways to support SHIFSD&apos;s mission. Whether you give, serve, or collaborate — your contribution creates lasting impact.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Donate */}
-      <section id="donate" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Suspense fallback={null}>
-            <DonationSuccess />
-          </Suspense>
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-amber/10 flex items-center justify-center">
-                  <Heart className="w-6 h-6 text-amber" />
-                </div>
-                <h2 className="font-[var(--font-heading)] text-3xl font-bold text-charcoal">Donate</h2>
-              </div>
-              <div className="section-divider mb-6" />
-              <p className="text-charcoal-light leading-relaxed mb-6">
-                Your generosity directly empowers Liberian communities. Every dollar supports education for
-                underserved youth, sustainable farming for families, and savings programs that transform
-                women&apos;s lives.
-              </p>
-              <h3 className="font-[var(--font-heading)] font-bold text-charcoal mb-3">Your Impact</h3>
-              <ul className="space-y-3 mb-8">
-                {[
-                  "$25 — Provides school supplies for 5 students at Hummingbird Academy",
-                  "$50 — Trains a woman in VSLA savings methodology",
-                  "$100 — Sponsors a youth through Work Ready Now training",
-                  "$500 — Supports CSA training for an entire farming community",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-charcoal-light">
-                    <CheckCircle className="w-4 h-4 text-forest mt-0.5 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <DonateForm />
-          </div>
-        </div>
-      </section>
-
-      {/* Volunteer */}
-      <section id="volunteer" className="py-20 bg-gray-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div className="bg-white rounded-2xl p-8">
-              <h3 className="font-[var(--font-heading)] font-bold text-lg text-charcoal mb-6">
-                Volunteer Application
-              </h3>
-              <form
-                name="volunteer"
-                method="POST"
-                data-netlify="true"
-                action="/get-involved?form=volunteer-success"
-                className="space-y-4"
-              >
-                <input type="hidden" name="form-name" value="volunteer" />
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <input type="text" name="first-name" required placeholder="First Name" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
-                  <input type="text" name="last-name" required placeholder="Last Name" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
-                </div>
-                <input type="email" name="email" required placeholder="Email Address" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
-                <select name="area-of-interest" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm text-charcoal-light focus:outline-none focus:ring-2 focus:ring-forest">
-                  <option>Area of Interest</option>
-                  <option>Education & Teaching</option>
-                  <option>Agriculture & Farming</option>
-                  <option>Administration & Operations</option>
-                  <option>Communications & Media</option>
-                  <option>Fundraising & Grants</option>
-                  <option>Technology & IT</option>
-                </select>
-                <textarea name="message" rows={4} placeholder="Tell us about your skills and availability..." className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest resize-none" />
-                <button type="submit" className="w-full bg-forest hover:bg-forest-dark text-white font-[var(--font-heading)] font-bold py-3.5 rounded-xl text-sm transition-colors">
-                  Submit Application
-                </button>
-              </form>
-            </div>
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-forest/10 flex items-center justify-center">
-                  <Users className="w-6 h-6 text-forest" />
-                </div>
-                <h2 className="font-[var(--font-heading)] text-3xl font-bold text-charcoal">Volunteer</h2>
-              </div>
-              <div className="section-divider mb-6" />
-              <p className="text-charcoal-light leading-relaxed mb-6">
-                Join SHIFSD as a volunteer or intern and contribute your skills to community transformation.
-                We welcome professionals, students, and retirees who share our vision.
-              </p>
-              <h3 className="font-[var(--font-heading)] font-bold text-charcoal mb-3">Opportunities Include</h3>
-              <ul className="space-y-3">
-                {[
-                  "Teaching and tutoring at Hummingbird Academy",
-                  "TVET instruction at Holy Hands Institute",
-                  "Agricultural extension support in Nimba County",
-                  "Grant writing and fundraising support",
-                  "Digital communications and website management",
-                  "Program monitoring and evaluation",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-charcoal-light">
-                    <CheckCircle className="w-4 h-4 text-forest mt-0.5 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Partner */}
-      <section id="partner" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-deep-blue/10 flex items-center justify-center">
-                  <Handshake className="w-6 h-6 text-deep-blue" />
-                </div>
-                <h2 className="font-[var(--font-heading)] text-3xl font-bold text-charcoal">Partner With Us</h2>
-              </div>
-              <div className="section-divider mb-6" />
-              <p className="text-charcoal-light leading-relaxed mb-6">
-                SHIFSD brings local knowledge, community trust, and operational capacity to deliver
-                results at scale. Our track record with USAID/EDC and All We Can demonstrates our
-                ability to execute complex, multi-county programs effectively.
-              </p>
-              <h3 className="font-[var(--font-heading)] font-bold text-charcoal mb-3">Collaboration Areas</h3>
-              <ul className="space-y-3 mb-6">
-                {[
-                  "Program implementation partnership",
-                  "Capacity building and institutional strengthening",
-                  "Research and knowledge sharing",
-                  "Technical assistance and training",
-                  "Funding and grant co-development",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-charcoal-light">
-                    <CheckCircle className="w-4 h-4 text-deep-blue mt-0.5 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-deep-blue rounded-2xl p-8 text-white">
-              <h3 className="font-[var(--font-heading)] font-bold text-lg mb-6">Partnership Inquiry</h3>
-              <form
-                name="partnership"
-                method="POST"
-                data-netlify="true"
-                action="/get-involved?form=partner-success"
-                className="space-y-4"
-              >
-                <input type="hidden" name="form-name" value="partnership" />
-                <input type="text" name="organization" required placeholder="Organization Name" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber" />
-                <input type="text" name="contact-person" required placeholder="Contact Person" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber" />
-                <input type="email" name="email" required placeholder="Email Address" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber" />
-                <select name="partnership-type" className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber">
-                  <option>Partnership Type</option>
-                  <option>Program Implementation</option>
-                  <option>Funding / Grants</option>
-                  <option>Technical Assistance</option>
-                  <option>Research Partnership</option>
-                </select>
-                <textarea name="message" rows={4} placeholder="Tell us about your partnership vision..." className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-amber resize-none" />
-                <button type="submit" className="w-full bg-amber hover:bg-amber-dark text-white font-[var(--font-heading)] font-bold py-3.5 rounded-xl text-sm transition-colors flex items-center justify-center gap-2">
-                  <Mail className="w-4 h-4" /> Submit Inquiry
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero />
+      <WaysToHelp />
+      <VolunteerForm />
+      <PartnershipForm />
+      <FAQ />
     </>
   );
 }

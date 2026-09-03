@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, Heart } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -11,6 +11,9 @@ const navigation = [
     href: "/about",
     children: [
       { name: "Our Story", href: "/about#our-story" },
+      { name: "Vision & Mission", href: "/about#vision-mission" },
+      { name: "Core Values", href: "/about#core-values" },
+      { name: "Journey", href: "/about#journey" },
       { name: "Leadership", href: "/about#leadership" },
       { name: "Partners", href: "/about#partners" },
     ],
@@ -19,164 +22,176 @@ const navigation = [
     name: "Programs",
     href: "/programs",
     children: [
-      { name: "Climate Smart Agriculture", href: "/programs/climate-smart-agriculture" },
-      { name: "Education & Livelihood", href: "/programs/education-livelihood" },
-      { name: "Financial Sustainability", href: "/programs/financial-sustainability" },
+      { name: "Climate-Smart Agriculture", href: "/programs/climate-smart-agriculture#overview" },
+      { name: "Education & Livelihood", href: "/programs/education-livelihood#overview" },
+      { name: "Financial Sustainability", href: "/programs/financial-sustainability#overview" },
+      { name: "Our Approach", href: "/programs#approach" },
     ],
   },
   {
     name: "Impact",
     href: "/impact",
     children: [
-      { name: "Annual Reports", href: "/impact#reports" },
+      { name: "Key Metrics", href: "/impact#metrics" },
+      { name: "Impact by Area", href: "/impact#by-area" },
       { name: "Stories of Change", href: "/impact#stories" },
       { name: "Data & Results", href: "/impact#data" },
+      { name: "Geographic Reach", href: "/impact#geographic-reach" },
     ],
   },
   {
     name: "Get Involved",
     href: "/get-involved",
     children: [
-      { name: "Donate", href: "/get-involved#donate" },
-      { name: "Volunteer", href: "/get-involved#volunteer" },
-      { name: "Partner With Us", href: "/get-involved#partner" },
+      { name: "Donate", href: "/donate#tiers" },
+      { name: "Volunteer", href: "/get-involved#volunteer-form" },
+      { name: "Partner With Us", href: "/get-involved#partner-form" },
+      { name: "FAQ", href: "/get-involved#faq" },
     ],
   },
   { name: "News & Media", href: "/news" },
   { name: "Contact", href: "/contact" },
 ];
 
+function Icon({ name, className }: { name: string; className?: string }) {
+  return (
+    <span className={`material-symbols-outlined ${className ?? ""}`} aria-hidden>
+      {name}
+    </span>
+  );
+}
+
 export function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
-      {/* Top utility bar */}
-      <div className="bg-forest text-white text-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-8">
-          <div className="flex items-center gap-4">
-            <span className="hidden sm:inline">shifsdliberia@gmail.com</span>
-            <span className="hidden sm:inline">+231 (0) 770 024 082</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs opacity-80">MPEA/NGO/AC#0369</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main navbar */}
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+    <header className="sticky top-0 left-0 right-0 z-50">
+      {/* ── Navigation: Warm Sand, 82px ────────────────────────── */}
+      <nav className="bg-warm-sand h-[82px] flex items-center">
+        <div className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 lg:px-20 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 shrink-0">
+          <Link href="/" className="flex items-center shrink-0" aria-label="SHIFSD — Home">
             <img
-              src="/images/logo.webp"
-              alt="SHIFSD Logo"
-              className="w-10 h-10 lg:w-12 lg:h-12 rounded-full object-cover"
+              src="/images/logos/logo-primary-light.png"
+              alt="SHIFSD — Self-Help Initiative for Sustainable Development"
+              className="block"
+              style={{ width: 170, height: 48, aspectRatio: "85 / 24" }}
             />
-            <div className="hidden sm:block">
-              <div className="font-[var(--font-heading)] font-bold text-forest text-sm lg:text-base leading-tight">
-                SHIFSD
-              </div>
-              <div className="text-[10px] lg:text-xs text-charcoal-light leading-tight">
-                Practical Help for Self-Reliance
-              </div>
-            </div>
           </Link>
 
-          {/* Desktop navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          {/* Desktop nav */}
+          <ul className="hidden lg:flex items-center gap-8">
             {navigation.map((item) => (
-              <div
+              <li
                 key={item.name}
-                className="relative group"
+                className="relative"
                 onMouseEnter={() => item.children && setOpenDropdown(item.name)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-charcoal hover:text-forest transition-colors"
+                  className={`inline-flex items-center gap-1 text-[15px] font-medium transition-colors ${
+                    isActive(item.href)
+                      ? "text-warm-teal"
+                      : "text-deep-canopy hover:text-warm-teal"
+                  }`}
                 >
                   {item.name}
-                  {item.children && <ChevronDown className="w-3 h-3" />}
+                  {item.children && (
+                    <Icon
+                      name="expand_more"
+                      className="!text-[18px] transition-transform"
+                    />
+                  )}
                 </Link>
+
                 {item.children && openDropdown === item.name && (
-                  <div className="absolute top-full left-0 w-56 bg-white rounded-lg shadow-lg border border-gray-border py-2 animate-fade-in-up">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.name}
-                        href={child.href}
-                        className="block px-4 py-2 text-sm text-charcoal hover:bg-gray-bg hover:text-forest transition-colors"
-                      >
-                        {child.name}
-                      </Link>
-                    ))}
+                  <div className="absolute top-full left-0 pt-3 w-64">
+                    <div className="bg-white rounded-lg shadow-[var(--shadow-md)] border border-gray-200 py-2">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.name}
+                          href={child.href}
+                          className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-warm-sand hover:text-warm-teal transition-colors"
+                        >
+                          {child.name}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          {/* CTA + Mobile toggle */}
+          {/* Right cluster */}
           <div className="flex items-center gap-3">
             <Link
-              href="/get-involved#donate"
-              className="hidden sm:inline-flex items-center gap-2 bg-amber hover:bg-amber-dark text-white font-[var(--font-heading)] font-semibold px-5 py-2.5 rounded-full text-sm transition-all shadow-md hover:shadow-lg"
+              href="/donate"
+              className="hidden sm:inline-flex items-center gap-2 bg-liberian-flame text-white font-semibold px-6 py-2.5 rounded-md text-[15px] hover:bg-liberian-flame/90 transition-all shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)]"
             >
-              <Heart className="w-4 h-4" />
               Donate
             </Link>
             <button
-              className="lg:hidden p-2 text-charcoal"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-deep-canopy"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <Icon name={mobileOpen ? "close" : "menu"} />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-border max-h-[80vh] overflow-y-auto">
-          <div className="px-4 py-4 space-y-1">
+      {/* ── Mobile menu ────────────────────────────────────────── */}
+      {mobileOpen && (
+        <div className="lg:hidden bg-warm-sand border-t border-gray-200 max-h-[80vh] overflow-y-auto">
+          <ul className="px-4 py-4 space-y-1">
             {navigation.map((item) => (
-              <div key={item.name}>
+              <li key={item.name}>
                 <Link
                   href={item.href}
-                  className="block px-3 py-2.5 text-base font-medium text-charcoal hover:text-forest hover:bg-gray-bg rounded-lg"
-                  onClick={() => !item.children && setMobileMenuOpen(false)}
+                  className={`block px-3 py-2.5 text-base font-medium rounded-md ${
+                    isActive(item.href)
+                      ? "text-warm-teal bg-white"
+                      : "text-deep-canopy hover:bg-white"
+                  }`}
+                  onClick={() => !item.children && setMobileOpen(false)}
                 >
                   {item.name}
                 </Link>
                 {item.children && (
-                  <div className="pl-6 space-y-1">
+                  <ul className="pl-6 space-y-1 py-1">
                     {item.children.map((child) => (
-                      <Link
-                        key={child.name}
-                        href={child.href}
-                        className="block px-3 py-2 text-sm text-charcoal-light hover:text-forest"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {child.name}
-                      </Link>
+                      <li key={child.name}>
+                        <Link
+                          href={child.href}
+                          className="block px-3 py-2 text-sm text-gray-700 hover:text-warm-teal"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {child.name}
+                        </Link>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 )}
-              </div>
+              </li>
             ))}
-            <div className="pt-3">
+            <li className="pt-3">
               <Link
-                href="/get-involved#donate"
-                className="flex items-center justify-center gap-2 bg-amber text-white font-semibold px-5 py-3 rounded-full w-full"
-                onClick={() => setMobileMenuOpen(false)}
+                href="/donate"
+                className="flex items-center justify-center gap-2 bg-liberian-flame text-white font-semibold px-5 py-3 rounded-md w-full"
+                onClick={() => setMobileOpen(false)}
               >
-                <Heart className="w-4 h-4" />
-                Donate Now
+                Donate
               </Link>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       )}
     </header>

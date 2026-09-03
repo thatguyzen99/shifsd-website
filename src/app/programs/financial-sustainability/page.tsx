@@ -1,83 +1,308 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { SectionHeading } from "@/components/SectionHeading";
-import { TrendingUp, Building, Sprout, Factory, BarChart3, ArrowRight } from "lucide-react";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Financial Sustainability",
-  description: "SHIFSD's Financial Sustainability pillar: social enterprise, agri-business investment, and revenue diversification for long-term institutional resilience.",
+import Link from "next/link";
+import { animate, motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
 };
 
-export default function FinancialPage() {
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+function CountUp({
+  to,
+  suffix = "",
+  useCommas = true,
+}: {
+  to: number;
+  suffix?: string;
+  useCommas?: boolean;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(0, to, {
+      duration: 2,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      onUpdate: (v) => setN(v),
+    });
+    return () => controls.stop();
+  }, [inView, to]);
+
+  const int = Math.floor(n);
+  const display = useCommas ? int.toLocaleString() : String(int);
+  return (
+    <span ref={ref} className="tabular-nums">
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
+// ─── 1. Financial Hero ──────────────────────────────────────────
+function FinancialHero() {
+  return (
+    <section data-node-id="50:19" className="bg-horizon-gold">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          className="flex flex-col items-center gap-5 text-center text-deep-canopy"
+        >
+          <motion.p
+            variants={fadeUp}
+            className="text-[13px] text-deep-canopy/60"
+          >
+            <Link href="/" className="hover:text-deep-canopy transition-colors">
+              Home
+            </Link>
+            <span className="px-2">/</span>
+            <Link
+              href="/programs#program-cards"
+              className="hover:text-deep-canopy transition-colors"
+            >
+              Programs
+            </Link>
+            <span className="px-2">/</span>
+            <span>Financial Sustainability</span>
+          </motion.p>
+          <motion.h1
+            variants={fadeUp}
+            className="font-[family-name:var(--font-display)] font-semibold text-[34px] leading-[42px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px]"
+            style={{ letterSpacing: "-1px" }}
+          >
+            Financial Sustainability
+          </motion.h1>
+          <motion.p
+            variants={fadeUp}
+            className="text-[18px] leading-[28px] text-deep-canopy/80 max-w-[900px]"
+          >
+            Building institutional resilience through strategic resource
+            mobilization, social enterprise, and community-based savings that
+            reduce dependency on external funding.
+          </motion.p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 2. Program Overview ────────────────────────────────────────
+function ProgramOverview() {
+  return (
+    <section id="overview" data-node-id="50:23" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col lg:flex-row gap-14 items-center"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="w-full lg:w-[520px] shrink-0"
+          >
+            <div className="h-[380px] rounded-2xl overflow-hidden">
+              <img
+                src="/images/programs/financial-overview.jpg"
+                alt="Community savings group"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="flex-1 flex flex-col gap-5">
+            <p
+              className="text-horizon-gold text-[13px] font-semibold uppercase"
+              style={{ letterSpacing: "3px" }}
+            >
+              Program Overview
+            </p>
+            <h2
+              className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[28px] leading-[36px]"
+              style={{ letterSpacing: "-0.25px" }}
+            >
+              Sustaining Impact Beyond Aid
+            </h2>
+            <p className="text-gray-600 text-[16px] leading-[26px]">
+              Our financial sustainability pillar ensures SHIFSD&apos;s programs
+              endure beyond individual grants. Through strategic partnerships,
+              social enterprise development, and community savings groups, we
+              are building a foundation for long-term, self-funded impact.
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 3. Key Strategies ──────────────────────────────────────────
+const strategies = [
+  {
+    title: "Resource Mobilization",
+    description:
+      "Strategic grant writing, donor engagement, and multi-year funding partnerships.",
+  },
+  {
+    title: "Social Enterprise",
+    description:
+      "Revenue-generating agricultural enterprises and value-chain development.",
+  },
+  {
+    title: "Community Savings",
+    description:
+      "Village savings and loan associations building grassroots financial resilience.",
+  },
+];
+
+function KeyStrategies() {
+  return (
+    <section id="strategies" data-node-id="50:29" className="bg-warm-sand scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-10"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[32px] text-center"
+          >
+            Key Strategies
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            {strategies.map((s) => (
+              <motion.div
+                key={s.title}
+                variants={fadeUp}
+                className="bg-white rounded-xl px-6 py-7 flex flex-col gap-3"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[20px] leading-[28px]">
+                  {s.title}
+                </h3>
+                <p className="text-gray-500 text-[14px] leading-[22px]">
+                  {s.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 4. Financial Stats ─────────────────────────────────────────
+const finStats = [
+  { value: 6, suffix: "+", label: "Strategic Partners", useCommas: true },
+  { value: 3, suffix: "", label: "Revenue Streams", useCommas: true },
+  { value: 85, suffix: "%", label: "Program Reinvestment", useCommas: true },
+  { value: 2030, suffix: "", label: "Self-Sufficiency Target", useCommas: false },
+];
+
+function FinancialStats() {
+  return (
+    <section id="stats" data-node-id="50:41" className="bg-deep-canopy scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {finStats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="flex flex-col items-center text-center gap-1.5"
+            >
+              <span
+                className="font-[family-name:var(--font-heading)] font-medium text-horizon-gold text-[36px] leading-[44px]"
+                style={{ letterSpacing: "-0.5px" }}
+              >
+                <CountUp
+                  to={s.value}
+                  suffix={s.suffix}
+                  useCommas={s.useCommas}
+                />
+              </span>
+              <span className="text-white/85 text-[14px] font-medium">
+                {s.label}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 5. Partner CTA ─────────────────────────────────────────────
+function PartnerCTA() {
+  return (
+    <section id="partner" data-node-id="50:54" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-6 text-center"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[32px]"
+          >
+            Partner for Long-Term Impact
+          </motion.h2>
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-wrap gap-4 justify-center"
+          >
+            <Link
+              href="/get-involved#partner-form"
+              className="bg-horizon-gold hover:bg-horizon-gold/90 text-deep-canopy text-[16px] font-semibold px-8 py-3.5 rounded-lg transition-colors"
+            >
+              Become a Partner
+            </Link>
+            <Link
+              href="/programs#program-cards"
+              className="border-2 border-deep-canopy text-deep-canopy hover:bg-deep-canopy hover:text-white text-[16px] font-semibold px-8 py-3.5 rounded-lg transition-colors"
+            >
+              ← Back to Programs
+            </Link>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Page ───────────────────────────────────────────────────────
+export default function FinancialSustainabilityPage() {
   return (
     <>
-      <section className="relative pt-32 pb-20 bg-amber-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-4">
-            <TrendingUp className="w-6 h-6 text-amber" />
-            <span className="text-amber-300 font-[var(--font-heading)] font-semibold text-sm uppercase tracking-wider">Pillar 3</span>
-          </div>
-          <h1 className="font-[var(--font-heading)] text-4xl sm:text-5xl font-bold text-white leading-tight">
-            Financial Sustainability
-          </h1>
-          <p className="mt-6 text-lg text-white/80 leading-relaxed max-w-2xl font-[var(--font-accent)] italic">
-            &ldquo;If investment is made in agriculture and entrepreneurship, the institution will become financially sustainable.&rdquo;
-          </p>
-        </div>
-      </section>
-
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading title="Building Institutional Resilience" subtitle="Ensuring SHIFSD can continue serving communities for decades to come through diversified, sustainable revenue." />
-
-          <div className="mt-12 grid md:grid-cols-2 gap-8">
-            {[
-              {
-                icon: Building,
-                title: "Social Enterprise Model",
-                description: "Hummingbird Academy and Holy Hands Institute generate operational revenue through school fees and vocational training programs, creating a sustainable funding base that reduces donor dependency.",
-              },
-              {
-                icon: Sprout,
-                title: "Agricultural Investment",
-                description: "The 28.1-acre farmland in Kpytuo Town, Nimba County serves dual purposes: a CSA demonstration site and an agri-business venture generating institutional revenue through crop production and sales.",
-              },
-              {
-                icon: Factory,
-                title: "Food Processing & Value Addition",
-                description: "Developing food processing capabilities to add value to agricultural products, increasing revenue potential and creating local employment opportunities in Nimba County.",
-              },
-              {
-                icon: BarChart3,
-                title: "Revenue Diversification",
-                description: "Strategic development of multiple income streams — school operations, agricultural production, vocational training, and social enterprise — to ensure long-term institutional sustainability.",
-              },
-            ].map((item) => {
-              const Icon = item.icon;
-              return (
-                <div key={item.title} className="rounded-2xl border border-gray-border p-8 hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 rounded-xl bg-amber/10 flex items-center justify-center mb-5">
-                    <Icon className="w-6 h-6 text-amber-dark" />
-                  </div>
-                  <h3 className="font-[var(--font-heading)] font-bold text-charcoal text-lg mb-3">{item.title}</h3>
-                  <p className="text-sm text-charcoal-light leading-relaxed">{item.description}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-16 bg-forest-dark rounded-2xl p-8 md:p-12 text-center text-white">
-            <h3 className="font-[var(--font-heading)] text-2xl font-bold mb-4">Invest in Sustainable Impact</h3>
-            <p className="text-white/80 max-w-xl mx-auto mb-6">
-              Your partnership helps SHIFSD build the financial resilience needed to serve communities
-              for generations. Every investment multiplies through our social enterprise model.
-            </p>
-            <Link href="/get-involved#partner" className="inline-flex items-center gap-2 bg-amber hover:bg-amber-dark text-white font-[var(--font-heading)] font-semibold px-8 py-3.5 rounded-full transition-colors">
-              Become a Partner <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <FinancialHero />
+      <ProgramOverview />
+      <KeyStrategies />
+      <FinancialStats />
+      <PartnerCTA />
     </>
   );
 }

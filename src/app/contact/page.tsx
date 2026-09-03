@@ -1,158 +1,429 @@
-import { Metadata } from "next";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description: "Get in touch with SHIFSD Liberia. Visit our headquarters in Johnsonville, Monrovia or reach us by email and phone.",
+import { motion } from "framer-motion";
+import { useRef, useState, type FormEvent } from "react";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
 };
 
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+function Icon({ name, className }: { name: string; className?: string }) {
+  return (
+    <span className={`material-symbols-outlined ${className ?? ""}`} aria-hidden>
+      {name}
+    </span>
+  );
+}
+
+// ─── 1. Hero ────────────────────────────────────────────────────
+function Hero() {
+  return (
+    <section data-node-id="58:19" className="bg-deep-canopy">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          className="flex flex-col items-center gap-4 text-center"
+        >
+          <motion.h1
+            variants={fadeUp}
+            className="font-[family-name:var(--font-display)] font-semibold text-white text-[34px] leading-[42px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px]"
+            style={{ letterSpacing: "-1px" }}
+          >
+            Contact Us
+          </motion.h1>
+          <motion.p
+            variants={fadeUp}
+            className="text-teal-light text-[18px] max-w-[700px]"
+          >
+            We&apos;d love to hear from you. Reach out to learn more about our
+            programs or explore partnership opportunities.
+          </motion.p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 2. Contact Form ────────────────────────────────────────────
+const inputClass =
+  "w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-[14px] text-deep-canopy placeholder:text-gray-400 focus:border-warm-teal focus:outline-none focus:ring-2 focus:ring-warm-teal/20 transition-colors";
+
+function Field({
+  label,
+  children,
+  htmlFor,
+}: {
+  label: string;
+  children: React.ReactNode;
+  htmlFor?: string;
+}) {
+  return (
+    <label className="flex flex-col gap-2" htmlFor={htmlFor}>
+      <span className="font-[family-name:var(--font-body)] font-medium text-gray-700 text-[14px]">
+        {label}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+function ContactForm() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setState("sending");
+    try {
+      const data = new FormData(form);
+      const body = new URLSearchParams(data as unknown as Record<string, string>);
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error("Network");
+      setState("sent");
+      form.reset();
+    } catch {
+      setState("error");
+    }
+  }
+
+  return (
+    <section id="form" data-node-id="58:22" className="bg-warm-sand scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-10"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[36px] leading-[44px] text-center"
+            style={{ letterSpacing: "-0.5px" }}
+          >
+            Send Us a Message
+          </motion.h2>
+
+          <motion.form
+            ref={formRef}
+            variants={fadeUp}
+            onSubmit={onSubmit}
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            className="w-full max-w-[800px] bg-white rounded-2xl shadow-md p-10 flex flex-col gap-6"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p className="hidden">
+              <label>
+                Don&apos;t fill this out: <input name="bot-field" />
+              </label>
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Field label="First Name" htmlFor="c-first">
+                <input
+                  id="c-first"
+                  name="first-name"
+                  type="text"
+                  required
+                  placeholder="Enter your first name"
+                  className={inputClass}
+                />
+              </Field>
+              <Field label="Last Name" htmlFor="c-last">
+                <input
+                  id="c-last"
+                  name="last-name"
+                  type="text"
+                  required
+                  placeholder="Enter your last name"
+                  className={inputClass}
+                />
+              </Field>
+            </div>
+
+            <Field label="Email Address" htmlFor="c-email">
+              <input
+                id="c-email"
+                name="email"
+                type="email"
+                required
+                placeholder="you@example.com"
+                className={inputClass}
+              />
+            </Field>
+
+            <Field label="Subject" htmlFor="c-subject">
+              <select
+                id="c-subject"
+                name="subject"
+                required
+                defaultValue=""
+                className={inputClass}
+              >
+                <option value="" disabled>
+                  How can we help?
+                </option>
+                <option value="general">General inquiry</option>
+                <option value="programs">Programs &amp; services</option>
+                <option value="partnership">Partnership</option>
+                <option value="donation">Donation / giving</option>
+                <option value="media">Media &amp; press</option>
+                <option value="other">Other</option>
+              </select>
+            </Field>
+
+            <Field label="Message" htmlFor="c-message">
+              <textarea
+                id="c-message"
+                name="message"
+                rows={5}
+                required
+                placeholder="Write your message here..."
+                className={`${inputClass} resize-y`}
+              />
+            </Field>
+
+            <div className="flex flex-col gap-3">
+              <button
+                type="submit"
+                disabled={state === "sending"}
+                className="bg-warm-teal hover:bg-warm-teal/90 disabled:bg-gray-400 text-white text-[16px] font-semibold px-8 py-3.5 rounded-lg transition-colors self-start"
+              >
+                {state === "sending" ? "Sending…" : "Send Message"}
+              </button>
+              {state === "sent" && (
+                <p className="text-warm-teal text-[14px] font-medium">
+                  Thanks — your message is on its way. We&apos;ll be in touch
+                  shortly.
+                </p>
+              )}
+              {state === "error" && (
+                <p className="text-error text-[14px] font-medium">
+                  Couldn&apos;t send — please email{" "}
+                  <a
+                    href="mailto:info@shifsd-liberia.org"
+                    className="underline"
+                  >
+                    info@shifsd-liberia.org
+                  </a>{" "}
+                  directly.
+                </p>
+              )}
+            </div>
+          </motion.form>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 3. Contact Info ────────────────────────────────────────────
+type InfoCard = {
+  icon: string;
+  title: string;
+  lines: React.ReactNode[];
+};
+
+const infoCards: InfoCard[] = [
+  {
+    icon: "home",
+    title: "Visit Us",
+    lines: [
+      "Block C, Lee Hill Community,",
+      "Johnsonville Township,",
+      "Monrovia, Liberia",
+    ],
+  },
+  {
+    icon: "mail",
+    title: "Email Us",
+    lines: [
+      <a
+        key="e1"
+        href="mailto:info@shifsd-liberia.org"
+        className="hover:text-warm-teal transition-colors"
+      >
+        info@shifsd-liberia.org
+      </a>,
+      <a
+        key="e2"
+        href="mailto:programs@shifsd.org"
+        className="hover:text-warm-teal transition-colors"
+      >
+        programs@shifsd.org
+      </a>,
+    ],
+  },
+  {
+    icon: "call",
+    title: "Call Us",
+    lines: [
+      <a
+        key="p1"
+        href="tel:+231770024082"
+        className="hover:text-warm-teal transition-colors"
+      >
+        +231 770 024 082
+      </a>,
+      "Mon–Fri, 9am–5pm",
+    ],
+  },
+  {
+    icon: "public",
+    title: "Follow Us",
+    lines: [
+      <a
+        key="s1"
+        href="https://www.facebook.com/"
+        target="_blank"
+        rel="noreferrer"
+        className="hover:text-warm-teal transition-colors"
+      >
+        Facebook
+      </a>,
+      <span key="s2">
+        <a
+          href="https://www.linkedin.com/"
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-warm-teal transition-colors"
+        >
+          LinkedIn
+        </a>
+        {" / "}
+        <a
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-warm-teal transition-colors"
+        >
+          Instagram
+        </a>
+      </span>,
+    ],
+  },
+];
+
+function ContactInfo() {
+  return (
+    <section id="info" data-node-id="60:2" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="flex flex-col items-center gap-10"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[36px] leading-[44px] text-center"
+            style={{ letterSpacing: "-0.5px" }}
+          >
+            Other Ways to Reach Us
+          </motion.h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+            {infoCards.map((card) => (
+              <motion.div
+                key={card.title}
+                variants={fadeUp}
+                className="bg-gray-50 border border-gray-200 rounded-2xl px-6 py-8 flex flex-col items-center gap-4 text-center"
+              >
+                <div className="w-14 h-14 rounded-full bg-warm-teal flex items-center justify-center">
+                  <Icon
+                    name={card.icon}
+                    className="!text-[26px] text-white"
+                  />
+                </div>
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold text-deep-canopy text-[18px] leading-[28px]">
+                  {card.title}
+                </h3>
+                <div className="text-gray-500 text-[14px] leading-[22px] flex flex-col gap-0.5">
+                  {card.lines.map((line, i) => (
+                    <span key={i}>{line}</span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 4. Map ─────────────────────────────────────────────────────
+function MapSection() {
+  // OpenStreetMap embed centered on Johnsonville Township, Monrovia
+  // (~6.28°N, -10.68°W). No API key required.
+  const mapSrc =
+    "https://www.openstreetmap.org/export/embed.html?bbox=-10.7500%2C6.2500%2C-10.6100%2C6.3200&layer=mapnik&marker=6.2830%2C-10.6800";
+  return (
+    <section id="map" data-node-id="60:25" className="bg-white scroll-mt-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+          className="rounded-2xl overflow-hidden border border-gray-200"
+        >
+          <iframe
+            title="Map — Monrovia, Liberia"
+            src={mapSrc}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full h-[400px] block"
+          />
+        </motion.div>
+        <p className="mt-3 text-center text-[13px] text-gray-500">
+          Block C, Lee Hill Community · Johnsonville Township · Monrovia,
+          Liberia ·{" "}
+          <a
+            href="https://www.openstreetmap.org/?mlat=6.283&mlon=-10.68#map=13/6.283/-10.68"
+            target="_blank"
+            rel="noreferrer"
+            className="text-warm-teal hover:underline"
+          >
+            Open in maps →
+          </a>
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// ─── Page ───────────────────────────────────────────────────────
 export default function ContactPage() {
   return (
     <>
-      <section className="relative pt-32 pb-20 bg-forest-dark">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-amber font-[var(--font-heading)] font-semibold text-sm uppercase tracking-wider mb-3">Contact Us</p>
-            <h1 className="font-[var(--font-heading)] text-4xl sm:text-5xl font-bold text-white leading-tight">
-              Let&apos;s Connect
-            </h1>
-            <p className="mt-6 text-lg text-white/80 leading-relaxed">
-              Whether you have questions, want to visit our programs, or are interested in partnership — we&apos;d love to hear from you.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-12">
-            {/* Contact Form */}
-            <div className="lg:col-span-3">
-              <h2 className="font-[var(--font-heading)] text-2xl font-bold text-charcoal mb-2">Send a Message</h2>
-              <div className="section-divider mb-6" />
-              <form
-                name="contact"
-                method="POST"
-                data-netlify="true"
-                action="/contact?form=success"
-                className="space-y-5"
-              >
-                <input type="hidden" name="form-name" value="contact" />
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-charcoal mb-1.5">First Name *</label>
-                    <input type="text" name="first-name" required className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-charcoal mb-1.5">Last Name *</label>
-                    <input type="text" name="last-name" required className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-charcoal mb-1.5">Email Address *</label>
-                  <input type="email" name="email" required className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-charcoal mb-1.5">Subject</label>
-                  <select name="subject" className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-forest">
-                    <option>General Inquiry</option>
-                    <option>Partnership Opportunity</option>
-                    <option>Donation Question</option>
-                    <option>Volunteer Interest</option>
-                    <option>Media / Press Inquiry</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-charcoal mb-1.5">Message *</label>
-                  <textarea name="message" required rows={6} className="w-full px-4 py-3 rounded-xl border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-forest resize-none" placeholder="How can we help you?" />
-                </div>
-                <button type="submit" className="bg-forest hover:bg-forest-dark text-white font-[var(--font-heading)] font-bold px-8 py-3.5 rounded-xl text-sm transition-colors flex items-center gap-2">
-                  <Send className="w-4 h-4" /> Send Message
-                </button>
-              </form>
-            </div>
-
-            {/* Contact Info */}
-            <div className="lg:col-span-2">
-              <h2 className="font-[var(--font-heading)] text-2xl font-bold text-charcoal mb-2">Contact Details</h2>
-              <div className="section-divider mb-6" />
-
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-xl bg-forest/10 flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-forest" />
-                  </div>
-                  <div>
-                    <h3 className="font-[var(--font-heading)] font-bold text-sm text-charcoal">Headquarters</h3>
-                    <p className="text-sm text-charcoal-light mt-1 leading-relaxed">
-                      Block C, Lee Hill Community<br />
-                      Johnsonville Township<br />
-                      Monrovia, Liberia
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-xl bg-forest/10 flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5 text-forest" />
-                  </div>
-                  <div>
-                    <h3 className="font-[var(--font-heading)] font-bold text-sm text-charcoal">Email</h3>
-                    <a href="mailto:shifsdliberia@gmail.com" className="text-sm text-deep-blue hover:underline mt-1 block">
-                      shifsdliberia@gmail.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-xl bg-forest/10 flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5 text-forest" />
-                  </div>
-                  <div>
-                    <h3 className="font-[var(--font-heading)] font-bold text-sm text-charcoal">Phone</h3>
-                    <a href="tel:+231770024082" className="text-sm text-deep-blue hover:underline mt-1 block">
-                      +231 (0) 770 024 082
-                    </a>
-                    <a href="tel:+231886874950" className="text-sm text-deep-blue hover:underline block">
-                      +231 (0) 886 874 950
-                    </a>
-                    <p className="text-xs text-charcoal-light mt-1">Contact: Jeremiah T. Burgess</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-xl bg-forest/10 flex items-center justify-center shrink-0">
-                    <Clock className="w-5 h-5 text-forest" />
-                  </div>
-                  <div>
-                    <h3 className="font-[var(--font-heading)] font-bold text-sm text-charcoal">Office Hours</h3>
-                    <p className="text-sm text-charcoal-light mt-1">
-                      Monday – Friday: 8:00 AM – 5:00 PM<br />
-                      Saturday: 9:00 AM – 1:00 PM<br />
-                      Sunday: Closed
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Google Maps embed */}
-              <div className="mt-8 rounded-xl overflow-hidden h-56">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15864.2!2d-10.78!3d6.31!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf09f91a7f1c5b3%3A0x23456789!2sJohnsonville%2C+Monrovia%2C+Liberia!5e0!3m2!1sen!2s!4v1700000000000"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="SHIFSD Liberia Location - Johnsonville, Monrovia"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero />
+      <ContactForm />
+      <ContactInfo />
+      <MapSection />
     </>
   );
 }

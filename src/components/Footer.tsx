@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 
 const quickLinks = [
+  { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Programs", href: "/programs" },
   { name: "Impact", href: "/impact" },
@@ -11,97 +11,97 @@ const quickLinks = [
 ];
 
 const programLinks = [
-  { name: "Climate Smart Agriculture", href: "/programs/climate-smart-agriculture" },
-  { name: "Education & Livelihood", href: "/programs/education-livelihood" },
-  { name: "Financial Sustainability", href: "/programs/financial-sustainability" },
+  { name: "Climate-Smart Agriculture", href: "/programs/climate-smart-agriculture#overview" },
+  { name: "Education & Livelihood", href: "/programs/education-livelihood#overview" },
+  { name: "Financial Sustainability", href: "/programs/financial-sustainability#overview" },
+  { name: "Our Approach", href: "/programs#approach" },
+  { name: "Partner With Us", href: "/programs#partner-cta" },
 ];
 
-const partners = [
-  { name: "EDC", logo: "/images/partner-edc.webp" },
-  { name: "All We Can (UK)", logo: "/images/partner-allwecan.webp" },
-  { name: "Mission Alliance", logo: "/images/partner-mission-alliance.webp" },
-  { name: "YOCEL", logo: "/images/partner-yocel.webp" },
-  { name: "Brown Marital Trust", logo: null },
-  { name: "Stichting INITIAT", logo: "/images/partner-initiat.webp" },
+function Icon({ name, className }: { name: string; className?: string }) {
+  return (
+    <span className={`material-symbols-outlined ${className ?? ""}`} aria-hidden>
+      {name}
+    </span>
+  );
+}
+
+const socials = [
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/",
+    svg: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M8 10v7M8 7.5v.01M12 17v-4a2 2 0 0 1 4 0v4M12 13v4" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/",
+    svg: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M14 8h-1.5a1.5 1.5 0 0 0-1.5 1.5V12m-2 0h5m-2.5 0v7" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/",
+    svg: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="3.5" />
+        <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/",
+    svg: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
+        <rect x="2.5" y="6" width="19" height="12" rx="3" />
+        <path d="m10.5 9.5 4 2.5-4 2.5v-5z" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-forest-dark text-white">
-      {/* Newsletter signup strip */}
-      <div className="bg-forest">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div>
-              <h3 className="font-[var(--font-heading)] text-lg font-bold">
-                Stay Connected with SHIFSD
-              </h3>
-              <p className="text-white/80 text-sm mt-1">
-                Get updates on our programs, impact stories, and ways to get involved.
-              </p>
-            </div>
-            <form
-              name="newsletter"
-              method="POST"
-              data-netlify="true"
-              action="/contact?form=newsletter"
-              className="flex w-full md:w-auto gap-2"
-            >
-              <input type="hidden" name="form-name" value="newsletter" />
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="Your email address"
-                className="px-4 py-2.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm w-full md:w-72 focus:outline-none focus:ring-2 focus:ring-amber"
-              />
-              <button
-                type="submit"
-                className="bg-amber hover:bg-amber-dark text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-colors whitespace-nowrap"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* About column */}
+    <footer className="bg-deep-canopy text-white">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-20 pt-20 pb-6">
+        {/* ── Columns ─────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1.15fr_1.2fr] gap-10 lg:gap-12">
+          {/* About */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <img
-                src="/images/logo.webp"
-                alt="SHIFSD Logo"
-                className="w-10 h-10 rounded-full object-cover"
-              />
-              <div>
-                <div className="font-[var(--font-heading)] font-bold">SHIFSD Liberia</div>
-                <div className="text-xs text-white/60">Est. 2000</div>
-              </div>
-            </div>
-            <p className="text-sm text-white/70 leading-relaxed mb-4">
-              Self Help Initiative for Sustainable Development — empowering communities through
-              education, agriculture, and entrepreneurship since 2000.
+            <img
+              src="/images/logos/logo-primary-dark.png"
+              alt="SHIFSD — Self-Help Initiative for Sustainable Development"
+              className="block mb-6"
+              style={{ width: 170, height: 48, aspectRatio: "85 / 24" }}
+            />
+            <p className="text-sm text-white/75 leading-[22px] max-w-[280px]">
+              Self Help Initiative for Sustainable Development — empowering
+              Liberian communities through agriculture, education, and
+              sustainable livelihoods since 2000.
             </p>
-            <div className="inline-block bg-white/10 rounded-lg px-3 py-1.5 text-xs">
-              Accredited: MPEA/NGO/AC#0369
-            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-[var(--font-heading)] font-bold text-sm uppercase tracking-wider mb-4">
+            <h4 className="font-[family-name:var(--font-heading)] font-semibold text-horizon-gold text-[15px] mb-5">
               Quick Links
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 hover:text-amber transition-colors"
+                    className="text-sm text-white/85 hover:text-horizon-gold transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -110,81 +110,102 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Programs */}
+          {/* Our Programs */}
           <div>
-            <h4 className="font-[var(--font-heading)] font-bold text-sm uppercase tracking-wider mb-4">
+            <h4 className="font-[family-name:var(--font-heading)] font-semibold text-horizon-gold text-[15px] mb-5">
               Our Programs
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {programLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 hover:text-amber transition-colors"
+                    className="text-sm text-white/85 hover:text-horizon-gold transition-colors"
                   >
                     {link.name}
                   </Link>
                 </li>
               ))}
             </ul>
-            <h4 className="font-[var(--font-heading)] font-bold text-sm uppercase tracking-wider mt-6 mb-3">
-              Partners
-            </h4>
-            <div className="flex flex-wrap gap-3 mt-1">
-              {partners.map((p) => (
-                <div key={p.name} className="flex items-center justify-center w-14 h-14 rounded-lg bg-white/10 p-1.5" title={p.name}>
-                  {p.logo ? (
-                    <img loading="lazy" src={p.logo} alt={p.name} className="max-h-10 max-w-full object-contain brightness-0 invert opacity-70" />
-                  ) : (
-                    <span className="text-[8px] text-white/50 text-center leading-tight">{p.name}</span>
-                  )}
-                </div>
-              ))}
-            </div>
           </div>
 
-          {/* Contact */}
+          {/* Contact Us */}
           <div>
-            <h4 className="font-[var(--font-heading)] font-bold text-sm uppercase tracking-wider mb-4">
+            <h4 className="font-[family-name:var(--font-heading)] font-semibold text-horizon-gold text-[15px] mb-5">
               Contact Us
             </h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-sm text-white/70">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-amber" />
-                <span>Block C, Lee Hill Community, Johnsonville Township, Monrovia, Liberia</span>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3 text-sm text-white/85">
+                <Icon name="home" className="!text-[20px] mt-0.5 shrink-0" />
+                <span className="leading-[22px]">
+                  Block C, Lee Hill Community,
+                  <br />
+                  Johnsonville Township,
+                  <br />
+                  Monrovia, Liberia
+                </span>
               </li>
-              <li className="flex items-center gap-3 text-sm text-white/70">
-                <Mail className="w-4 h-4 shrink-0 text-amber" />
-                <a href="mailto:shifsdliberia@gmail.com" className="hover:text-amber transition-colors">
-                  shifsdliberia@gmail.com
+              <li className="flex items-center gap-3 text-sm text-white/85">
+                <Icon name="mail" className="!text-[20px] shrink-0" />
+                <a
+                  href="mailto:info@shifsd-liberia.org"
+                  className="hover:text-horizon-gold transition-colors"
+                >
+                  info@shifsd-liberia.org
                 </a>
               </li>
-              <li className="flex items-center gap-3 text-sm text-white/70">
-                <Phone className="w-4 h-4 shrink-0 text-amber" />
-                <a href="tel:+231770024082" className="hover:text-amber transition-colors">
-                  +231 (0) 770 024 082
+              <li className="flex items-center gap-3 text-sm text-white/85">
+                <Icon name="call" className="!text-[20px] shrink-0" />
+                <a
+                  href="tel:+231770024082"
+                  className="hover:text-horizon-gold transition-colors"
+                >
+                  +231 770 024 082
                 </a>
               </li>
             </ul>
-            <div className="mt-6">
-              <Link
-                href="/get-involved#donate"
-                className="inline-flex items-center gap-2 bg-amber hover:bg-amber-dark text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-colors"
-              >
-                Support Our Mission
-                <ExternalLink className="w-3 h-3" />
-              </Link>
+
+            <div className="flex items-center gap-3 mt-6 text-white/85">
+              {socials.map((s) => (
+                <a
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={s.name}
+                  className="w-9 h-9 hover:text-horizon-gold transition-colors"
+                >
+                  {s.svg}
+                </a>
+              ))}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/40">
-          <p>&copy; {new Date().getFullYear()} SHIFSD Liberia Inc. All rights reserved.</p>
-          <p>
-            Motto: &ldquo;Practical Help for Self-Reliance&rdquo;
+        {/* ── Divider ─────────────────────────────────────────── */}
+        <div className="h-px bg-white/10 mt-16" />
+
+        {/* ── SHIFSD wordmark ─────────────────────────────────── */}
+        <div className="pt-4 pb-2 overflow-hidden">
+          <div
+            className="font-[family-name:var(--font-display)] font-semibold text-white leading-[0.85] tracking-[-0.04em] select-none"
+            style={{ fontSize: "clamp(4rem, 26vw, 22rem)" }}
+          >
+            SHIFSD
+          </div>
+        </div>
+
+        {/* ── Bottom bar ──────────────────────────────────────── */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-[13px] text-white/60">
+          <p>© {new Date().getFullYear()} SHIFSD Liberia. All Rights Reserved.</p>
+          <p className="flex items-center gap-2">
+            <Link href="/privacy" className="hover:text-horizon-gold transition-colors">
+              Privacy Policy
+            </Link>
+            <span aria-hidden>·</span>
+            <Link href="/terms" className="hover:text-horizon-gold transition-colors">
+              Terms of Service
+            </Link>
           </p>
         </div>
       </div>

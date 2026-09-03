@@ -1,86 +1,105 @@
 @import "tailwindcss";
 
 @theme {
-  /* SHIFSD Brand Colors */
-  --color-forest: #1B5E20;
-  --color-forest-light: #2E7D32;
-  --color-forest-dark: #0D3B12;
-  --color-amber: #FF8F00;
-  --color-amber-light: #FFA726;
-  --color-amber-dark: #E65100;
-  --color-deep-blue: #0D47A1;
-  --color-deep-blue-light: #1565C0;
-  --color-charcoal: #212121;
-  --color-charcoal-light: #424242;
-  --color-gray-bg: #F5F5F5;
-  --color-gray-border: #E0E0E0;
-  --color-white: #FFFFFF;
+  /* ─── Primary Palette ─────────────────────────────── */
+  --color-warm-teal: #1A6B5A;
+  --color-liberian-flame: #E85D26;
+  --color-horizon-gold: #F5B731;
+  --color-deep-canopy: #1E3A3A;
+  --color-warm-sand: #F4F0EB;
 
-  /* Typography */
-  --font-heading: "Montserrat", sans-serif;
-  --font-body: "Open Sans", sans-serif;
-  --font-accent: "Lora", serif;
+  /* ─── Extended Palette ────────────────────────────── */
+  --color-teal-light: #D1FAE5;
+  --color-teal-muted: #A7F3D0;
+  --color-flame-light: #FED7AA;
+  --color-gold-light: #FEF3C7;
+  --color-canopy-light: #2D4F4F;
+
+  /* ─── Neutrals ────────────────────────────────────── */
+  --color-white: #FFFFFF;
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+
+  /* ─── Semantic ────────────────────────────────────── */
+  --color-success: #16A34A;
+  --color-warning: #EAB308;
+  --color-error: #DC2626;
+  --color-info: #2563EB;
+
+  /* ─── Typography ──────────────────────────────────── */
+  /* Large display type only (hero headline, giant wordmark) */
+  --font-display: "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  /* Section headings, card titles, most h2-h6 */
+  --font-heading: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-accent: "Lora", Georgia, serif;
+
+  /* ─── Spacing scale (Figma tokens) ────────────────── */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-30: 120px;
+
+  /* ─── Border radius ───────────────────────────────── */
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ─── Elevation ───────────────────────────────────── */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* Base styles */
+/* ─── Base ──────────────────────────────────────────── */
 html {
-  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   font-family: var(--font-body);
-  color: var(--color-charcoal);
+  color: var(--color-gray-900);
   background-color: var(--color-white);
 }
 
+/* Heading font-family/weight are set explicitly per-element via utility classes. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
-/* Animated counter */
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* Prevent scroll-jump when Lenis initializes */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 
-.animate-count {
-  animation: countUp 0.6s ease-out forwards;
-}
-
-/* Fade in on scroll */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.7s ease-out forwards;
-}
-
-/* Stagger children */
-.stagger-children > * {
-  opacity: 0;
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
-.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
-.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
-.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
-
-/* Hero gradient overlay */
-.hero-overlay {
-  background: linear-gradient(
-    135deg,
-    rgba(27, 94, 32, 0.85) 0%,
-    rgba(13, 71, 161, 0.75) 100%
-  );
-}
-
-/* Section divider */
-.section-divider {
-  width: 60px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-forest), var(--color-amber));
-  border-radius: 2px;
+/* Material Symbols default weight/grade/size (per CLAUDE.md) */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
 }
