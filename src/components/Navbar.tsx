@@ -81,7 +81,7 @@ export function Navbar() {
               src="/images/logos/logo-primary-light.png"
               alt="SHIFSD — Self-Help Initiative for Sustainable Development"
               className="block"
-              style={{ width: 170, height: 48, aspectRatio: "85 / 24" }}
+              style={{ width: 170, height: 52, aspectRatio: "952 / 291" }}
             />
           </Link>
 

@@ -84,7 +84,7 @@ export function Footer() {
               src="/images/logos/logo-primary-dark.png"
               alt="SHIFSD — Self-Help Initiative for Sustainable Development"
               className="block mb-6"
-              style={{ width: 170, height: 48, aspectRatio: "85 / 24" }}
+              style={{ width: 170, height: 52, aspectRatio: "952 / 291" }}
             />
             <p className="text-sm text-white/75 leading-[22px] max-w-[280px]">
               Self Help Initiative for Sustainable Development — empowering
