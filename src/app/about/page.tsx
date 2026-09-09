@@ -597,6 +597,20 @@ function PartnersInstitutions() {
               </div>
             ))}
           </motion.div>
+
+          <motion.p
+            variants={fadeUp}
+            className="text-gray-600 text-[15px] leading-[24px] text-center max-w-[720px] mt-4"
+          >
+            We are especially grateful to{" "}
+            <span className="font-semibold text-deep-canopy">All We Can (AWC)</span>{" "}
+            for providing multi-year unrestricted core funding — powering our
+            institutional stability and our Climate-Smart Agriculture work in
+            Nimba County. Programme-specific support from{" "}
+            <span className="font-semibold text-deep-canopy">Mission Alliance</span>{" "}
+            underwrites adult literacy across 30 communities in the Zorzor and
+            Salayea districts of Lofa County.
+          </motion.p>
         </motion.div>
       </div>
     </section>

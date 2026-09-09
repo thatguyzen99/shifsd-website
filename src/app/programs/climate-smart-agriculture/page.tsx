@@ -139,8 +139,11 @@ function ProgramOverview() {
             <p className="text-gray-600 text-[16px] leading-[26px]">
               Our CSA program trains farmers in climate-adaptive techniques
               across seven counties. Working on our 28.1-acre demonstration
-              farm and in communities, we equip smallholder farmers with the
-              knowledge to increase yields while protecting the environment.
+              farm in Nimba County — supported by our long-standing partner{" "}
+              <span className="font-semibold text-deep-canopy">All We Can (AWC)</span>{" "}
+              — and in communities across the region, we equip smallholder
+              farmers with the knowledge to increase yields while protecting
+              the environment.
             </p>
           </motion.div>
         </motion.div>

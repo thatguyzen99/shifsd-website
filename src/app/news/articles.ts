@@ -111,24 +111,23 @@ export const articles: Article[] = [
     isoDate: "2025-02-28",
     image: "/images/news/mission-alliance.jpg",
     excerpt:
-      "A new multi-year partnership with Mission Alliance will expand our adult literacy and village savings work in Lofa and Nimba Counties.",
+      "A new multi-year partnership with Mission Alliance will expand our adult literacy work across 30 communities in the Zorzor and Salayea districts of Lofa County.",
     body: [
       {
         type: "p",
-        text: "SHIFSD is entering a multi-year partnership with Mission Alliance to expand adult literacy and village savings and loan association (VSLA) programming in Lofa and Nimba Counties. The agreement was signed in February 2025 and runs through 2028.",
+        text: "SHIFSD is entering a multi-year partnership with Mission Alliance to expand adult literacy programming across 30 communities in the Zorzor and Salayea districts of Lofa County. The agreement was signed in February 2025 and runs through 2028.",
       },
       {
         type: "p",
-        text: "Under the partnership, Mission Alliance provides multi-year, unrestricted core funding, and SHIFSD contributes on-the-ground implementation, county-level coordinators, and the community trust built over 20 years of continuous presence. The two organisations will share monitoring, learning, and financial reporting.",
+        text: "Under the partnership, Mission Alliance provides multi-year, restricted funding earmarked for the literacy programme, and SHIFSD contributes on-the-ground implementation, county-level coordinators, and the community trust built over 20 years of continuous presence. The two organisations will share monitoring, learning, and financial reporting.",
       },
       { type: "h2", text: "What the partnership funds" },
       {
         type: "list",
         items: [
-          "Adult literacy circles using the REFLECT methodology, targeting 500 new learners over three years.",
-          "Formation of 25 new VSLAs in Lofa and Nimba, with a bias toward women-led groups.",
+          "Adult literacy circles using the REFLECT methodology across 30 communities in the Zorzor and Salayea districts, targeting 500 new learners over three years.",
           "Training of local facilitators so the work continues after the funding cycle.",
-          "Baseline and endline evaluations to test whether the model can scale beyond these two counties.",
+          "Baseline and endline evaluations to test whether the model can scale beyond Lofa County.",
         ],
       },
       {
@@ -149,7 +148,7 @@ export const articles: Article[] = [
     body: [
       {
         type: "p",
-        text: "The 28.1-acre SHIFSD demonstration farm in Kpytuo Town, Nimba County, has just closed its most productive season since we acquired the land in 2023. Rice, cassava, and short-cycle vegetables all exceeded target yields — cassava by 41 percent, rice by 28 percent.",
+        text: "The 28.1-acre SHIFSD demonstration farm in Kpytuo Town, Nimba County — supported by our long-standing partner All We Can (AWC) — has just closed its most productive season since we acquired the land in 2023. Rice, cassava, and short-cycle vegetables all exceeded target yields — cassava by 41 percent, rice by 28 percent.",
       },
       {
         type: "p",

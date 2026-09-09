@@ -422,7 +422,7 @@ const updates = [
     tag: "Partnership",
     title: "New Alliance with Mission Alliance Strengthens Programs",
     excerpt:
-      "A strategic partnership with Mission Alliance brings new resources and shared expertise to our community development efforts.",
+      "A multi-year Mission Alliance partnership will expand our adult literacy work across 30 communities in the Zorzor and Salayea districts of Lofa County.",
     image: "/images/news-partnership.jpg",
     date: "February 12, 2025",
     href: "/news",
