@@ -23,7 +23,7 @@
 | Animation | **GSAP** | Complex timelines, number counters, parallax |
 | Scrolling | **Lenis** | Smooth scroll wrapper — initialize in a `LenisProvider` client component |
 | Icons | **Google Material Symbols** | Outlined, weight 400, grade 0, size 24. Load via CDN `<link>`. **NOT Lucide React** for new pages |
-| Fonts | **DM Sans** (headings), **Inter** (body/UI), **Lora** (accent/quotes) | Load via `next/font/google` |
+| Fonts | **Clash Display** (hero/display), **Clash Grotesk** (headings/UI subheads), **Inter** (body/UI), **Lora** (accent/quotes) | Clash Display + Clash Grotesk loaded via Fontshare `<link>` in `layout.tsx`; Inter + Lora via `next/font/google`. **DM Sans is NOT used** — do not introduce it. |
 | Deployment | **Netlify** | CMS at `/admin/`, Forms, Identity |
 
 ### Key Dependencies (package.json)
@@ -50,9 +50,10 @@ Tailwind v4 uses `@theme` in CSS, not a JS config file. Define custom colors/fon
   --color-deep-canopy: #1E3A3A;
   --color-warm-sand: #F4F0EB;
   /* ... etc */
-  --font-heading: 'DM Sans', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-accent: 'Lora', serif;
+  --font-display: "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-accent: "Lora", Georgia, serif;
 }
 ```
 
@@ -105,15 +106,19 @@ Tailwind v4 uses `@theme` in CSS, not a JS config file. Define custom colors/fon
 
 ### 3.2 Typography (20 text styles)
 
-**Headings — DM Sans**
+**Display — Clash Display** (hero headlines, section titles at Display/H1 scale)
 | Style | Weight | Size | Line Height |
 |-------|--------|------|-------------|
-| Display | Bold | 64px | 72px |
-| H1 | Bold | 48px | 56px |
-| H2 | Bold | 36px | 44px |
-| H3 | Bold | 28px | 36px |
-| H4 | Medium | 24px | 32px |
-| H5 | Medium | 20px | 28px |
+| Display | Bold (700) | 64px | 72px |
+| H1 | Bold (700) | 48px | 56px |
+| H2 | SemiBold (600) | 36px | 44px |
+
+**Headings — Clash Grotesk** (H3–H5, UI subheads, eyebrow labels)
+| Style | Weight | Size | Line Height |
+|-------|--------|------|-------------|
+| H3 | SemiBold (600) | 28px | 36px |
+| H4 | Medium (500) | 24px | 32px |
+| H5 | Medium (500) | 20px | 28px |
 
 **Body — Inter**
 | Style | Weight | Size | Line Height |
@@ -507,7 +512,7 @@ For each page/section you implement:
 - **Figma is the source of truth.** Always screenshot before implementing.
 - **Tailwind v4** — use `@theme` in CSS, not `tailwind.config.js`.
 - **Material Symbols** for icons on new pages (not Lucide React).
-- **DM Sans** for headings, **Inter** for body, **Lora** for accents/quotes.
+- **Clash Display** for display/hero, **Clash Grotesk** for headings/UI subheads, **Inter** for body, **Lora** for accents/quotes. **DM Sans is not part of this brand — do not use it.**
 - **Deep Canopy** (`#1E3A3A`) for top bar and footer backgrounds.
 - **Warm Teal** (`#1A6B5A`) is the primary brand color for CTAs and accents.
 - **Liberian Flame** (`#E85D26`) for the Donate button and secondary CTAs.
