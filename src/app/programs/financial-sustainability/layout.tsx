@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Financial Sustainability",
   description:
-    "Building institutional resilience through strategic partnerships, social enterprise, and community-based savings groups. 6+ partners, 3 revenue streams, 2030 self-sufficiency target.",
+    "Empowering families and communities through VSLAs, financial literacy, and entrepreneurship support.",
   openGraph: {
     title: "Financial Sustainability | SHIFSD Liberia",
     description:
-      "Sustaining impact beyond aid — a model for long-term, self-funded community development.",
+      "Empowering families and communities through VSLAs, financial literacy, and entrepreneurship support.",
   },
 };
 

@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Our Impact",
   description:
-    "24+ years of service, 1,187+ direct beneficiaries, 7 counties, 28.1 acres of farmland, 6+ strategic partners. Independently verified impact across agriculture, education, and financial programs.",
+    "2,526 beneficiaries between late 2024 and 2026, 65 public schools in Leaders in Teaching, and 1,395+ youth reached in 2022–2024 — SHIFSD's impact across education, agriculture and financial empowerment.",
   openGraph: {
     title: "SHIFSD Impact | Measuring Change Across Liberia",
     description:
-      "Over two decades of measurable, verified impact — stories, data, and the geographic reach of SHIFSD's work.",
+      "Key figures, impact by programme area, reports and the geographic reach of SHIFSD's work.",
   },
 };
 

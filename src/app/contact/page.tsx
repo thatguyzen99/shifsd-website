@@ -246,14 +246,16 @@ type InfoCard = {
   lines: React.ReactNode[];
 };
 
+// Source: Organizational Profile (09/2026).
 const infoCards: InfoCard[] = [
   {
     icon: "home",
     title: "Visit Us",
     lines: [
       "Block C, Lee Hill Community,",
-      "Johnsonville Township,",
+      "Johnsonville Avenue,",
       "Monrovia, Liberia",
+      "P.O. Box 1164, 1000 Monrovia 10, Liberia",
     ],
   },
   {
@@ -268,11 +270,21 @@ const infoCards: InfoCard[] = [
         info@shifsd-liberia.org
       </a>,
       <a
-        key="e2"
-        href="mailto:programs@shifsd.org"
+        key="e1b"
+        href="mailto:shifsdliberia@gmail.com"
         className="hover:text-warm-teal transition-colors"
       >
-        programs@shifsd.org
+        shifsdliberia@gmail.com
+      </a>,
+      <span key="e2" className="mt-2 font-medium text-deep-canopy">
+        Jeremiah T. Burgess
+      </span>,
+      <a
+        key="e3"
+        href="mailto:jburgess@shifsd-liberia.org"
+        className="hover:text-warm-teal transition-colors"
+      >
+        jburgess@shifsd-liberia.org
       </a>,
     ],
   },
@@ -280,19 +292,24 @@ const infoCards: InfoCard[] = [
     icon: "call",
     title: "Call Us",
     lines: [
-      <a
-        key="p1"
-        href="tel:+231770024082"
-        className="hover:text-warm-teal transition-colors"
-      >
-        +231 770 024 082
+      <a key="p1" href="tel:+231770024082" className="hover:text-warm-teal transition-colors">
+        +231 (0)770 024 082
       </a>,
-      "Mon–Fri, 9am–5pm",
+      <a key="p2" href="tel:+231886874950" className="hover:text-warm-teal transition-colors">
+        +231 (0)886 874 950
+      </a>,
+      <a key="p3" href="tel:+231770215306" className="hover:text-warm-teal transition-colors">
+        +231 (0)770 215 306
+      </a>,
+      "Contact person: Jeremiah T. Burgess",
     ],
   },
   {
     icon: "public",
     title: "Follow Us",
+    // TODO(content): LinkedIn / Instagram links pointed at the platform
+    // homepages, not SHIFSD accounts, so they were removed. Add the real
+    // profile URLs when SHIFSD has them.
     lines: [
       <a
         key="s1"
@@ -303,28 +320,10 @@ const infoCards: InfoCard[] = [
       >
         Facebook
       </a>,
-      <span key="s2">
-        <a
-          href="https://www.linkedin.com/"
-          target="_blank"
-          rel="noreferrer"
-          className="hover:text-warm-teal transition-colors"
-        >
-          LinkedIn
-        </a>
-        {" / "}
-        <a
-          href="https://www.instagram.com/"
-          target="_blank"
-          rel="noreferrer"
-          className="hover:text-warm-teal transition-colors"
-        >
-          Instagram
-        </a>
-      </span>,
     ],
   },
 ];
+
 
 function ContactInfo() {
   return (
@@ -400,7 +399,7 @@ function MapSection() {
           />
         </motion.div>
         <p className="mt-3 text-center text-[13px] text-gray-500">
-          Block C, Lee Hill Community · Johnsonville Township · Monrovia,
+          Block C, Lee Hill Community · Johnsonville Avenue · Monrovia,
           Liberia ·{" "}
           <a
             href="https://www.openstreetmap.org/?mlat=6.283&mlon=-10.68#map=13/6.283/-10.68"

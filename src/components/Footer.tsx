@@ -26,8 +26,9 @@ function Icon({ name, className }: { name: string; className?: string }) {
   );
 }
 
-// TODO: replace placeholder hrefs (platform homepages) with real SHIFSD
-// profile URLs when the accounts go live. Facebook is already the real one.
+// TODO(content): LinkedIn, Instagram and YouTube icons were removed because
+// they linked to the platform homepages, not SHIFSD accounts. Add them back
+// with the real profile URLs when the accounts go live.
 const socials = [
   {
     name: "Facebook",
@@ -36,37 +37,6 @@ const socials = [
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
         <circle cx="12" cy="12" r="9" />
         <path d="M14 8h-1.5a1.5 1.5 0 0 0-1.5 1.5V12m-2 0h5m-2.5 0v7" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <path d="M8 10v7M8 7.5v.01M12 17v-4a2 2 0 0 1 4 0v4M12 13v4" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
-        <rect x="3" y="3" width="18" height="18" rx="5" />
-        <circle cx="12" cy="12" r="3.5" />
-        <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    name: "YouTube",
-    href: "https://www.youtube.com/",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
-        <rect x="2.5" y="6" width="19" height="12" rx="3" />
-        <path d="m10.5 9.5 4 2.5-4 2.5v-5z" fill="currentColor" stroke="none" />
       </svg>
     ),
   },
@@ -87,9 +57,10 @@ export function Footer() {
               style={{ width: 170, height: 52, aspectRatio: "952 / 291" }}
             />
             <p className="text-sm text-white/75 leading-[22px] max-w-[280px]">
-              Self Help Initiative for Sustainable Development — empowering
-              Liberian communities through agriculture, education, and
-              sustainable livelihoods since 2000.
+              Self-Help Initiative for Sustainable Development-Liberia
+              (SHIFSD-Liberia), Inc. — alleviating poverty through alternative
+              education and entrepreneurship since 2000. Accreditation no.
+              MFDP/NGO/AC#531871651.
             </p>
           </div>
 
@@ -142,9 +113,9 @@ export function Footer() {
                 <span className="leading-[22px]">
                   Block C, Lee Hill Community,
                   <br />
-                  Johnsonville Township,
+                  Johnsonville Avenue, Monrovia
                   <br />
-                  Monrovia, Liberia
+                  P.O. Box 1164, 1000 Monrovia 10, Liberia
                 </span>
               </li>
               <li className="flex items-center gap-3 text-sm text-white/85">
@@ -157,13 +128,38 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-3 text-sm text-white/85">
-                <Icon name="call" className="!text-[20px] shrink-0" />
+                <Icon name="mail" className="!text-[20px] shrink-0" />
                 <a
-                  href="tel:+231770024082"
+                  href="mailto:shifsdliberia@gmail.com"
                   className="hover:text-horizon-gold transition-colors"
                 >
-                  +231 770 024 082
+                  shifsdliberia@gmail.com
                 </a>
+              </li>
+              <li className="flex items-start gap-3 text-sm text-white/85">
+                <Icon name="call" className="!text-[20px] mt-0.5 shrink-0" />
+                <span className="leading-[22px]">
+                  <a
+                    href="tel:+231770024082"
+                    className="hover:text-horizon-gold transition-colors"
+                  >
+                    +231 (0)770 024 082
+                  </a>
+                  <br />
+                  <a
+                    href="tel:+231886874950"
+                    className="hover:text-horizon-gold transition-colors"
+                  >
+                    +231 (0)886 874 950
+                  </a>
+                  <br />
+                  <a
+                    href="tel:+231770215306"
+                    className="hover:text-horizon-gold transition-colors"
+                  >
+                    +231 (0)770 215 306
+                  </a>
+                </span>
               </li>
             </ul>
 
@@ -200,6 +196,7 @@ export function Footer() {
         {/* ── Bottom bar ──────────────────────────────────────── */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-[13px] text-white/60">
           <p>© {new Date().getFullYear()} SHIFSD Liberia. All Rights Reserved.</p>
+          <p>Designed &amp; built by Melvin Z. Freeman</p>
           <p className="flex items-center gap-2">
             <Link href="/privacy" className="hover:text-horizon-gold transition-colors">
               Privacy Policy

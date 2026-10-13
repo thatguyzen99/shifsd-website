@@ -88,8 +88,10 @@ function ImpactHero() {
             variants={fadeUp}
             className="text-[18px] leading-[28px] text-white/85 max-w-[900px]"
           >
-            Over two decades of measurable impact across agriculture, education,
-            and community development in Liberia.
+            Between late 2024 and 2026, SHIFSD reached a combined total of
+            2,526 beneficiaries through its integrated programs in education,
+            climate-smart agriculture, financial empowerment, and community
+            development.
           </motion.p>
         </motion.div>
       </div>
@@ -98,12 +100,13 @@ function ImpactHero() {
 }
 
 // ─── 2. Key Metrics ─────────────────────────────────────────────
+// Source: Organizational Profile (09/2026). 25+ years = founded 11 Nov 2000.
 const keyMetrics = [
-  { value: 24, suffix: "+", label: "Years of Service", format: "int" as const },
-  { value: 1187, suffix: "+", label: "Beneficiaries", format: "int" as const },
-  { value: 7, suffix: "", label: "Counties", format: "int" as const },
-  { value: 28.1, suffix: "", label: "Acres Farmland", format: "float" as const },
-  { value: 6, suffix: "+", label: "Partners", format: "int" as const },
+  { value: 25, suffix: "+", label: "Years of Service", format: "int" as const },
+  { value: 2526, suffix: "", label: "Beneficiaries, Late 2024–2026", format: "int" as const },
+  { value: 4, suffix: "", label: "Counties of Operation", format: "int" as const },
+  { value: 65, suffix: "", label: "Public Schools (LIT)", format: "int" as const },
+  { value: 1395, suffix: "+", label: "Youth Reached, 2022–2024", format: "int" as const },
 ];
 
 function KeyMetrics() {
@@ -142,16 +145,17 @@ type Area = {
   items: string[];
 };
 
+// Sources: Organizational Profile (09/2026) and 2024 Annual Report.
 const impactAreas: Area[] = [
   {
     name: "Agriculture",
     accent: "teal",
     href: "/programs/climate-smart-agriculture#overview",
     items: [
-      "1,187+ farmers trained in CSA techniques",
-      "28.1-acre demonstration farm established",
-      "85% yield improvement reported",
-      "7 counties with active programs",
+      "28.1 acres of farmland purchased between 2023 and 2024",
+      "CSA awareness events in 25 communities (2024)",
+      "Baseline survey of 305 households in Nimba for AWC/Y-Care (2024)",
+      "Welthungerhilfe consultancy: 50 storage facilities mapped across 3 counties; end-line survey of 300 respondents (2023)",
     ],
   },
   {
@@ -159,10 +163,10 @@ const impactAreas: Area[] = [
     accent: "flame",
     href: "/programs/education-livelihood#overview",
     items: [
-      "50+ scholarships awarded",
-      "200+ youth in vocational training",
-      "Adult literacy programs in 3 communities",
-      "Leadership development for young changemakers",
+      "Leaders in Teaching with EDC / Mastercard Foundation: 65 public schools (2025–present)",
+      "Adult Education Project with Mission Alliance: 30 communities in Lofa (January 2025–present)",
+      "USAID Youth Advance Activity: 1,395+ youth in 12 communities (2022–2024)",
+      "Hummingbird Academy: 381 students in the 2023/2024 school year",
     ],
   },
   {
@@ -170,10 +174,10 @@ const impactAreas: Area[] = [
     accent: "gold",
     href: "/programs/financial-sustainability#overview",
     items: [
-      "6+ strategic partnerships secured",
-      "3 revenue streams developed",
-      "Community savings groups established",
-      "Path to 2030 self-sufficiency mapped",
+      "150 rural women trained in VSLA methodologies in five groups (2024)",
+      "Five youth VSLA groups established with EDC in Montserrado (2024)",
+      "145 participants in entrepreneurship training (June 2024)",
+      "Five-year strategic plan (2024–2028) with All We Can, emphasising financial sustainability",
     ],
   },
 ];
@@ -253,312 +257,10 @@ function ImpactByArea() {
   );
 }
 
-// ─── 4a. Stories of Change ──────────────────────────────────────
-type Story = {
-  initials: string;
-  name: string;
-  role: string;
-  county: string;
-  program: string;
-  programAccent: "teal" | "flame" | "gold";
-  quote: string;
-};
-
-const stories: Story[] = [
-  {
-    initials: "MB",
-    name: "Musa B.",
-    role: "Smallholder Farmer",
-    county: "Nimba County",
-    program: "Climate-Smart Agriculture",
-    programAccent: "teal",
-    quote:
-      "Before SHIFSD's training, my rice yield could barely feed my family. After learning conservation techniques on the demo farm, I harvested twice as much last season and sold the surplus to pay school fees.",
-  },
-  {
-    initials: "GK",
-    name: "Grace K.",
-    role: "Adult Literacy Graduate",
-    county: "Lofa County",
-    program: "Education & Livelihood",
-    programAccent: "flame",
-    quote:
-      "I was 42 when I learned to read my own name. Now I keep the records for our savings group and help my grandchildren with their homework. SHIFSD gave me a second beginning.",
-  },
-  {
-    initials: "JT",
-    name: "James T.",
-    role: "VSLA Chairperson",
-    county: "Nimba County",
-    program: "Financial Sustainability",
-    programAccent: "gold",
-    quote:
-      "Our village savings group started with 15 members and $200. Two years later we're 42 members and have loaned out over $6,000 to small businesses. No one had to leave town to find capital.",
-  },
-];
-
-const storyAccents = {
-  teal: { pill: "bg-warm-teal/10 text-warm-teal", avatar: "bg-warm-teal" },
-  flame: { pill: "bg-liberian-flame/10 text-liberian-flame", avatar: "bg-liberian-flame" },
-  gold: { pill: "bg-horizon-gold/10 text-horizon-gold", avatar: "bg-horizon-gold" },
-};
-
-function StoriesOfChange() {
-  return (
-    <section id="stories" className="bg-warm-sand scroll-mt-24">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={stagger}
-          className="flex flex-col items-center gap-12"
-        >
-          <motion.div
-            variants={fadeUp}
-            className="flex flex-col items-center gap-3 text-center max-w-[720px]"
-          >
-            <p
-              className="text-warm-teal text-[13px] font-semibold uppercase"
-              style={{ letterSpacing: "3px" }}
-            >
-              In Their Words
-            </p>
-            <h2
-              className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[36px] leading-[44px]"
-              style={{ letterSpacing: "-0.5px" }}
-            >
-              Stories of Change
-            </h2>
-            <p className="text-gray-600 text-[16px] leading-[26px]">
-              Behind every number is a person. These are a few of the Liberians
-              whose lives have shifted through SHIFSD&apos;s programs.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-            {stories.map((s) => {
-              const a = storyAccents[s.programAccent];
-              return (
-                <motion.article
-                  key={s.name}
-                  variants={fadeUp}
-                  className="bg-white rounded-2xl p-7 flex flex-col gap-5 border border-gray-200"
-                >
-                  <span
-                    className="font-[family-name:var(--font-accent)] text-horizon-gold text-[48px] leading-none italic font-semibold -mb-2"
-                    aria-hidden
-                  >
-                    &ldquo;
-                  </span>
-                  <p className="font-[family-name:var(--font-accent)] italic text-deep-canopy text-[17px] leading-[28px]">
-                    {s.quote}
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 mt-auto border-t border-gray-100">
-                    <div
-                      className={`${a.avatar} w-11 h-11 rounded-full flex items-center justify-center shrink-0`}
-                    >
-                      <span className="font-[family-name:var(--font-heading)] font-semibold text-white text-[14px]">
-                        {s.initials}
-                      </span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[15px]">
-                        {s.name}
-                      </p>
-                      <p className="text-gray-500 text-[12px]">
-                        {s.role} · {s.county}
-                      </p>
-                    </div>
-                  </div>
-                  <span
-                    className={`${a.pill} inline-block self-start text-[11px] font-semibold rounded-full px-2.5 py-1`}
-                  >
-                    {s.program}
-                  </span>
-                </motion.article>
-              );
-            })}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ─── 4b. Data & Results ─────────────────────────────────────────
-type Result = {
-  label: string;
-  from: number;
-  to: number;
-  suffix?: string;
-  fromYear: string;
-  toYear: string;
-  accent: "teal" | "flame" | "gold";
-};
-
-const results: Result[] = [
-  {
-    label: "Farmers trained (cumulative)",
-    from: 120,
-    to: 1187,
-    suffix: "+",
-    fromYear: "2016",
-    toYear: "2024",
-    accent: "teal",
-  },
-  {
-    label: "Youth in vocational training",
-    from: 45,
-    to: 200,
-    suffix: "+",
-    fromYear: "2018",
-    toYear: "2024",
-    accent: "flame",
-  },
-  {
-    label: "Communities with active programs",
-    from: 3,
-    to: 12,
-    fromYear: "2016",
-    toYear: "2024",
-    accent: "gold",
-  },
-  {
-    label: "Strategic funding partners",
-    from: 1,
-    to: 6,
-    suffix: "+",
-    fromYear: "2016",
-    toYear: "2024",
-    accent: "teal",
-  },
-];
-
-const resultAccents = {
-  teal: { bar: "bg-warm-teal", text: "text-warm-teal", track: "bg-warm-teal/15" },
-  flame: { bar: "bg-liberian-flame", text: "text-liberian-flame", track: "bg-liberian-flame/15" },
-  gold: { bar: "bg-horizon-gold", text: "text-horizon-gold", track: "bg-horizon-gold/15" },
-};
-
-function ProgressBar({
-  percent,
-  accent,
-}: {
-  percent: number;
-  accent: keyof typeof resultAccents;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.4 });
-  const a = resultAccents[accent];
-  return (
-    <div ref={ref} className={`h-2 w-full rounded-full ${a.track} overflow-hidden`}>
-      <motion.div
-        className={`h-full ${a.bar} rounded-full`}
-        initial={{ width: 0 }}
-        animate={{ width: inView ? `${percent}%` : 0 }}
-        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-      />
-    </div>
-  );
-}
-
-function DataAndResults() {
-  return (
-    <section id="data" className="bg-white scroll-mt-24">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={stagger}
-          className="flex flex-col items-center gap-12"
-        >
-          <motion.div
-            variants={fadeUp}
-            className="flex flex-col items-center gap-3 text-center max-w-[720px]"
-          >
-            <p
-              className="text-liberian-flame text-[13px] font-semibold uppercase"
-              style={{ letterSpacing: "3px" }}
-            >
-              By the Numbers
-            </p>
-            <h2
-              className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[36px] leading-[44px]"
-              style={{ letterSpacing: "-0.5px" }}
-            >
-              Data &amp; Results
-            </h2>
-            <p className="text-gray-600 text-[16px] leading-[26px]">
-              Measurable growth across every pillar. Every figure is drawn from
-              our annual reporting and field verification records.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-            {results.map((r) => {
-              const percent = Math.min(100, Math.round((r.from / r.to) * 100));
-              const growth = Math.round(((r.to - r.from) / r.from) * 100);
-              const a = resultAccents[r.accent];
-              return (
-                <motion.div
-                  key={r.label}
-                  variants={fadeUp}
-                  className="bg-gray-50 border border-gray-200 rounded-2xl p-7 flex flex-col gap-5"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[18px] leading-[26px]">
-                      {r.label}
-                    </h3>
-                    <span
-                      className={`${a.text} font-[family-name:var(--font-heading)] font-semibold text-[14px] whitespace-nowrap`}
-                    >
-                      +{growth}%
-                    </span>
-                  </div>
-
-                  <div className="flex items-end justify-between gap-4">
-                    <div className="flex flex-col">
-                      <span className="text-gray-400 text-[11px] font-medium uppercase tracking-wider">
-                        {r.fromYear}
-                      </span>
-                      <span className="font-[family-name:var(--font-heading)] font-medium text-gray-500 text-[24px] leading-[32px]">
-                        {r.from.toLocaleString()}
-                        {r.suffix ?? ""}
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-end">
-                      <span
-                        className={`${a.text} text-[11px] font-semibold uppercase tracking-wider`}
-                      >
-                        {r.toYear}
-                      </span>
-                      <span
-                        className={`font-[family-name:var(--font-heading)] font-medium ${a.text} text-[36px] leading-[44px]`}
-                        style={{ letterSpacing: "-0.5px" }}
-                      >
-                        <CountUp to={r.to} suffix={r.suffix ?? ""} />
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <ProgressBar percent={percent} accent={r.accent} />
-                    <div className="flex justify-between text-[11px] text-gray-400">
-                      <span>Baseline {percent}%</span>
-                      <span>Current 100%</span>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
+// Stories of Change and Data & Results were removed: their names, quotes,
+// baselines and growth figures were not in any SHIFSD source.
+// TODO(content): add real beneficiary stories only with names, quotes and
+// consent supplied by SHIFSD.
 
 // ─── 4c. Publications ───────────────────────────────────────────
 type Publication = {
@@ -574,16 +276,18 @@ const publications: Publication[] = [
   {
     title: "Annual Impact Report 2024",
     description:
-      "Independently verified program numbers, financials, and stories from the year in one document.",
+      "Our actions and achievements in 2024, the first year of our five-year strategic plan.",
     file: "/docs/SHIFSD-Annual-Report-2024.pdf",
     filename: "SHIFSD-Annual-Report-2024.pdf",
     icon: "insert_chart",
     accent: "gold",
   },
+  // TODO(content): public/docs/SHIFSD-Strategic-Plan-2024-2028.pdf in the
+  // repo is truncated/corrupted and will not open. Replace it with a good copy.
   {
     title: "Strategic Plan 2024–2028",
     description:
-      "Our four-year roadmap across the three pillars: agriculture, education, and financial sustainability.",
+      "Our five-year plan (2024–2028) across three pillars: Climate Smart Agriculture, Education and Livelihood Skills, and Financial Sustainability.",
     file: "/docs/SHIFSD-Strategic-Plan-2024-2028.pdf",
     filename: "SHIFSD-Strategic-Plan-2024-2028.pdf",
     icon: "map",
@@ -592,7 +296,7 @@ const publications: Publication[] = [
   {
     title: "Organizational Profile",
     description:
-      "History, governance, program structure, and the accreditation record — everything a partner needs.",
+      "History, registration and accreditation, strategy, reach, human resources, partners and track record (updated September 2026).",
     file: "/docs/SHIFSD-Organizational-Profile.pdf",
     filename: "SHIFSD-Organizational-Profile.pdf",
     icon: "menu_book",
@@ -642,8 +346,7 @@ function Publications() {
               Reports &amp; Downloads
             </h2>
             <p className="text-gray-600 text-[16px] leading-[26px]">
-              The primary sources behind everything on this page. Every figure
-              can be traced back to one of these documents.
+              The primary sources behind the figures on this page.
             </p>
           </motion.div>
 
@@ -712,8 +415,9 @@ function GeographicReach() {
             variants={fadeUp}
             className="text-gray-600 text-[16px] leading-[26px] text-center max-w-[720px] -mt-2"
           >
-            Programs active across 7 of Liberia&apos;s 15 counties. Hover over
-            a marker to see the work happening on the ground.
+            SHIFSD currently operates in Montserrado, Bong, Nimba, and Lofa
+            Counties. In the past, SHIFSD has also worked in Margibi, Grand Cape
+            Mount, Bomi, and River Gee Counties.
           </motion.p>
           <motion.div variants={fadeUp} className="w-full">
             <LiberiaMap />
@@ -763,8 +467,6 @@ export default function ImpactPage() {
       <ImpactHero />
       <KeyMetrics />
       <ImpactByArea />
-      <StoriesOfChange />
-      <DataAndResults />
       <Publications />
       <GeographicReach />
       <SupportCTA />

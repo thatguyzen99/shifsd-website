@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const quickLinks = [
   { name: "Programs", href: "/programs", description: "Our three strategic pillars" },
-  { name: "Impact", href: "/impact", description: "Measurable change across 7 counties" },
+  { name: "Impact", href: "/impact", description: "Our reach across Liberia" },
   { name: "News & Media", href: "/news", description: "Stories from the field" },
   { name: "Get Involved", href: "/get-involved", description: "Donate, volunteer, or partner" },
 ];

@@ -88,9 +88,8 @@ function CSAHero() {
             variants={fadeUp}
             className="text-[18px] leading-[28px] text-white/85 max-w-[900px]"
           >
-            Training smallholder farmers in conservation agriculture,
-            agroforestry, and post-harvest techniques to build food security and
-            climate resilience across Liberia.
+            Strengthening food security and resilience through farmer training
+            and agribusiness initiatives.
           </motion.p>
         </motion.div>
       </div>
@@ -117,7 +116,7 @@ function ProgramOverview() {
             <div className="h-[380px] rounded-2xl overflow-hidden">
               <img
                 src="/images/programs/csa.jpg"
-                alt="Climate-Smart Agriculture demonstration farm"
+                alt="Climate-Smart Agriculture"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -137,13 +136,15 @@ function ProgramOverview() {
               Growing Food Security from the Ground Up
             </h2>
             <p className="text-gray-600 text-[16px] leading-[26px]">
-              Our CSA program trains farmers in climate-adaptive techniques
-              across seven counties. Working on our 28.1-acre demonstration
-              farm in Nimba County — supported by our long-standing partner{" "}
-              <span className="font-semibold text-deep-canopy">All We Can (AWC)</span>{" "}
-              — and in communities across the region, we equip smallholder
-              farmers with the knowledge to increase yields while protecting
-              the environment.
+              Climate Smart Agriculture is one of SHIFSD&apos;s three thematic
+              pillars. Between 2023 and 2024, SHIFSD purchased farmland in
+              Kpytuo Town, Nimba County, bringing the total to 28.1 acres, with
+              a long-term aim of making the institution financially
+              sustainable. In 2024, with{" "}
+              <span className="font-semibold text-deep-canopy">All We Can</span>
+              , SHIFSD conducted a baseline survey with 305 households in Nimba
+              County for the AWC/Y-Care International Project, assessing food
+              security and resilience.
             </p>
           </motion.div>
         </motion.div>
@@ -153,26 +154,27 @@ function ProgramOverview() {
 }
 
 // ─── 3. Key Activities ──────────────────────────────────────────
+// Sources: Organizational Profile (09/2026) and 2024 Annual Report.
 const activities = [
   {
-    title: "Conservation Agriculture",
+    title: "Farmer Training & Agribusiness",
     description:
-      "Minimum tillage, crop rotation, and soil cover techniques that improve yields while reducing environmental impact.",
+      "Strengthening food security and resilience through farmer training and agribusiness initiatives.",
   },
   {
-    title: "Agroforestry",
+    title: "CSA Awareness",
     description:
-      "Integrating trees with crops to restore soil fertility, provide shade, and create additional income from fruit and timber.",
+      "In 2024, CSA awareness events were held in 25 communities, reaching more than five hundred inhabitants.",
   },
   {
-    title: "Post-Harvest Management",
+    title: "Farmland for Agribusiness",
     description:
-      "Training in proper drying, storage, and processing to reduce crop losses and improve food safety.",
+      "28.1 acres purchased between 2023 and 2024, to be partly used for an agri-business venture in food processing and value addition.",
   },
   {
-    title: "Seed Multiplication",
+    title: "Surveys & Consultancy",
     description:
-      "Community seed banks and improved variety multiplication to ensure access to quality planting materials.",
+      "2024: baseline survey of 305 households in Nimba (AWC/Y-Care). 2023: Welthungerhilfe consultancy mapping 50 storage facilities across three counties, with an end-line survey of 300 respondents.",
   },
 ];
 
@@ -218,16 +220,13 @@ function KeyActivities() {
 }
 
 // ─── 4. CSA Impact Stats ────────────────────────────────────────
+// Sources: 2024 Annual Report (acres, communities); Organizational Profile
+// (households, storage facilities).
 const csaStats = [
-  { value: 1187, suffix: "+", label: "Farmers Trained", format: "int" as const },
-  {
-    value: 28.1,
-    suffix: "",
-    label: "Acres Demonstration Farm",
-    format: "float" as const,
-  },
-  { value: 7, suffix: "", label: "Counties Reached", format: "int" as const },
-  { value: 85, suffix: "%", label: "Yield Improvement", format: "int" as const },
+  { value: 28.1, suffix: "", label: "Acres of Farmland", format: "float" as const },
+  { value: 25, suffix: "", label: "Communities Reached by CSA Awareness", format: "int" as const },
+  { value: 305, suffix: "", label: "Households in Baseline Survey", format: "int" as const },
+  { value: 50, suffix: "", label: "Storage Facilities Mapped (WHH)", format: "int" as const },
 ];
 
 function CSAImpactStats() {

@@ -125,8 +125,8 @@ export default function TermsPage() {
               <p>
                 Donations made through this site — via GlobalGiving, direct
                 bank transfer, or mobile money — go to SHIFSD&apos;s program
-                and operating budget. We publish an annual impact report each
-                year detailing how funds are spent.
+                and operating budget. Our 2024 Annual Report is available on
+                our Impact page.
               </p>
               <p>
                 Where a donation is designated for a specific program, we use

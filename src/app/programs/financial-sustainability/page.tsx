@@ -90,9 +90,8 @@ function FinancialHero() {
             variants={fadeUp}
             className="text-[18px] leading-[28px] text-deep-canopy/80 max-w-[900px]"
           >
-            Building institutional resilience through strategic resource
-            mobilization, social enterprise, and community-based savings that
-            reduce dependency on external funding.
+            Empowering families and communities through VSLAs, financial
+            literacy, and entrepreneurship support.
           </motion.p>
         </motion.div>
       </div>
@@ -139,10 +138,13 @@ function ProgramOverview() {
               Sustaining Impact Beyond Aid
             </h2>
             <p className="text-gray-600 text-[16px] leading-[26px]">
-              Our financial sustainability pillar ensures SHIFSD&apos;s programs
-              endure beyond individual grants. Through strategic partnerships,
-              social enterprise development, and community savings groups, we
-              are building a foundation for long-term, self-funded impact.
+              Financial Sustainability is one of SHIFSD&apos;s three thematic
+              pillars, delivered through Village Savings and Loan Associations
+              (VSLAs), financial literacy, entrepreneurship incubation, and
+              other pathways to sustainable livelihoods. Since 2023, with
+              financial and technical support from All We Can, SHIFSD has been
+              implementing its five-year strategic plan (2024–2028) with
+              emphasis on financial sustainability.
             </p>
           </motion.div>
         </motion.div>
@@ -152,21 +154,22 @@ function ProgramOverview() {
 }
 
 // ─── 3. Key Strategies ──────────────────────────────────────────
+// Sources: Organizational Profile (09/2026) and 2024 Annual Report.
 const strategies = [
   {
-    title: "Resource Mobilization",
+    title: "VSLAs",
     description:
-      "Strategic grant writing, donor engagement, and multi-year funding partnerships.",
+      "In 2024, five groups of 150 rural women were trained in VSLA methodologies, and five youth VSLA groups were established with EDC in Montserrado County.",
   },
   {
-    title: "Social Enterprise",
+    title: "Financial Literacy",
     description:
-      "Revenue-generating agricultural enterprises and value-chain development.",
+      "Part of how SHIFSD empowers families and communities, alongside VSLAs and entrepreneurship support.",
   },
   {
-    title: "Community Savings",
+    title: "Entrepreneurship Support",
     description:
-      "Village savings and loan associations building grassroots financial resilience.",
+      "Entrepreneurship incubation and training — 145 participants completed SHIFSD's six-day entrepreneurship training in June 2024.",
   },
 ];
 
@@ -211,11 +214,12 @@ function KeyStrategies() {
 }
 
 // ─── 4. Financial Stats ─────────────────────────────────────────
+// Source: 2024 Annual Report.
 const finStats = [
-  { value: 6, suffix: "+", label: "Strategic Partners", useCommas: true },
-  { value: 3, suffix: "", label: "Revenue Streams", useCommas: true },
-  { value: 85, suffix: "%", label: "Program Reinvestment", useCommas: true },
-  { value: 2030, suffix: "", label: "Self-Sufficiency Target", useCommas: false },
+  { value: 150, suffix: "", label: "Women Trained in VSLA Methodology", useCommas: true },
+  { value: 5, suffix: "", label: "Youth VSLA Groups with EDC", useCommas: true },
+  { value: 6092, suffix: "", label: "US$ Saved by Women's VSLAs in About 8 Months", useCommas: true },
+  { value: 145, suffix: "", label: "Entrepreneurship Training Participants", useCommas: true },
 ];
 
 function FinancialStats() {
