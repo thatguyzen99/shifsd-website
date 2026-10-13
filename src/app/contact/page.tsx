@@ -223,10 +223,10 @@ function ContactForm() {
                 <p className="text-error text-[14px] font-medium">
                   Couldn&apos;t send — please email{" "}
                   <a
-                    href="mailto:shifsdliberia@gmail.com"
+                    href="mailto:info@shifsd-liberia.org"
                     className="underline"
                   >
-                    shifsdliberia@gmail.com
+                    info@shifsd-liberia.org
                   </a>{" "}
                   directly.
                 </p>
@@ -264,6 +264,13 @@ const infoCards: InfoCard[] = [
     lines: [
       <a
         key="e1"
+        href="mailto:info@shifsd-liberia.org"
+        className="hover:text-warm-teal transition-colors"
+      >
+        info@shifsd-liberia.org
+      </a>,
+      <a
+        key="e1b"
         href="mailto:shifsdliberia@gmail.com"
         className="hover:text-warm-teal transition-colors"
       >

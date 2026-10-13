@@ -417,7 +417,7 @@ function GeographicReach() {
           >
             SHIFSD currently operates in Montserrado, Bong, Nimba, and Lofa
             Counties. In the past, SHIFSD has also worked in Margibi, Grand Cape
-            Mount, and Bomi Counties.
+            Mount, Bomi, and River Gee Counties.
           </motion.p>
           <motion.div variants={fadeUp} className="w-full">
             <LiberiaMap />

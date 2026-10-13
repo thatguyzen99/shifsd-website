@@ -13,7 +13,7 @@ type CountyMeta = {
 };
 
 // Source: Organizational Profile (09/2026), "Geographical Reach" and
-// "Our current and past recent activities". Counties not listed here render
+// "Our current and past recent activities", plus River Gee (2024 Annual Report). Counties not listed here render
 // as muted, non-interactive shapes.
 const ACTIVE: Record<string, CountyMeta> = {
   Montserrado: {
@@ -45,6 +45,8 @@ const ACTIVE: Record<string, CountyMeta> = {
   Margibi: { status: "past", programs: ["Past: surveys with Welthungerhilfe"] },
   "Grand Cape Mount": { status: "past", programs: ["Past: surveys with Welthungerhilfe"] },
   Bomi: { status: "past", programs: ["Past: surveys with Welthungerhilfe"] },
+  // River Gee: listed in the 2024 Annual Report; restored at SHIFSD's request.
+  "River Gee": { status: "past", programs: ["Community Development"] },
 };
 
 // Alphabetical (as in the data file) is fine for the legend order.
@@ -60,7 +62,7 @@ export default function LiberiaMap() {
           viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}
           className="w-full h-auto block"
           role="img"
-          aria-label="Map of Liberia showing the four counties where SHIFSD currently operates and three where it has worked in the past"
+          aria-label="Map of Liberia showing the four counties where SHIFSD currently operates and four where it has worked in the past"
         >
           {/* Ocean / background */}
           <rect
@@ -207,7 +209,7 @@ export default function LiberiaMap() {
       </div>
 
       {/* Legend / active county list */}
-      <div className="w-full max-w-[1000px] mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+      <div className="w-full max-w-[1000px] mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
         {activeCounties.map((c) => {
           const meta = ACTIVE[c.name];
           const inner = (

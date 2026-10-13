@@ -464,13 +464,11 @@ function JourneyTimeline() {
 
 // ─── 7. Leadership ──────────────────────────────────────────────
 // Source: Organizational Profile (09/2026), "Human Resources".
-// TODO(content): the profile lists Jeremiah T. Burgess as contact person but
-// does not state his title. "Executive Director" is carried over from the
-// previous site — confirm it. Add photos when supplied.
+// Title confirmed by SHIFSD. Add photos when supplied.
 const leaders = [
   {
     name: "Jeremiah T. Burgess",
-    role: "Executive Director",
+    role: "Executive Director & Founder",
     photo: null,
   },
   {
@@ -553,12 +551,16 @@ function Leadership() {
 }
 
 // ─── 8. Partners & Institutions ─────────────────────────────────
-// Current partners and networks: Organizational Profile (09/2026).
-// Logos are the ones already in the repo; networks are text only.
+// Partners: EDC/Mastercard Foundation, All We Can, Mission Alliance (profile
+// 09/2026) plus YOCEL, Brown Marital Trust and Stichting INITIAT (confirmed by
+// SHIFSD). Logos are the ones already in the repo; networks are text only.
 const partners = [
   { name: "Education Development Center (EDC) / Mastercard Foundation", logo: "/images/partner-edc.webp" },
   { name: "All We Can (UK)", logo: "/images/partner-allwecan.webp" },
   { name: "Mission Alliance", logo: "/images/partner-mission-alliance.webp" },
+  { name: "YOCEL", logo: "/images/partner-yocel.webp" },
+  { name: "Brown Marital Trust", logo: null },
+  { name: "Stichting INITIAT", logo: "/images/partner-initiat.webp" },
 ];
 
 const networks = [
@@ -624,7 +626,12 @@ function PartnersInstitutions() {
             <span className="font-semibold text-deep-canopy">All We Can (UK)</span>{" "}
             and{" "}
             <span className="font-semibold text-deep-canopy">Mission Alliance</span>
-            , who also provide ongoing technical support. SHIFSD is a network
+            , who also provide ongoing technical support. We also thank{" "}
+            <span className="font-semibold text-deep-canopy">YOCEL</span>,{" "}
+            <span className="font-semibold text-deep-canopy">Brown Marital Trust</span>{" "}
+            and{" "}
+            <span className="font-semibold text-deep-canopy">Stichting INITIAT</span>{" "}
+            for their partnership. SHIFSD is a network
             member of {networks.slice(0, 3).join(", ")}, and regionally a member
             of Pamoja Education.
           </motion.p>

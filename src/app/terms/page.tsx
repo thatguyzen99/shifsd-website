@@ -70,10 +70,10 @@ export default function TermsPage() {
               using the site you agree to them. If you don&apos;t, please
               stop using the site. If anything is unclear, email{" "}
               <a
-                href="mailto:shifsdliberia@gmail.com"
+                href="mailto:info@shifsd-liberia.org"
                 className="text-warm-teal underline"
               >
-                shifsdliberia@gmail.com
+                info@shifsd-liberia.org
               </a>
               .
             </motion.p>
@@ -196,10 +196,10 @@ export default function TermsPage() {
               <p>
                 Questions about these terms can be sent to{" "}
                 <a
-                  href="mailto:shifsdliberia@gmail.com"
+                  href="mailto:info@shifsd-liberia.org"
                   className="text-warm-teal underline"
                 >
-                  shifsdliberia@gmail.com
+                  info@shifsd-liberia.org
                 </a>{" "}
                 or mailed to Block C, Lee Hill Community, Johnsonville
                 Township, Monrovia, Liberia.

@@ -357,10 +357,10 @@ function VolunteerForm() {
               <p className="text-error text-[14px] font-medium">
                 Something went wrong. Please email us at{" "}
                 <a
-                  href="mailto:shifsdliberia@gmail.com"
+                  href="mailto:info@shifsd-liberia.org"
                   className="underline"
                 >
-                  shifsdliberia@gmail.com
+                  info@shifsd-liberia.org
                 </a>{" "}
                 and we&apos;ll help directly.
               </p>
@@ -536,10 +536,10 @@ function PartnershipForm() {
               <p className="text-error text-[14px] font-medium">
                 Something went wrong. Please email us at{" "}
                 <a
-                  href="mailto:shifsdliberia@gmail.com"
+                  href="mailto:info@shifsd-liberia.org"
                   className="underline"
                 >
-                  shifsdliberia@gmail.com
+                  info@shifsd-liberia.org
                 </a>{" "}
                 and we&apos;ll help directly.
               </p>
@@ -558,7 +558,7 @@ const faqs = [
     // TODO(content): the previous answer ("100% of designated donations go
     // directly to program activities…") had no source. Replace with SHIFSD's
     // own wording if they want a specific policy statement here.
-    a: "Donations support SHIFSD's work across our three pillars: Education & Livelihood Skills, Climate Smart Agriculture, and Financial Sustainability. Email us at shifsdliberia@gmail.com if you'd like to discuss how your gift will be used.",
+    a: "Donations support SHIFSD's work across our three pillars: Education & Livelihood Skills, Climate Smart Agriculture, and Financial Sustainability. Email us at info@shifsd-liberia.org if you'd like to discuss how your gift will be used.",
   },
   {
     q: "Can I volunteer remotely?",
@@ -570,7 +570,7 @@ const faqs = [
   },
   {
     q: "How do I become a partner organization?",
-    a: "Use the partnership form above, or email shifsdliberia@gmail.com with your organization details and areas of interest.",
+    a: "Use the partnership form above, or email info@shifsd-liberia.org with your organization details and areas of interest.",
   },
 ];
 

@@ -355,12 +355,16 @@ function Testimonial() {
 }
 
 // ─── 5. Partners Strip ──────────────────────────────────────────
-// Current partners per the Organizational Profile (09/2026). Logos are the
-// ones already in the repo; no new logos added. Networks are text only.
+// Partners: EDC/Mastercard Foundation, All We Can, Mission Alliance (profile
+// 09/2026) plus YOCEL, Brown Marital Trust and Stichting INITIAT (confirmed by
+// SHIFSD). Logos are the ones already in the repo. Networks are text only.
 const partners = [
   { name: "Education Development Center (EDC) / Mastercard Foundation", logo: "/images/partner-edc.webp" },
   { name: "All We Can (UK)", logo: "/images/partner-allwecan.webp" },
   { name: "Mission Alliance", logo: "/images/partner-mission-alliance.webp" },
+  { name: "YOCEL", logo: "/images/partner-yocel.webp" },
+  { name: "Brown Marital Trust", logo: null },
+  { name: "Stichting INITIAT", logo: "/images/partner-initiat.webp" },
 ];
 
 const networks = [
@@ -382,7 +386,7 @@ function PartnersStrip() {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={stagger}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[900px] mx-auto"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"
         >
           {partners.map((p) => (
             <motion.div

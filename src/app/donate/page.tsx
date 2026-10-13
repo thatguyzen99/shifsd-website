@@ -80,35 +80,38 @@ type Tier = {
   buttonClass: string;
 };
 
-// TODO(content): the previous tier descriptions ("$25 provides seeds and tools
-// for one family…") were not backed by any SHIFSD cost data, so they were
-// removed. Add per-tier descriptions only with figures SHIFSD can stand behind.
+// Tier descriptions point each gift at a pillar (Organizational Profile 09/2026)
+// without claiming a fixed cost-per-item.
 const tiers: Tier[] = [
   {
     amount: 25,
     name: "Seed",
-    description: "",
+    description:
+      "Supports adult education and literacy in the underserved communities we serve.",
     amountColor: "text-warm-teal",
     buttonClass: "bg-warm-teal hover:bg-warm-teal/90 text-white",
   },
   {
     amount: 50,
     name: "Cultivate",
-    description: "",
+    description:
+      "Supports teacher training and skills programs for young people and women.",
     amountColor: "text-liberian-flame",
     buttonClass: "bg-liberian-flame hover:bg-liberian-flame/90 text-white",
   },
   {
     amount: 100,
     name: "Harvest",
-    description: "",
+    description:
+      "Supports Village Savings and Loan Associations, financial literacy, and entrepreneurship.",
     amountColor: "text-horizon-gold",
     buttonClass: "bg-warm-teal hover:bg-warm-teal/90 text-white",
   },
   {
     amount: 250,
     name: "Transform",
-    description: "",
+    description:
+      "Supports all three pillars: education, climate-smart agriculture, and financial empowerment.",
     amountColor: "text-deep-canopy",
     buttonClass: "bg-warm-teal hover:bg-warm-teal/90 text-white",
   },
@@ -309,7 +312,7 @@ const bankDetails = {
 
 const mobileMoney = [
   { provider: "Orange Money", number: "+231 770 024 082", name: "SHIFSD Liberia" },
-  { provider: "MTN Mobile Money", number: "+231 886 874 950", name: "SHIFSD Liberia" },
+  { provider: "Lonestar MTN Mobile Money", number: "+231 886 874 950", name: "SHIFSD Liberia" },
 ];
 
 function DonationMethods({
@@ -442,7 +445,7 @@ function DonationMethods({
                       gifts, or corporate partnerships.
                     </p>
                     <a
-                      href={`mailto:shifsdliberia@gmail.com?subject=${emailSubject}`}
+                      href={`mailto:info@shifsd-liberia.org?subject=${emailSubject}`}
                       className="bg-warm-teal hover:bg-warm-teal/90 text-white text-[16px] font-semibold rounded-lg px-6 py-3.5 inline-flex items-center justify-center gap-2 transition-colors"
                     >
                       Email Us to Donate <span aria-hidden>↗</span>
@@ -491,9 +494,9 @@ function DonationMethods({
                     Please email us at{" "}
                     <a
                       className="text-warm-teal underline"
-                      href={`mailto:shifsdliberia@gmail.com?subject=${emailSubject}`}
+                      href={`mailto:info@shifsd-liberia.org?subject=${emailSubject}`}
                     >
-                      shifsdliberia@gmail.com
+                      info@shifsd-liberia.org
                     </a>{" "}
                     with your deposit reference
                     {selected !== null ? ` and note $${selected}` : ""} so we

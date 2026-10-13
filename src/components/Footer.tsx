@@ -121,6 +121,15 @@ export function Footer() {
               <li className="flex items-center gap-3 text-sm text-white/85">
                 <Icon name="mail" className="!text-[20px] shrink-0" />
                 <a
+                  href="mailto:info@shifsd-liberia.org"
+                  className="hover:text-horizon-gold transition-colors"
+                >
+                  info@shifsd-liberia.org
+                </a>
+              </li>
+              <li className="flex items-center gap-3 text-sm text-white/85">
+                <Icon name="mail" className="!text-[20px] shrink-0" />
+                <a
                   href="mailto:shifsdliberia@gmail.com"
                   className="hover:text-horizon-gold transition-colors"
                 >
