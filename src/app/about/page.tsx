@@ -28,7 +28,7 @@ function Icon({ name, className }: { name: string; className?: string }) {
 }
 
 // ─── CountUp helper ─────────────────────────────────────────────
-function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
+function CountUp({ to, suffix = "", plain = false }: { to: number; suffix?: string; plain?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
   const [n, setN] = useState(0);
@@ -44,7 +44,11 @@ function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
     return () => controls.stop();
   }, [inView, to]);
 
-  const display = isFractional ? n.toFixed(1) : Math.floor(n).toLocaleString();
+  const display = isFractional
+    ? n.toFixed(1)
+    : plain
+      ? String(Math.floor(n))
+      : Math.floor(n).toLocaleString();
   return (
     <span ref={ref} className="tabular-nums">
       {display}
@@ -99,9 +103,9 @@ function AboutHero() {
             data-node-id="39:23"
             className="text-[18px] leading-[28px] text-white/80 max-w-[900px]"
           >
-            From a group of Liberian refugees in Ghana to a nationally recognized
-            NGO transforming communities across seven counties — this is our
-            journey of resilience, purpose, and sustainable impact.
+            Founded by a group of Liberian refugees in Ghana in 2000, SHIFSD is
+            a national nonprofit now operating in Montserrado, Bong, Nimba and
+            Lofa Counties.
           </motion.p>
         </motion.div>
       </div>
@@ -153,30 +157,35 @@ function OurStory() {
               data-node-id="41:7"
               className="text-gray-600 text-[16px] leading-[26px]"
             >
-              SHIFSD was founded in 2000 by Jeremiah Burgess and a group of
-              Liberian refugees in the Buduburam Refugee Camp in Ghana. Driven
-              by a shared vision to rebuild their war-torn homeland, they began
-              planning for the sustainable development of Liberia.
+              The Self-Help Initiative for Sustainable Development (SHIFSD) was
+              originally founded on November 11, 2000 in the Central Region of
+              Ghana by a group of Liberian refugees. It was formally registered
+              with the Government of Liberia on May 30, 2005 as a national
+              nonprofit and non-governmental organization.
             </p>
             <p
               data-node-id="41:8"
               className="text-gray-600 text-[16px] leading-[26px]"
             >
-              After returning to Liberia, SHIFSD established its headquarters in
-              Monrovia and expanded its programs to seven counties, working
-              alongside communities to implement sustainable agriculture,
-              education, and livelihood programs that empower families to lift
-              themselves out of poverty.
+              Following repatriation in August 2008, SHIFSD relocated its
+              headquarters to Johnsonville, Monrovia, Liberia, where it continues
+              to operate at its own premises. The organization is duly
+              accredited under registration number MFDP/NGO/AC#531871651 with
+              the Government of Liberia.
+            </p>
+            <p className="text-gray-600 text-[16px] leading-[26px]">
+              Our programs primarily serve disadvantaged young people between
+              the ages of 18 and 35, as well as persons with disabilities.
             </p>
             <a
-              href="/docs/SHIFSD-Strategic-Plan-2024-2028.pdf"
-              download="SHIFSD-Strategic-Plan-2024-2028.pdf"
+              href="/docs/SHIFSD-Organizational-Profile.pdf"
+              download="SHIFSD-Organizational-Profile.pdf"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 self-start text-warm-teal text-[14px] font-semibold hover:underline mt-1"
             >
               <Icon name="download" className="!text-[18px]" />
-              Read the Strategic Plan 2024–2028
+              Read our Organizational Profile
               <span aria-hidden>↗</span>
             </a>
           </motion.div>
@@ -187,12 +196,13 @@ function OurStory() {
 }
 
 // ─── 3. At a Glance ─────────────────────────────────────────────
+// Source: Organizational Profile (09/2026).
 const glanceStats = [
   { value: 2000, suffix: "", label: "Year Founded", format: "int" },
-  { value: 7, suffix: "", label: "Counties Reached", format: "int" },
-  { value: 1187, suffix: "+", label: "Direct Beneficiaries", format: "int" },
-  { value: 28.1, suffix: "", label: "Acres of Farmland", format: "float" },
-  { value: 6, suffix: "+", label: "Strategic Partners", format: "int" },
+  { value: 4, suffix: "", label: "Counties of Operation", format: "int" },
+  { value: 2526, suffix: "", label: "Beneficiaries, Late 2024–2026", format: "int" },
+  { value: 17, suffix: "", label: "Core Staff", format: "int" },
+  { value: 36, suffix: "", label: "LIT Master Trainers", format: "int" },
 ];
 
 function AtAGlance() {
@@ -213,7 +223,7 @@ function AtAGlance() {
                 className="font-[family-name:var(--font-heading)] font-medium text-horizon-gold text-[36px] leading-[44px]"
                 style={{ letterSpacing: "-0.5px" }}
               >
-                <CountUp to={s.value} suffix={s.suffix} />
+                <CountUp to={s.value} suffix={s.suffix} plain={s.label === "Year Founded"} />
               </span>
               <span className="text-white/85 text-[14px] leading-[20px]">
                 {s.label}
@@ -270,9 +280,7 @@ function VisionMission() {
                 Our Vision
               </h3>
               <p className="text-gray-600 text-[16px] leading-[26px]">
-                A resilient, self-sustaining Liberia where communities thrive
-                through sustainable agriculture, quality education, and economic
-                empowerment.
+                To envisage a society free of illiteracy and poverty.
               </p>
             </motion.div>
             <motion.div
@@ -288,10 +296,9 @@ function VisionMission() {
                 Our Mission
               </h3>
               <p className="text-gray-600 text-[16px] leading-[26px]">
-                To empower Liberian communities with the knowledge, skills, and
-                resources needed to achieve food security, educational
-                excellence, and financial independence through participatory,
-                sustainable development.
+                To alleviate poverty by expanding access to alternative
+                education and entrepreneurship opportunities across
+                Liberia&apos;s underserved communities.
               </p>
             </motion.div>
           </div>
@@ -302,42 +309,37 @@ function VisionMission() {
 }
 
 // ─── 5. Core Values ─────────────────────────────────────────────
+// Core values and their lines: Organizational Profile (09/2026), "Core Values".
 const coreValues = [
   {
-    icon: "eco",
-    name: "Sustainability",
+    icon: "verified",
+    name: "Integrity",
     description:
-      "Building programs that endure beyond external funding through community ownership and self-reliance.",
-  },
-  {
-    icon: "handshake",
-    name: "Community Participation",
-    description:
-      "Every initiative is co-designed with the communities we serve, ensuring relevance and lasting adoption.",
-  },
-  {
-    icon: "account_balance",
-    name: "Accountability",
-    description:
-      "Transparent governance, rigorous reporting, and ethical stewardship of every resource entrusted to us.",
-  },
-  {
-    icon: "lightbulb",
-    name: "Innovation",
-    description:
-      "Embracing climate-smart techniques, digital tools, and creative approaches to development challenges.",
+      "Openly communicating challenges to communities and donors in a timely manner.",
   },
   {
     icon: "balance",
-    name: "Equity & Inclusion",
+    name: "Justice",
     description:
-      "Prioritizing women, youth, and marginalized groups to ensure no community is left behind.",
+      "Treating staff, partners, and stakeholders with respect, fairness, and honesty.",
   },
   {
-    icon: "volunteer_activism",
-    name: "Partnership",
+    icon: "account_balance",
+    name: "Transparency & Accountability",
     description:
-      "Collaborating with local and international organizations to multiply impact and share knowledge.",
+      "Keeping program management open and answerable to participating communities, donors, and partners.",
+  },
+  {
+    icon: "handshake",
+    name: "Participation",
+    description:
+      "Valuing consensus building and shared leadership in decision-making.",
+  },
+  {
+    icon: "diversity_3",
+    name: "Diversity",
+    description:
+      "Striving to accommodate and respect people of varied backgrounds, experiences, and affiliations.",
   },
 ];
 
@@ -397,13 +399,14 @@ function CoreValues() {
 }
 
 // ─── 6. Our Journey Timeline ────────────────────────────────────
+// Source: Organizational Profile (09/2026).
 const milestones = [
-  { year: "2000", label: "Founded in Buduburam Refugee Camp, Ghana" },
-  { year: "2005", label: "Registered as NGO in Liberia; began field operations" },
-  { year: "2010", label: "Launched Climate-Smart Agriculture program" },
-  { year: "2016", label: "Expanded to 7 counties with EDC partnership" },
-  { year: "2020", label: "Established 28.1-acre demonstration farm" },
-  { year: "2024", label: "Reached 1,187+ direct beneficiaries" },
+  { year: "2000", label: "Founded on 11 November in the Central Region of Ghana by Liberian refugees" },
+  { year: "2005", label: "Registered with the Government of Liberia on 30 May as a national nonprofit NGO" },
+  { year: "2008", label: "Repatriated in August; headquarters moved to Johnsonville, Monrovia" },
+  { year: "2022", label: "USAID Youth Advance Activity: 1,395+ youth in 12 communities (2022–2024)" },
+  { year: "2024", label: "Baseline survey of 305 households in Nimba for the AWC/Y-Care International Project" },
+  { year: "2025", label: "Leaders in Teaching with EDC / Mastercard Foundation and the Adult Education Project with Mission Alliance" },
 ];
 
 function JourneyTimeline() {
@@ -460,20 +463,24 @@ function JourneyTimeline() {
 }
 
 // ─── 7. Leadership ──────────────────────────────────────────────
+// Source: Organizational Profile (09/2026), "Human Resources".
+// TODO(content): the profile lists Jeremiah T. Burgess as contact person but
+// does not state his title. "Executive Director" is carried over from the
+// previous site — confirm it. Add photos when supplied.
 const leaders = [
   {
-    name: "Jeremiah Burgess",
-    role: "Executive Director & Founder",
+    name: "Jeremiah T. Burgess",
+    role: "Executive Director",
     photo: null,
   },
   {
     name: "Board of Directors",
-    role: "Governance & Strategic Oversight",
+    role: "Seven members providing strategic oversight",
     photo: null,
   },
   {
-    name: "Program Managers",
-    role: "Field Operations & Community Engagement",
+    name: "Management & Staff",
+    role: "17 core staff and 36 LIT Master Trainers, plus field monitors and literacy facilitators",
     photo: null,
   },
 ];
@@ -546,13 +553,19 @@ function Leadership() {
 }
 
 // ─── 8. Partners & Institutions ─────────────────────────────────
+// Current partners and networks: Organizational Profile (09/2026).
+// Logos are the ones already in the repo; networks are text only.
 const partners = [
-  { name: "EDC", logo: "/images/partner-edc.webp" },
-  { name: "All We Can", logo: "/images/partner-allwecan.webp" },
+  { name: "Education Development Center (EDC) / Mastercard Foundation", logo: "/images/partner-edc.webp" },
+  { name: "All We Can (UK)", logo: "/images/partner-allwecan.webp" },
   { name: "Mission Alliance", logo: "/images/partner-mission-alliance.webp" },
-  { name: "YOCEL", logo: "/images/partner-yocel.webp" },
-  { name: "Brown Marital Trust", logo: null },
-  { name: "Stichting INITIAT", logo: "/images/partner-initiat.webp" },
+];
+
+const networks = [
+  "Liberia National NGO Network (LINNK)",
+  "Consortium of Adult Educators (CAE)",
+  "New Africa Research Development Agency (NARDA)",
+  "Pamoja Education (regional)",
 ];
 
 function PartnersInstitutions() {
@@ -582,6 +595,7 @@ function PartnersInstitutions() {
               <div
                 key={p.name}
                 className="bg-white border border-gray-200 rounded-lg w-[140px] h-[60px] flex items-center justify-center overflow-hidden px-3"
+                title={p.name}
               >
                 {p.logo ? (
                   <img
@@ -602,14 +616,17 @@ function PartnersInstitutions() {
             variants={fadeUp}
             className="text-gray-600 text-[15px] leading-[24px] text-center max-w-[720px] mt-4"
           >
-            We are especially grateful to{" "}
-            <span className="font-semibold text-deep-canopy">All We Can (AWC)</span>{" "}
-            for providing multi-year unrestricted core funding — powering our
-            institutional stability and our Climate-Smart Agriculture work in
-            Nimba County. Programme-specific support from{" "}
-            <span className="font-semibold text-deep-canopy">Mission Alliance</span>{" "}
-            underwrites adult literacy across 30 communities in the Zorzor and
-            Salayea districts of Lofa County.
+            SHIFSD&apos;s work is sustained through the support of{" "}
+            <span className="font-semibold text-deep-canopy">
+              the Education Development Center (EDC) / Mastercard Foundation
+            </span>
+            ,{" "}
+            <span className="font-semibold text-deep-canopy">All We Can (UK)</span>{" "}
+            and{" "}
+            <span className="font-semibold text-deep-canopy">Mission Alliance</span>
+            , who also provide ongoing technical support. SHIFSD is a network
+            member of {networks.slice(0, 3).join(", ")}, and regionally a member
+            of Pamoja Education.
           </motion.p>
         </motion.div>
       </div>

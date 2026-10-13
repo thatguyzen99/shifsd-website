@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | SHIFSD Liberia",
   },
   description:
-    "SHIFSD exists to alleviate poverty through access to alternative sources of education and entrepreneurship across Liberia. 24+ years of community impact.",
+    "SHIFSD exists to alleviate poverty by expanding access to alternative education and entrepreneurship opportunities across Liberia's underserved communities. Serving Liberia since 2000.",
   keywords: [
     "Liberia NGO",
     "SHIFSD Liberia",

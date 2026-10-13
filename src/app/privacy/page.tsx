@@ -71,10 +71,10 @@ export default function PrivacyPage() {
               when you use this website, how we use it, and the choices you
               have. If anything here is unclear, email{" "}
               <a
-                href="mailto:info@shifsd-liberia.org"
+                href="mailto:shifsdliberia@gmail.com"
                 className="text-warm-teal underline"
               >
-                info@shifsd-liberia.org
+                shifsdliberia@gmail.com
               </a>{" "}
               and we will do our best to answer plainly.
             </motion.p>
@@ -170,10 +170,10 @@ export default function PrivacyPage() {
               <p>
                 Write to{" "}
                 <a
-                  href="mailto:info@shifsd-liberia.org"
+                  href="mailto:shifsdliberia@gmail.com"
                   className="text-warm-teal underline"
                 >
-                  info@shifsd-liberia.org
+                  shifsdliberia@gmail.com
                 </a>{" "}
                 and we will confirm within a reasonable time.
               </p>
@@ -210,10 +210,10 @@ export default function PrivacyPage() {
               <p>
                 Questions about this policy can be sent to{" "}
                 <a
-                  href="mailto:info@shifsd-liberia.org"
+                  href="mailto:shifsdliberia@gmail.com"
                   className="text-warm-teal underline"
                 >
-                  info@shifsd-liberia.org
+                  shifsdliberia@gmail.com
                 </a>{" "}
                 or mailed to Block C, Lee Hill Community, Johnsonville
                 Township, Monrovia, Liberia.

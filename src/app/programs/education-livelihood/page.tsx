@@ -83,9 +83,8 @@ function EducationHero() {
             variants={fadeUp}
             className="text-[18px] leading-[28px] text-white/85 max-w-[900px]"
           >
-            Empowering youth and adults through scholarships, vocational
-            training, literacy programs, and livelihood skills to create
-            pathways out of poverty.
+            Equipping youth and women with employable skills and practical
+            knowledge.
           </motion.p>
         </motion.div>
       </div>
@@ -132,10 +131,13 @@ function ProgramOverview() {
               Building Human Capital for a Stronger Liberia
             </h2>
             <p className="text-gray-600 text-[16px] leading-[26px]">
-              Our education programs target out-of-school youth, adult learners,
-              and community leaders. Through scholarships, vocational training,
-              and literacy programs, we equip individuals with the skills needed
-              to build productive, self-sufficient lives.
+              SHIFSD advances community development by promoting alternative
+              basic education and providing public secondary school teachers
+              &amp; school leaders&apos; training in partnership with the
+              Education Development Center / Mastercard Foundation&apos;s
+              Leaders in Teaching (LIT) Program. Our programs primarily serve
+              disadvantaged young people between the ages of 18 and 35, as well
+              as persons with disabilities.
             </p>
           </motion.div>
         </motion.div>
@@ -145,26 +147,27 @@ function ProgramOverview() {
 }
 
 // ─── 3. Key Programs ────────────────────────────────────────────
+// Source: Organizational Profile (09/2026).
 const keyPrograms = [
   {
-    title: "Scholarship Program",
+    title: "Leaders in Teaching",
     description:
-      "Full scholarships for promising students to pursue secondary and higher education.",
+      "With EDC / Mastercard Foundation since 2025: teachers and school leaders training in 65 public schools across Bong, Montserrado #1 and three Nimba districts.",
   },
   {
-    title: "Vocational Training",
+    title: "Adult Education Project",
     description:
-      "Practical skills in agriculture, construction, and tailoring for employment readiness.",
+      "With Mission Alliance since January 2025: 30 communities in the Zorzor and Salayea Districts of Lofa County.",
   },
   {
-    title: "Adult Literacy",
+    title: "Holy Hands Institute",
     description:
-      "Functional literacy and numeracy programs for adults in rural communities.",
+      "Technical and vocational skills training for young people at SHIFSD's Multipurpose Youth Training Center, Johnsonville.",
   },
   {
-    title: "Leadership Development",
+    title: "Hummingbird Academy",
     description:
-      "Youth mentorship and community leadership programs building future change-makers.",
+      "Academic programs for young people at SHIFSD's Multipurpose Youth Training Center, Johnsonville.",
   },
 ];
 
@@ -209,11 +212,12 @@ function KeyPrograms() {
 }
 
 // ─── 4. Education Impact ────────────────────────────────────────
+// Source: Organizational Profile (09/2026).
 const eduStats = [
-  { value: 50, suffix: "+", label: "Scholarships Awarded" },
-  { value: 5, suffix: "", label: "Training Programs" },
-  { value: 200, suffix: "+", label: "Youth Trained" },
-  { value: 3, suffix: "", label: "Communities Served" },
+  { value: 65, suffix: "", label: "Public Schools (LIT)" },
+  { value: 36, suffix: "", label: "LIT Master Trainers" },
+  { value: 30, suffix: "", label: "Adult Education Communities" },
+  { value: 1395, suffix: "+", label: "Youth Reached, 2022–2024" },
 ];
 
 function EducationImpact() {
@@ -273,7 +277,7 @@ function SupportCTA() {
               href="/donate#tiers"
               className="bg-liberian-flame hover:bg-liberian-flame/90 text-white text-[16px] font-semibold px-8 py-3.5 rounded-lg transition-colors"
             >
-              Sponsor a Student
+              Donate to Education
             </Link>
             <Link
               href="/programs#program-cards"

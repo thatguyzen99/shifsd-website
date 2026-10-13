@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Climate-Smart Agriculture",
   description:
-    "Training smallholder farmers in conservation agriculture, agroforestry, and post-harvest management. 1,187+ farmers trained, 28.1-acre demonstration farm, 85% yield improvement.",
+    "Strengthening food security and resilience through farmer training and agribusiness initiatives. 28.1 acres of farmland and CSA awareness in 25 communities.",
   openGraph: {
     title: "Climate-Smart Agriculture | SHIFSD Liberia",
     description:
-      "Growing food security from the ground up across seven Liberian counties.",
+      "Strengthening food security and resilience through farmer training and agribusiness.",
   },
 };
 

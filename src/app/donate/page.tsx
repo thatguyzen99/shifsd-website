@@ -25,6 +25,9 @@ function Icon({ name, className }: { name: string; className?: string }) {
   );
 }
 
+// TODO(content): this points at the GlobalGiving homepage, not a SHIFSD
+// project page. Replace with SHIFSD's own GlobalGiving URL, or remove the
+// GlobalGiving option if SHIFSD is not listed there.
 const GLOBAL_GIVING_URL = "https://www.globalgiving.org/";
 
 // ─── 1. Donate Hero ─────────────────────────────────────────────
@@ -77,36 +80,35 @@ type Tier = {
   buttonClass: string;
 };
 
+// TODO(content): the previous tier descriptions ("$25 provides seeds and tools
+// for one family…") were not backed by any SHIFSD cost data, so they were
+// removed. Add per-tier descriptions only with figures SHIFSD can stand behind.
 const tiers: Tier[] = [
   {
     amount: 25,
     name: "Seed",
-    description:
-      "Provides seeds and tools for one family's garden plot for a full growing season.",
+    description: "",
     amountColor: "text-warm-teal",
     buttonClass: "bg-warm-teal hover:bg-warm-teal/90 text-white",
   },
   {
     amount: 50,
     name: "Cultivate",
-    description:
-      "Sponsors one student's educational materials and school supplies for a semester.",
+    description: "",
     amountColor: "text-liberian-flame",
     buttonClass: "bg-liberian-flame hover:bg-liberian-flame/90 text-white",
   },
   {
     amount: 100,
     name: "Harvest",
-    description:
-      "Funds a community savings group starter kit and financial literacy training.",
+    description: "",
     amountColor: "text-horizon-gold",
     buttonClass: "bg-warm-teal hover:bg-warm-teal/90 text-white",
   },
   {
     amount: 250,
     name: "Transform",
-    description:
-      "Provides comprehensive support: agriculture training, education, and financial tools for an entire family.",
+    description: "",
     amountColor: "text-deep-canopy",
     buttonClass: "bg-warm-teal hover:bg-warm-teal/90 text-white",
   },
@@ -154,7 +156,7 @@ function DonationTiers({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full mt-4">
             {tiers.map((t) => {
               const isSelected = selected === t.amount;
-              const isPopular = t.amount === 50;
+              const isPopular = false; // "Most Popular" badge removed — no donation data behind it
               return (
                 <motion.button
                   key={t.amount}
@@ -194,9 +196,11 @@ function DonationTiers({
                   <p className="font-[family-name:var(--font-heading)] font-medium text-deep-canopy text-[20px]">
                     {t.name}
                   </p>
-                  <p className="text-gray-500 text-[14px] text-center w-[220px]">
-                    {t.description}
-                  </p>
+                  {t.description && (
+                    <p className="text-gray-500 text-[14px] text-center w-[220px]">
+                      {t.description}
+                    </p>
+                  )}
                   <span
                     className={`${
                       isSelected
@@ -401,10 +405,8 @@ function DonationMethods({
                       </div>
                     </div>
                     <p className="text-gray-700 text-[14px]">
-                      GlobalGiving is a trusted platform supporting nonprofits
-                      worldwide. Your donation is secure, tax-deductible (for
-                      US donors), and 100% of your gift goes to SHIFSD
-                      programs.
+                      GlobalGiving is a platform supporting nonprofits
+                      worldwide.
                     </p>
                     <a
                       href={GLOBAL_GIVING_URL}
@@ -440,7 +442,7 @@ function DonationMethods({
                       gifts, or corporate partnerships.
                     </p>
                     <a
-                      href={`mailto:info@shifsd-liberia.org?subject=${emailSubject}`}
+                      href={`mailto:shifsdliberia@gmail.com?subject=${emailSubject}`}
                       className="bg-warm-teal hover:bg-warm-teal/90 text-white text-[16px] font-semibold rounded-lg px-6 py-3.5 inline-flex items-center justify-center gap-2 transition-colors"
                     >
                       Email Us to Donate <span aria-hidden>↗</span>
@@ -489,9 +491,9 @@ function DonationMethods({
                     Please email us at{" "}
                     <a
                       className="text-warm-teal underline"
-                      href={`mailto:info@shifsd-liberia.org?subject=${emailSubject}`}
+                      href={`mailto:shifsdliberia@gmail.com?subject=${emailSubject}`}
                     >
-                      info@shifsd-liberia.org
+                      shifsdliberia@gmail.com
                     </a>{" "}
                     with your deposit reference
                     {selected !== null ? ` and note $${selected}` : ""} so we
@@ -545,10 +547,7 @@ function DonationMethods({
                 <Icon name="lock" className="!text-[16px]" /> Secure
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <Icon name="verified" className="!text-[16px]" /> Verified
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Icon name="check_circle" className="!text-[16px]" /> Tax-deductible
+                <Icon name="verified" className="!text-[16px]" /> Government-accredited NGO
               </span>
             </div>
           </motion.div>
@@ -660,124 +659,17 @@ function CustomDonation({
   );
 }
 
-// ─── 5. Your Impact ─────────────────────────────────────────────
-const impactBreakdown = [
-  {
-    percent: "85%",
-    label: "Direct Programs",
-    description: "Goes directly to field operations and community impact",
-  },
-  {
-    percent: "10%",
-    label: "Administration",
-    description: "Keeps our organization running efficiently",
-  },
-  {
-    percent: "5%",
-    label: "Fundraising",
-    description: "Invested in sustainable growth and outreach",
-  },
-];
-
-function YourImpact() {
-  return (
-    <section
-      id="impact"
-      data-node-id="65:19"
-      className="bg-warm-teal scroll-mt-24"
-    >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-30 py-20">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={stagger}
-          className="flex flex-col items-center gap-12"
-        >
-          <motion.h2
-            variants={fadeUp}
-            className="font-[family-name:var(--font-heading)] font-medium text-white text-[36px] leading-[44px] text-center"
-            style={{ letterSpacing: "-0.5px" }}
-          >
-            Where Your Money Goes
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
-            {impactBreakdown.map((row) => (
-              <motion.div
-                key={row.label}
-                variants={fadeUp}
-                className="flex flex-col items-center gap-3 text-center"
-              >
-                <p className="font-[family-name:var(--font-heading)] font-semibold text-horizon-gold text-[48px] leading-none">
-                  {row.percent}
-                </p>
-                <p className="font-[family-name:var(--font-heading)] font-semibold text-white text-[18px]">
-                  {row.label}
-                </p>
-                <p className="text-teal-light text-[14px] max-w-[280px]">
-                  {row.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ─── 6. Donor Testimonial ───────────────────────────────────────
-function DonorTestimonial() {
-  return (
-    <section
-      id="testimonial"
-      data-node-id="65:34"
-      className="bg-warm-sand scroll-mt-24"
-    >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-50 py-20">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={stagger}
-          className="flex flex-col items-center gap-6 text-center"
-        >
-          <motion.p
-            variants={fadeUp}
-            className="font-[family-name:var(--font-accent)] italic font-medium text-deep-canopy text-[22px] leading-[32px] max-w-[900px]"
-          >
-            &ldquo;Seeing the direct impact of my monthly donation — families
-            growing their own food, children staying in school — makes every
-            dollar feel like a thousand. SHIFSD is the real deal.&rdquo;
-          </motion.p>
-          <motion.div variants={fadeUp} className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-warm-teal flex items-center justify-center">
-              <span className="font-[family-name:var(--font-heading)] font-semibold text-white text-[14px]">
-                SM
-              </span>
-            </div>
-            <div className="flex flex-col text-left">
-              <p className="font-[family-name:var(--font-body)] font-semibold text-deep-canopy text-[16px]">
-                Sarah Mitchell
-              </p>
-              <p className="text-gray-500 text-[14px]">
-                Monthly Donor since 2022
-              </p>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
+// "Where Your Money Goes" (85/10/5 split) and the donor testimonial were
+// removed: neither the percentages nor the named donor came from
+// any SHIFSD source.
 
 // ─── 7. Trust & Security ────────────────────────────────────────
+// Facts: Organizational Profile (09/2026); Annual Report is on the Impact page.
 const trustBadges = [
-  { icon: "lock", label1: "SSL Encrypted", label2: "& Secure" },
+  { icon: "lock", label1: "SSL Encrypted", label2: "Website" },
   { icon: "account_balance", label1: "Government", label2: "Accredited NGO" },
-  { icon: "bar_chart", label1: "Transparent", label2: "Financial Reporting" },
-  { icon: "toll", label1: "Tax-Deductible", label2: "Contributions" },
+  { icon: "verified", label1: "Registered", label2: "Since 30 May 2005" },
+  { icon: "description", label1: "Annual Report", label2: "Published Online" },
 ];
 
 function TrustSecurity() {
@@ -846,8 +738,6 @@ export default function DonatePage() {
         selected={selected}
         onClear={clearSelection}
       />
-      <YourImpact />
-      <DonorTestimonial />
       <TrustSecurity />
     </>
   );

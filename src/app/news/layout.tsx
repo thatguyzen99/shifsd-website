@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "News & Media",
   description:
-    "Stories from the field, program updates, and media coverage of SHIFSD's work across seven Liberian counties.",
+    "Program updates and news from SHIFSD's work in Liberia.",
   openGraph: {
     title: "News & Media | SHIFSD Liberia",
     description:

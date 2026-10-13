@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { animate, motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { articles } from "./news/articles";
 
 // ─── Shared reveal variants ─────────────────────────────────────
 const fadeUp = {
@@ -71,8 +72,9 @@ function Hero() {
             className="text-[18px] leading-[28px]"
             style={{ color: "#C8D6D0" }}
           >
-            We exist to alleviate poverty through alternative education and
-            entrepreneurship across Liberia&apos;s most underserved communities.
+            We exist to alleviate poverty by expanding access to alternative
+            education and entrepreneurship opportunities across Liberia&apos;s
+            underserved communities.
           </motion.p>
           <motion.div
             variants={fadeUp}
@@ -126,11 +128,13 @@ function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
   );
 }
 
+// Source: SHIFSD Organizational Profile (updated 09/2026).
+// 25+ years = founded 11 November 2000.
 const stats = [
-  { value: 24, suffix: "+", label: "Years of Service" },
-  { value: 1187, suffix: "+", label: "Beneficiaries Since 2024" },
-  { value: 7, suffix: "", label: "Counties Reached" },
-  { value: 28.1, suffix: "", label: "Acres of Farmland" },
+  { value: 25, suffix: "+", label: "Years of Service" },
+  { value: 2526, suffix: "", label: "Beneficiaries, Late 2024–2026" },
+  { value: 4, suffix: "", label: "Counties of Operation" },
+  { value: 65, suffix: "", label: "Public Schools in Leaders in Teaching" },
 ];
 
 function ImpactStrip() {
@@ -161,29 +165,30 @@ function ImpactStrip() {
 
 // ─── 3. Three Pillars ───────────────────────────────────────────
 // Pillar card matches Figma node 110:594 (Card: Climate Smart Agriculture)
+// Pillar copy: Organizational Profile (09/2026). Pills: profile + 2024 Annual Report.
 const pillars = [
   {
     titleTop: "Climate Smart",
     titleBottom: "Agriculture",
     image: "/images/pillar-agriculture.jpg",
-    body: "Protecting the environment through sustainable farming practices, CSA awareness campaigns across 25 communities, and 28.1 acres of demonstration farmland.",
-    stats: ["28.1 acres", "25 communities", "500+ aware"],
+    body: "Strengthening food security and resilience through farmer training and agribusiness initiatives.",
+    stats: ["28.1 acres", "25 communities", "305 households surveyed"],
     href: "/programs/climate-smart-agriculture",
   },
   {
     titleTop: "Education &",
     titleBottom: "Livelihoods",
     image: "/images/pillar-education.jpg",
-    body: "Empowering youth and women through Hummingbird Academy, Holy Hands Institute TVET, and literacy for adults — a full ladder of opportunity.",
-    stats: ["480+ graduates", "100+ trainees", "3 institutes"],
+    body: "Equipping youth and women with employable skills and practical knowledge.",
+    stats: ["65 public schools", "30 communities", "1,395+ youth"],
     href: "/programs/education-livelihood",
   },
   {
     titleTop: "Financial",
     titleBottom: "Sustainability",
     image: "/images/pillar-financial.jpg",
-    body: "Building institutional resilience through social enterprise, agri-business ventures, and diversified revenue streams for long-term community impact.",
-    stats: ["12 enterprises", "3× revenue", "Long-term"],
+    body: "Empowering families and communities through VSLAs, financial literacy, and entrepreneurship support.",
+    stats: ["VSLAs", "Financial literacy", "Entrepreneurship"],
     href: "/programs/financial-sustainability",
   },
 ];
@@ -236,8 +241,8 @@ function ThreePillars() {
             Our Three Strategic Pillars
           </motion.h2>
           <motion.p variants={fadeUp} className="text-gray-600 text-[15px]">
-            Guided by our 2024-2028 Strategic Plan, we deliver measurable change
-            across three interconnected areas.
+            Our five-year strategic plan (2024–2028) is anchored in three
+            thematic pillars, implemented on an integrated basis.
           </motion.p>
         </motion.div>
 
@@ -314,7 +319,10 @@ function ThreePillars() {
   );
 }
 
-// ─── 4. Testimonial ─────────────────────────────────────────────
+// ─── 4. Our Vision (replaces an unsourced quote attributed to the ED) ──
+// Vision wording is verbatim from the Organizational Profile (09/2026).
+// TODO(content): if SHIFSD supplies a real, approved quote from Jeremiah T.
+// Burgess, it can go back here with his name and title.
 function Testimonial() {
   return (
     <section className="bg-deep-canopy py-24">
@@ -330,17 +338,15 @@ function Testimonial() {
             &ldquo;
           </div>
           <blockquote className="font-[family-name:var(--font-accent)] italic text-white/95 text-[24px] leading-[1.5]">
-            What began as a small group of Liberian refugees dreaming of a better
-            future has grown into a movement that transforms entire communities.
-            Every seed planted, every child educated, every family empowered is
-            proof that sustainable change starts from within.
+            To envisage a society free of illiteracy and poverty.
           </blockquote>
           <div className="mx-auto w-16 h-px bg-horizon-gold my-8" />
           <p className="text-horizon-gold font-semibold text-sm">
-            Jeremiah Burgess
+            Our Vision
           </p>
           <p className="text-white/70 text-sm mt-1">
-            Executive Director &amp; Founder, SHIFSD
+            Self-Help Initiative for Sustainable Development-Liberia
+            (SHIFSD-Liberia), Inc.
           </p>
         </motion.div>
       </div>
@@ -349,13 +355,19 @@ function Testimonial() {
 }
 
 // ─── 5. Partners Strip ──────────────────────────────────────────
+// Current partners per the Organizational Profile (09/2026). Logos are the
+// ones already in the repo; no new logos added. Networks are text only.
 const partners = [
-  { name: "EDC", logo: "/images/partner-edc.webp" },
-  { name: "All We Can", logo: "/images/partner-allwecan.webp" },
+  { name: "Education Development Center (EDC) / Mastercard Foundation", logo: "/images/partner-edc.webp" },
+  { name: "All We Can (UK)", logo: "/images/partner-allwecan.webp" },
   { name: "Mission Alliance", logo: "/images/partner-mission-alliance.webp" },
-  { name: "YOCEL", logo: "/images/partner-yocel.webp" },
-  { name: "Brown Marital Trust", logo: null },
-  { name: "Stichting INITIAT", logo: "/images/partner-initiat.webp" },
+];
+
+const networks = [
+  "Liberia National NGO Network (LINNK)",
+  "Consortium of Adult Educators (CAE)",
+  "New Africa Research Development Agency (NARDA)",
+  "Pamoja Education",
 ];
 
 function PartnersStrip() {
@@ -370,7 +382,7 @@ function PartnersStrip() {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={stagger}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[900px] mx-auto"
         >
           {partners.map((p) => (
             <motion.div
@@ -393,41 +405,29 @@ function PartnersStrip() {
             </motion.div>
           ))}
         </motion.div>
+        <p className="text-center text-gray-500 text-[13px] leading-[22px] mt-8 max-w-[900px] mx-auto">
+          <span className="font-semibold text-deep-canopy">Network member:</span>{" "}
+          {networks.join(" · ")}
+        </p>
       </div>
     </section>
   );
 }
 
 // ─── 6. Latest Updates ──────────────────────────────────────────
-const updates = [
-  {
-    tag: "Agriculture",
-    title: "CSA Training Reaches 7 Counties Across Liberia",
-    excerpt:
-      "Our Climate Smart Agriculture program expands to seven counties, equipping farmers with sustainable techniques for food security.",
-    image: "/images/news-agriculture.jpg",
-    date: "March 24, 2025",
-    href: "/news",
-  },
-  {
-    tag: "Education",
-    title: "Scholarship Program Empowers 50 Young Leaders",
-    excerpt:
-      "Through our Education & Livelihood initiative, 50 students received full scholarships to pursue higher education opportunities.",
-    image: "/images/news-education.jpg",
-    date: "February 26, 2025",
-    href: "/news",
-  },
-  {
-    tag: "Partnership",
-    title: "New Alliance with Mission Alliance Strengthens Programs",
-    excerpt:
-      "A multi-year Mission Alliance partnership will expand our adult literacy work across 30 communities in the Zorzor and Salayea districts of Lofa County.",
-    image: "/images/news-partnership.jpg",
-    date: "February 12, 2025",
-    href: "/news",
-  },
-];
+// Pulled from the sourced news articles (see src/app/news/articles.ts).
+const updates = articles
+  .slice()
+  .sort((a, b) => b.isoDate.localeCompare(a.isoDate))
+  .slice(0, 3)
+  .map((a) => ({
+    tag: a.category,
+    title: a.title,
+    excerpt: a.excerpt,
+    image: a.image,
+    date: a.date,
+    href: `/news/${a.slug}`,
+  }));
 
 function LatestUpdates() {
   return (
@@ -527,7 +527,7 @@ const involvementCards = [
     iconBg: "bg-liberian-flame",
     title: "Donate",
     body:
-      "Your financial support funds agricultural training, scholarships, and community infrastructure across Liberia.",
+      "Your financial support funds our work in education, climate-smart agriculture and financial empowerment across Liberia.",
     cta: "Give Now",
     ctaClass: "bg-liberian-flame text-white hover:bg-liberian-flame/90",
     href: "/donate",
@@ -537,7 +537,7 @@ const involvementCards = [
     iconBg: "bg-horizon-gold",
     title: "Volunteer",
     body:
-      "Share your skills and time to support our programs on the ground or remotely through our volunteer network.",
+      "Share your skills and time to support our programs on the ground or remotely.",
     cta: "Join Us",
     ctaClass: "bg-horizon-gold text-deep-canopy hover:bg-horizon-gold/90",
     href: "/get-involved#volunteer",
@@ -631,8 +631,8 @@ function Newsletter() {
             Stay Connected With Our Impact
           </h3>
           <p className="text-deep-canopy/80 text-sm mt-2">
-            Get quarterly updates on our programs, impact stories, and ways to
-            get involved.
+            Get updates on our programs, impact stories, and ways to get
+            involved.
           </p>
         </div>
         <form
@@ -648,11 +648,11 @@ function Newsletter() {
             name="email"
             required
             placeholder="Enter your email address"
-            className="px-4 py-3 rounded-md bg-white text-deep-canopy placeholder-gray-400 text-sm min-w-[280px] focus:outline-none focus:ring-2 focus:ring-deep-canopy"
+            className="px-4 py-3 rounded-md bg-white text-deep-canopy placeholder-gray-400 text-sm flex-1 min-w-0 md:flex-none md:min-w-[280px] focus:outline-none focus:ring-2 focus:ring-deep-canopy"
           />
           <button
             type="submit"
-            className="bg-deep-canopy hover:bg-deep-canopy/90 text-white font-semibold px-6 rounded-md text-sm transition-colors whitespace-nowrap"
+            className="bg-deep-canopy hover:bg-deep-canopy/90 text-white font-semibold px-5 sm:px-6 rounded-md text-sm transition-colors whitespace-nowrap shrink-0"
           >
             Subscribe
           </button>

@@ -70,10 +70,10 @@ export default function TermsPage() {
               using the site you agree to them. If you don&apos;t, please
               stop using the site. If anything is unclear, email{" "}
               <a
-                href="mailto:info@shifsd-liberia.org"
+                href="mailto:shifsdliberia@gmail.com"
                 className="text-warm-teal underline"
               >
-                info@shifsd-liberia.org
+                shifsdliberia@gmail.com
               </a>
               .
             </motion.p>
@@ -125,8 +125,8 @@ export default function TermsPage() {
               <p>
                 Donations made through this site — via GlobalGiving, direct
                 bank transfer, or mobile money — go to SHIFSD&apos;s program
-                and operating budget. We publish an annual impact report each
-                year detailing how funds are spent.
+                and operating budget. Our 2024 Annual Report is available on
+                our Impact page.
               </p>
               <p>
                 Where a donation is designated for a specific program, we use
@@ -196,10 +196,10 @@ export default function TermsPage() {
               <p>
                 Questions about these terms can be sent to{" "}
                 <a
-                  href="mailto:info@shifsd-liberia.org"
+                  href="mailto:shifsdliberia@gmail.com"
                   className="text-warm-teal underline"
                 >
-                  info@shifsd-liberia.org
+                  shifsdliberia@gmail.com
                 </a>{" "}
                 or mailed to Block C, Lee Hill Community, Johnsonville
                 Township, Monrovia, Liberia.

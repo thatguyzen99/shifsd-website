@@ -271,8 +271,8 @@ function Newsletter() {
         {state === "error" && (
           <p className="mt-3 text-deep-canopy/80 text-[13px]">
             Couldn&apos;t submit — try again or email{" "}
-            <a className="underline" href="mailto:info@shifsd-liberia.org">
-              info@shifsd-liberia.org
+            <a className="underline" href="mailto:shifsdliberia@gmail.com">
+              shifsdliberia@gmail.com
             </a>
             .
           </p>

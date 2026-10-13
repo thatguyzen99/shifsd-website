@@ -8,27 +8,43 @@ import { COUNTIES, VIEWBOX } from "@/data/liberia-map";
 type CountyMeta = {
   programs: string[];
   href?: string;
+  /** "current" = operating now; "past" = previous work only. */
+  status: "current" | "past";
 };
 
-// Only the 7 active counties get metadata; anything else on the map renders
-// as a muted, non-interactive shape.
+// Source: Organizational Profile (09/2026), "Geographical Reach" and
+// "Our current and past recent activities". Counties not listed here render
+// as muted, non-interactive shapes.
 const ACTIVE: Record<string, CountyMeta> = {
-  Lofa: {
-    programs: ["Adult Literacy Program"],
+  Montserrado: {
+    status: "current",
+    programs: [
+      "Leaders in Teaching (Montserrado #1)",
+      "Holy Hands Institute & Hummingbird Academy",
+    ],
+    href: "/programs/education-livelihood#overview",
+  },
+  Bong: {
+    status: "current",
+    programs: ["Leaders in Teaching"],
     href: "/programs/education-livelihood#overview",
   },
   Nimba: {
-    programs: ["Climate-Smart Agriculture", "VSLAs", "28.1-acre Demo Farm"],
+    status: "current",
+    programs: [
+      "Leaders in Teaching (3 districts)",
+      "Climate-Smart Agriculture",
+    ],
     href: "/programs/climate-smart-agriculture#overview",
   },
-  "Grand Cape Mount": { programs: ["Outreach Programs"] },
-  Bomi: { programs: ["Outreach Programs"] },
-  Montserrado: {
-    programs: ["HAC", "HHI", "EDC / Youth Advance"],
+  Lofa: {
+    status: "current",
+    programs: ["Adult Education Project (Zorzor & Salayea)"],
     href: "/programs/education-livelihood#overview",
   },
-  "River Gee": { programs: ["Community Development"] },
-  Maryland: { programs: ["Community Development"] },
+  Margibi: { status: "past", programs: ["Past: surveys with Welthungerhilfe"] },
+  "Grand Cape Mount": { status: "past", programs: ["Past: surveys with Welthungerhilfe"] },
+  Bomi: { status: "past", programs: ["Past: surveys with Welthungerhilfe"] },
 };
 
 // Alphabetical (as in the data file) is fine for the legend order.
@@ -44,7 +60,7 @@ export default function LiberiaMap() {
           viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}
           className="w-full h-auto block"
           role="img"
-          aria-label="Map of Liberia showing SHIFSD's 7 active operation counties"
+          aria-label="Map of Liberia showing the four counties where SHIFSD currently operates and three where it has worked in the past"
         >
           {/* Ocean / background */}
           <rect
@@ -83,13 +99,14 @@ export default function LiberiaMap() {
           {/* Active counties — interactive fills */}
           {activeCounties.map((c) => {
             const isHovered = hovered === c.name;
+            const isPast = ACTIVE[c.name].status === "past";
             return (
               <motion.path
                 key={c.name}
                 d={c.path}
                 initial={false}
                 animate={{
-                  fill: isHovered ? "#1A6B5A" : "#A7F3D0",
+                  fill: isHovered ? "#1A6B5A" : isPast ? "#FEF3C7" : "#A7F3D0",
                 }}
                 transition={{ duration: 0.2 }}
                 stroke="#1A6B5A"
@@ -121,6 +138,7 @@ export default function LiberiaMap() {
           {/* Active county markers + labels */}
           {activeCounties.map((c, i) => (
             <g key={`marker-${c.name}`} className="pointer-events-none">
+              {ACTIVE[c.name].status === "current" && (
               <motion.circle
                 cx={c.centroid[0]}
                 cy={c.centroid[1]}
@@ -138,11 +156,12 @@ export default function LiberiaMap() {
                   ease: "easeOut",
                 }}
               />
+              )}
               <circle
                 cx={c.centroid[0]}
                 cy={c.centroid[1]}
                 r="6"
-                fill="#F5B731"
+                fill={ACTIVE[c.name].status === "current" ? "#F5B731" : "#FFFFFF"}
                 stroke="#1E3A3A"
                 strokeWidth="1.5"
               />
@@ -203,8 +222,7 @@ export default function LiberiaMap() {
                 {c.name}
               </span>
               <span className="block text-[11px] text-gray-500 mt-0.5">
-                {meta.programs.length}{" "}
-                {meta.programs.length === 1 ? "program" : "programs"}
+                {meta.status === "past" ? "Past work" : "Operating now"}
               </span>
             </div>
           );

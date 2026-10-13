@@ -81,7 +81,7 @@ const ways: Way[] = [
   {
     title: "Donate",
     description:
-      "Your financial support directly funds agricultural training, scholarships, and community infrastructure. Choose one-time or monthly giving to create sustainable impact.",
+      "Your financial support funds our work in education, climate-smart agriculture and financial empowerment. Choose one-time or recurring giving.",
     image: "/images/get-involved/donate.jpg",
     cta: "Give Now",
     href: "/donate#tiers",
@@ -357,10 +357,10 @@ function VolunteerForm() {
               <p className="text-error text-[14px] font-medium">
                 Something went wrong. Please email us at{" "}
                 <a
-                  href="mailto:info@shifsd-liberia.org"
+                  href="mailto:shifsdliberia@gmail.com"
                   className="underline"
                 >
-                  info@shifsd-liberia.org
+                  shifsdliberia@gmail.com
                 </a>{" "}
                 and we&apos;ll help directly.
               </p>
@@ -433,8 +433,8 @@ function PartnershipForm() {
             </h2>
             <p className="text-gray-600 text-[15px] leading-[24px]">
               We collaborate with organizations that share our commitment to
-              community-led development. Share a few details and our
-              partnerships lead will set up a discovery call.
+              community-led development. Share a few details and our team will
+              be in touch.
             </p>
           </motion.div>
 
@@ -528,18 +528,18 @@ function PartnershipForm() {
 
             {state === "sent" && (
               <p className="text-warm-teal text-[14px] font-medium">
-                Thanks — we&apos;ve received your request. Our partnerships
-                lead will reach out shortly.
+                Thanks — we&apos;ve received your request. Our team will reach
+                out shortly.
               </p>
             )}
             {state === "error" && (
               <p className="text-error text-[14px] font-medium">
                 Something went wrong. Please email us at{" "}
                 <a
-                  href="mailto:info@shifsd-liberia.org"
+                  href="mailto:shifsdliberia@gmail.com"
                   className="underline"
                 >
-                  info@shifsd-liberia.org
+                  shifsdliberia@gmail.com
                 </a>{" "}
                 and we&apos;ll help directly.
               </p>
@@ -555,7 +555,10 @@ function PartnershipForm() {
 const faqs = [
   {
     q: "How is my donation used?",
-    a: "100% of designated donations go directly to program activities. Administrative costs are funded separately through institutional grants.",
+    // TODO(content): the previous answer ("100% of designated donations go
+    // directly to program activities…") had no source. Replace with SHIFSD's
+    // own wording if they want a specific policy statement here.
+    a: "Donations support SHIFSD's work across our three pillars: Education & Livelihood Skills, Climate Smart Agriculture, and Financial Sustainability. Email us at shifsdliberia@gmail.com if you'd like to discuss how your gift will be used.",
   },
   {
     q: "Can I volunteer remotely?",
@@ -563,11 +566,11 @@ const faqs = [
   },
   {
     q: "Is SHIFSD a registered NGO?",
-    a: "Yes, SHIFSD is officially accredited by the Government of Liberia and operates under full legal compliance.",
+    a: "Yes. SHIFSD was formally registered with the Government of Liberia on May 30, 2005 as a national nonprofit and non-governmental organization, and is accredited under registration number MFDP/NGO/AC#531871651.",
   },
   {
     q: "How do I become a partner organization?",
-    a: "Contact us at info@shifsd.org with your organization details and areas of interest. We'll schedule a discovery call.",
+    a: "Use the partnership form above, or email shifsdliberia@gmail.com with your organization details and areas of interest.",
   },
 ];
 
