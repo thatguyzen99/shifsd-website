@@ -22,7 +22,7 @@
 | Animation | **Framer Motion** | Page transitions, scroll-triggered reveals, hover states |
 | Animation | **GSAP** | Complex timelines, number counters, parallax |
 | Scrolling | **Lenis** | Smooth scroll wrapper — initialize in a `LenisProvider` client component |
-| Icons | **Google Material Symbols** | Outlined, weight 400, grade 0, size 24. Load via CDN `<link>`. **NOT Lucide React** for new pages |
+| Icons | **Google Material Symbols** | Outlined, weight 400, grade 0, size 24. **Self-hosted subset** at `public/fonts/material-symbols-outlined-subset.woff2` (see `globals.css` for how to add an icon). Do not load the full font from Google's CDN — it shows raw icon names on slow mobile connections. **NOT Lucide React** for new pages |
 | Fonts | **Clash Display** (hero/display), **Clash Grotesk** (headings/UI subheads), **Inter** (body/UI), **Lora** (accent/quotes) | Clash Display + Clash Grotesk loaded via Fontshare `<link>` in `layout.tsx`; Inter + Lora via `next/font/google`. **DM Sans is NOT used** — do not introduce it. |
 | Deployment | **Netlify** | CMS at `/admin/`, Forms, Identity |
 

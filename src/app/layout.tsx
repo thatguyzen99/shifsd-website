@@ -94,12 +94,23 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@500,600,700&display=swap"
         />
-        {/* Material Symbols (icons) — Google Fonts CDN */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Material Symbols (icons) — self-hosted subset (~5 KB vs ~970 KB from
+            Google's CDN). The @font-face lives in globals.css. When you use a
+            new icon name, regenerate the subset — see the comment there. */}
         <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+          rel="preload"
+          href="/fonts/material-symbols-outlined-subset.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        {/* Mark icons ready only once the icon font has loaded; until then the
+            icon names stay invisible (see globals.css). Uses a data attribute
+            React doesn't manage, so there is no hydration mismatch. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var d=document.documentElement;function ok(){d.setAttribute('data-icons','ready')}if(!document.fonts||!document.fonts.load){ok();return}document.fonts.load('24px "Material Symbols Outlined"').then(function(f){if(f&&f.length)ok()}).catch(function(){})})();`,
+          }}
         />
         <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer />
       </head>

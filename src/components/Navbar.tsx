@@ -139,7 +139,7 @@ export function Navbar() {
               Donate
             </Link>
             <button
-              className="lg:hidden p-2 text-deep-canopy"
+              className="lg:hidden p-2 text-deep-canopy menu-fallback"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
