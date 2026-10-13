@@ -369,13 +369,13 @@ function DonationMethods({
             className="w-full max-w-[820px] bg-warm-sand rounded-2xl p-8 md:p-10 flex flex-col gap-8 items-center"
           >
             {/* Tab bar */}
-            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden flex flex-wrap">
+            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden grid grid-cols-3 w-full sm:w-auto sm:flex">
               {tabs.map((t) => (
                 <button
                   key={t.id}
                   type="button"
                   onClick={() => setTab(t.id)}
-                  className={`flex items-center gap-2 px-6 py-3.5 text-[14px] font-semibold transition-colors ${
+                  className={`flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-2 sm:px-6 py-3 sm:py-3.5 text-[13px] sm:text-[14px] font-semibold text-center leading-tight transition-colors ${
                     tab === t.id
                       ? "bg-warm-teal text-white"
                       : "bg-white text-deep-canopy hover:bg-warm-sand"
@@ -639,14 +639,14 @@ function CustomDonation({
 
           <motion.div
             variants={fadeUp}
-            className="bg-white border border-gray-300 rounded-lg overflow-hidden flex flex-wrap"
+            className="bg-white border border-gray-300 rounded-lg overflow-hidden grid grid-cols-4 w-full sm:w-auto sm:flex"
           >
             {frequencies.map((f) => (
               <button
                 key={f.id}
                 type="button"
                 onClick={() => setFreq(f.id)}
-                className={`px-6 py-3 text-[14px] font-medium transition-colors ${
+                className={`px-1 sm:px-6 py-3 text-[13px] sm:text-[14px] font-medium transition-colors ${
                   freq === f.id
                     ? "bg-warm-teal text-white font-semibold"
                     : "bg-white text-gray-700 hover:bg-gray-50"

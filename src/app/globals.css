@@ -95,6 +95,73 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
 
+/* Material Symbols (icons) — self-hosted subset of only the icons this site
+   uses. Previously loaded from Google Fonts (~970 KB, display=swap), which on
+   slow mobile connections showed the raw icon names ("menu", "add", "mail")
+   instead of the icons.
+
+   To add a new icon: append its name to the list, sort it, and re-download:
+     https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block&icon_names=<comma,separated,sorted,names>
+   then save the woff2 it links to as public/fonts/material-symbols-outlined-subset.woff2.
+
+   Current icons: account_balance, add, arrow_forward, balance, call, check,
+   check_circle, close, content_copy, description, diversity_3, download,
+   expand_more, favorite, handshake, home, insert_chart, language, lock, mail,
+   map, menu, menu_book, person, public, smartphone, verified,
+   volunteer_activism */
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/material-symbols-outlined-subset.woff2") format("woff2");
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  /* Safety net: if the font ever fails, clip to one icon-sized box instead of
+     printing the icon's name across the layout. */
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+}
+
+/* Until the icon font has loaded, keep icon names invisible so a slow or
+   blocked font never prints words like "menu" or "add" into the layout. */
+html:not([data-icons="ready"]) .material-symbols-outlined {
+  color: transparent !important;
+}
+
+/* Mobile menu button: draw three lines in CSS if the icon isn't ready, so the
+   menu is always findable. */
+.menu-fallback {
+  position: relative;
+}
+html:not([data-icons="ready"]) .menu-fallback::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor;
+}
+
 /* Material Symbols default weight/grade/size (per CLAUDE.md) */
 .material-symbols-outlined {
   font-variation-settings:
